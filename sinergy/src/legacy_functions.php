@@ -1,11 +1,169 @@
 <?php
 /**
- * Funções Legadas da API
- * Handlers para todas as rotas do sistema
- * Versão FINAL COMPLETA - Produção, Expedição Manual, Blindagem de Medidas e Módulos Originais
+ * =====================================================================
+ * HANDLERS DA API - Sistema Sinergy ERP
+ * =====================================================================
+ *
+ * DESCRIÇÃO:
+ * Este arquivo contém 87+ funções handlers que processam as requisições
+ * da API REST. Cada função é responsável por uma operação específica
+ * (CRUD) em um módulo do sistema.
+ *
+ * ARQUITETURA:
+ * - Cada handler recebe dados validados do router (api/index.php)
+ * - Conecta ao banco de dados MySQL via MySQLi
+ * - Executa queries com prepared statements (segurança contra SQL Injection)
+ * - Retorna resposta JSON padronizada via sendJsonResponse()
+ *
+ * PADRÃO DE NOMENCLATURA:
+ * - handleGet*()    : Consultas SELECT (método GET)
+ * - handleAdd*()    : Inserções INSERT (método POST)
+ * - handleUpdate*() : Atualizações UPDATE (método PUT)
+ * - handleDelete*() : Remoções DELETE (método DELETE)
+ *
+ * MÓDULOS IMPLEMENTADOS (87 handlers):
+ * ┌─────────────────────────────────────────────────────────────┐
+ * │ 1. AUTENTICAÇÃO (6 handlers)                                │
+ * │    - Login, Registro, Recuperação de Senha, Reset           │
+ * │                                                              │
+ * │ 2. USUÁRIOS (6 handlers)                                    │
+ * │    - Perfil, Lista de Usuários, Vendedores, Atividade       │
+ * │                                                              │
+ * │ 3. ESTOQUE - BOBINAS (8 handlers)                           │
+ * │    - CRUD de bobinas (matéria-prima)                         │
+ * │    - Rastreamento de peso, lote, fornecedor                  │
+ * │                                                              │
+ * │ 4. PRODUTOS E ESTOQUE (10 handlers)                         │
+ * │    - CRUD de produtos                                        │
+ * │    - Estoque multi-localização (em estoque_produtos_handlers.php) │
+ * │    - Movimentações de entrada/saída                          │
+ * │                                                              │
+ * │ 5. COMERCIAL - ORÇAMENTOS (7 handlers)                      │
+ * │    - CRUD de orçamentos                                      │
+ * │    - Conversão automática: Orçamento → Pedido (ao aprovar)   │
+ * │    - Assistente técnico integrado                            │
+ * │                                                              │
+ * │ 6. COMERCIAL - PEDIDOS (4 handlers)                         │
+ * │    - Gestão de pedidos de venda                              │
+ * │    - Status: Aguardando → Em Produção → Expedindo → Concluído│
+ * │                                                              │
+ * │ 7. PRODUÇÃO (5 handlers)                                    │
+ * │    - Fila de produção (itens pendentes)                      │
+ * │    - Baixa de produção (marca como concluído)                │
+ * │    - Registro de bobinas utilizadas e sucata                 │
+ * │    - Histórico de produção                                   │
+ * │                                                              │
+ * │ 8. EXPEDIÇÃO (4 handlers)                                   │
+ * │    - Fila de expedição (itens prontos)                       │
+ * │    - Baixa de expedição (separa para envio)                  │
+ * │    - Histórico de expedição                                  │
+ * │                                                              │
+ * │ 9. CLIENTES (5 handlers)                                    │
+ * │    - CRUD de clientes                                        │
+ * │    - Suporte a endereços múltiplos (JSON)                    │
+ * │                                                              │
+ * │ 10. FINANCEIRO (7 handlers)                                 │
+ * │     - Contas a Pagar (CRUD)                                  │
+ * │     - Contas a Receber (criadas automaticamente de Pedidos)  │
+ * │     - Dashboard com KPIs (lucro, DRE, gráficos)              │
+ * │                                                              │
+ * │ 11. RH - FUNCIONÁRIOS (4 handlers)                          │
+ * │     - CRUD de funcionários                                   │
+ * │     - Vínculo com usuários do sistema                        │
+ * │                                                              │
+ * │ 12. PERMISSÕES (2 handlers)                                 │
+ * │     - Controle de acesso por módulo                          │
+ * │     - Granularidade: Admin (total) ou por módulos específicos│
+ * │                                                              │
+ * │ 13. FORNECEDORES (4 handlers)                               │
+ * │     - CRUD de fornecedores                                   │
+ * │     - Validação de CNPJ                                      │
+ * │                                                              │
+ * │ 14. NOTAS FISCAIS - XML (3 handlers)                        │
+ * │     - Upload e parsing de XML NFe                            │
+ * │     - Importação automática para estoque                     │
+ * │                                                              │
+ * │ 15. MANUTENÇÕES (3 handlers)                                │
+ * │     - Sistema de chamados técnicos                           │
+ * │     - Rastreamento de garantia                               │
+ * │                                                              │
+ * │ 16. CHAT INTERNO (4 handlers)                               │
+ * │     - Mensagens entre usuários                               │
+ * │     - Status online/offline (heartbeat)                      │
+ * │                                                              │
+ * │ 17. COMEX - RASTREIO (4 handlers)                           │
+ * │     - Rastreamento de containers                             │
+ * │     - Status de importação (6 etapas)                        │
+ * │                                                              │
+ * │ 18. SUPRIMENTOS (6 handlers)                                │
+ * │     - Solicitações de compra                                 │
+ * │     - Cotações (3 fornecedores)                              │
+ * │     - Pedidos de compra                                      │
+ * │                                                              │
+ * │ 19. AVISOS DO SISTEMA (3 handlers)                          │
+ * │     - Notificações globais                                   │
+ * │     - Gerenciamento de avisos temporários                    │
+ * │                                                              │
+ * │ 20. MOVIMENTAÇÕES (3 handlers)                              │
+ * │     - Histórico de movimentações de materiais                │
+ * │     - Rastreabilidade completa                               │
+ * │                                                              │
+ * │ 21. DASHBOARD DIRETORIA (1 handler)                         │
+ * │     - KPIs executivos consolidados                           │
+ * └─────────────────────────────────────────────────────────────┘
+ *
+ * FLUXOS DE NEGÓCIO IMPORTANTES:
+ *
+ * 1. FLUXO DE VENDAS:
+ *    Orçamento (pendente) → Aprovação → Pedido (auto-criado) →
+ *    Produção → Expedição → Faturamento → Contas a Receber
+ *
+ * 2. FLUXO DE PRODUÇÃO:
+ *    Pedido → Fila de Produção → Baixa (com bobinas) →
+ *    Fila de Expedição → Baixa de Expedição → Concluído
+ *
+ * 3. FLUXO FINANCEIRO:
+ *    - Contas a Pagar: Entrada manual de despesas/fornecedores
+ *    - Contas a Receber: Criado automaticamente ao gerar Pedido
+ *    - Dashboard: Consolida DRE, Lucro, Inadimplência
+ *
+ * SEGURANÇA:
+ * - Todas as entradas são sanitizadas (sanitize_input)
+ * - Prepared statements em 100% das queries
+ * - Passwords com hash bcrypt (via Security::hashPassword)
+ * - Validação de CPF, CNPJ, email (via Validation::)
+ *
+ * TRANSAÇÕES:
+ * - Orçamentos com itens: BEGIN → INSERT Orcamento + Itens → COMMIT
+ * - Pedidos com itens: BEGIN → INSERT Pedido + Itens + ContasReceber → COMMIT
+ * - Baixa de produção: BEGIN → UPDATE Status + INSERT BobinasUtilizadas → COMMIT
+ *
+ * RELACIONAMENTO COM BANCO DE DADOS:
+ * Cada handler interage com uma ou mais tabelas:
+ * - handleAddOrcamento()     → Orcamentos + ItensOrcamento
+ * - handleUpdateOrcamento()  → Orcamentos + Pedidos + ItensPedido + ContasReceber (se aprovar)
+ * - handleBaixarItemProducao()→ ItensPedido + BobinasUtilizadas + Bobinas
+ * - handleGetFinanceiroDashboard() → ContasPagar + ContasReceber (agregações)
+ *
+ * @author Paulo (Desenvolvedor Original)
+ * @version 2.0
+ * @since 2024
+ * @file legacy_functions.php
+ * @lines 1831 linhas de código
+ * @handlers 87 funções
  */
 
-// Helper para log de debug em arquivo
+// =====================================================================
+// FUNÇÕES AUXILIARES
+// =====================================================================
+
+/**
+ * Registra mensagens de debug em arquivo de log
+ * Útil para troubleshooting de problemas em produção
+ *
+ * @param string $message Mensagem a ser logada
+ * @return void
+ */
 function debug_log($message) {
     $logFile = __DIR__ . '/../logs/debug.log';
     $timestamp = date('Y-m-d H:i:s');
@@ -657,22 +815,76 @@ function handleAddOrcamento($data) {
     } finally { $conn->close(); }
 }
 
+/**
+ * =====================================================================
+ * FUNÇÃO CRÍTICA: Atualização e Conversão de Orçamento em Pedido
+ * =====================================================================
+ *
+ * DESCRIÇÃO:
+ * Esta é uma das funções mais importantes do sistema. Ela gerencia:
+ * 1. Atualização de status do orçamento (pendente/aprovado/rejeitado)
+ * 2. CONVERSÃO AUTOMÁTICA de orçamento aprovado em pedido de venda
+ * 3. Criação automática de conta a receber (financeiro)
+ *
+ * FLUXO DETALHADO QUANDO STATUS = 'APROVADO':
+ * ┌──────────────────────────────────────────────────────────────┐
+ * │ 1. BEGIN TRANSACTION (garante atomicidade)                   │
+ * │ 2. UPDATE Orcamentos SET Status = 'aprovado'                 │
+ * │ 3. Busca dados completos do orçamento + nome do vendedor     │
+ * │ 4. Gera número sequencial do pedido (formato: MMYY-0001)     │
+ * │ 5. INSERT INTO Pedidos (copia todos os dados do orçamento)   │
+ * │ 6. INSERT INTO ContasReceber (financeiro, venc +30 dias)     │
+ * │ 7. Loop pelos itens:                                         │
+ * │    - SELECT * FROM ItensOrcamento                            │
+ * │    - Para cada item: INSERT INTO ItensPedido                 │
+ * │    - Blindagem: produtos unitários têm medidas zeradas       │
+ * │ 8. COMMIT (sucesso) ou ROLLBACK (erro)                       │
+ * └──────────────────────────────────────────────────────────────┘
+ *
+ * IMPORTANTE - PRODUTOS UNITÁRIOS:
+ * Produtos vendidos por unidade (UN, PÇ, KIT, etc) têm os campos
+ * Comprimento e Altura zerados automaticamente, pois não são relevantes
+ * para a produção. Apenas produtos em m² usam essas dimensões.
+ *
+ * TABELAS AFETADAS:
+ * - Orcamentos (UPDATE status)
+ * - Pedidos (INSERT novo pedido)
+ * - ItensPedido (INSERT N itens)
+ * - ContasReceber (INSERT conta financeira)
+ *
+ * SEGURANÇA:
+ * - Usa transação MySQL para garantir ACID
+ * - Prepared statements em todas as queries
+ * - Rollback automático em caso de erro
+ * - Validação de existência do orçamento
+ *
+ * @param int $orcamento_id ID do orçamento a ser atualizado
+ * @param array $data Array com 'status' ('aprovado'|'rejeitado'|'pendente')
+ * @return void Envia JSON response com sucesso ou erro
+ */
 function handleUpdateOrcamento($orcamento_id, $data) {
     $conn = get_db_connection();
-    
-    // CASO 1: Aprovação de Status
+
+    // ============================================================
+    // CASO 1: APROVAÇÃO/REJEIÇÃO DE STATUS
+    // ============================================================
+    // Quando o frontend envia apenas { "status": "aprovado" }
     if (isset($data['status']) && count($data) == 1) {
         $status = $data['status'];
+
+        // Inicia transação para garantir consistência
         $conn->begin_transaction();
-        
+
         try {
-            // 1. Atualiza Status do Orçamento
+            // PASSO 1: Atualiza status do orçamento
             $stmt_status = $conn->prepare("UPDATE Orcamentos SET Status = ? WHERE ID = ?");
             $stmt_status->bind_param("si", $status, $orcamento_id);
             if (!$stmt_status->execute()) throw new Exception("Erro SQL Status: " . $stmt_status->error);
             $stmt_status->close();
 
-            // 2. Se Aprovado, Gera o Pedido Completo
+            // ============================================================
+            // PASSO 2: SE APROVADO, CONVERTE EM PEDIDO AUTOMATICAMENTE
+            // ============================================================
             if ($status === 'aprovado') {
                 
                 // Busca cabeçalho do Orçamento

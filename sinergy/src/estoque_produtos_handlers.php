@@ -1,7 +1,65 @@
 <?php
 /**
- * Handlers para Gestão de Estoque de Produtos
- * Versão: Multi-Localização + Classe Global + Status Colorido
+ * =====================================================================
+ * HANDLERS ESPECIALIZADOS - Gestão de Estoque de Produtos
+ * =====================================================================
+ *
+ * DESCRIÇÃO:
+ * Handlers dedicados ao controle de estoque de produtos acabados
+ * com suporte a múltiplas localizações físicas (armazéns, depósitos, etc).
+ *
+ * FUNCIONALIDADES:
+ * - Consulta de estoque com status automático (Normal/Baixo/Crítico/Zerado)
+ * - Movimentação de entrada/saída com validação de saldo
+ * - Rastreamento de histórico de todas as movimentações
+ * - Suporte a múltiplas localizações para o mesmo produto
+ * - Estatísticas consolidadas (total em estoque, valor, alertas)
+ * - Controle de estoque mínimo com alertas visuais
+ *
+ * DIFERENÇA ENTRE BOBINAS E PRODUTOS:
+ * - Bobinas: Matéria-prima (alumínio/aço) usada na PRODUÇÃO
+ * - Produtos: Itens acabados prontos para VENDA/EXPEDIÇÃO
+ *
+ * ARQUITETURA MULTI-LOCALIZAÇÃO:
+ * ┌─────────────────────────────────────────────────────────────┐
+ * │ Produto: Portão de Alumínio                                  │
+ * ├─────────────────────────────────────────────────────────────┤
+ * │ Localização A (Armazém Principal): 50 unidades               │
+ * │ Localização B (Depósito Filial):   30 unidades               │
+ * │ TOTAL: 80 unidades                                           │
+ * └─────────────────────────────────────────────────────────────┘
+ *
+ * STATUS AUTOMÁTICO DE ESTOQUE:
+ * - Zerado:   Quantidade = 0
+ * - Crítico:  Quantidade <= QuantidadeMinima
+ * - Baixo:    Quantidade <= QuantidadeMinima * 1.2
+ * - Normal:   Quantidade > QuantidadeMinima * 1.2
+ *
+ * SEGURANÇA E INTEGRIDADE:
+ * - Transações MySQL para movimentações (ACID)
+ * - Lock FOR UPDATE para evitar race conditions
+ * - Validação de saldo negativo (não permite saída maior que estoque)
+ * - Rastreamento de usuário responsável por cada movimentação
+ * - Histórico completo de todas as operações
+ *
+ * TABELAS RELACIONADAS:
+ * - Produtos: Cadastro de produtos (NomeItem, UnidadeMedida, Classe)
+ * - EstoqueProdutos: Saldos por produto/localização
+ * - MovimentacoesEstoqueProdutos: Histórico de entrada/saída
+ *
+ * HANDLERS DISPONÍVEIS:
+ * 1. handleGetEstoqueProdutos()           - Lista estoque completo
+ * 2. handleGetEstoqueProdutoById()        - Busca por produto específico
+ * 3. handleSetEstoqueProduto()            - Define/atualiza saldo (SET)
+ * 4. handleMovimentarEstoqueProduto()     - Registra entrada/saída
+ * 5. handleGetHistoricoMovimentacoesProduto() - Histórico de movimentações
+ * 6. handleGetEstatisticasEstoqueProdutos() - Estatísticas consolidadas
+ * 7. handleGetProdutosEstoqueBaixo()      - Produtos com estoque crítico
+ *
+ * @author Paulo (Desenvolvedor Original)
+ * @version 2.0 - Multi-Localização
+ * @since 2024
+ * @file estoque_produtos_handlers.php
  */
 
 /**
