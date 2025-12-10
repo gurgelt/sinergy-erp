@@ -1,84 +1,210 @@
 <?php
 /**
- * API REST - Sistema Sinergy
- * Ponto de Entrada da API
- * Versão Reestruturada e Otimizada
+ * =====================================================================
+ * API REST - Sistema Sinergy ERP
+ * =====================================================================
+ *
+ * DESCRIÇÃO:
+ * Ponto de entrada único da API REST do sistema Sinergy ERP.
+ * Este arquivo funciona como um router centralizado que recebe todas
+ * as requisições HTTP e direciona para os handlers apropriados.
+ *
+ * ARQUITETURA:
+ * - Frontend (JavaScript) → Apache (.htaccess) → index.php → Handlers → MySQL
+ * - Sistema de roteamento baseado em switch/case com pattern matching
+ * - Suporta métodos HTTP: GET, POST, PUT, DELETE
+ * - Responde exclusivamente em formato JSON
+ *
+ * FUNCIONALIDADES:
+ * - 87+ endpoints REST organizados por módulos
+ * - Parsing automático de JSON para POST/PUT
+ * - Tratamento centralizado de CORS
+ * - Validação de JSON com tratamento de erros
+ * - Normalização de URLs e paths
+ *
+ * MÓDULOS DISPONÍVEIS:
+ * - Autenticação (Login, Registro, Recuperação de Senha)
+ * - Usuários e Permissões
+ * - Estoque (Bobinas, Movimentações, Produtos)
+ * - Comercial (Orçamentos, Pedidos, Clientes)
+ * - Financeiro (Contas a Pagar/Receber, Dashboard)
+ * - RH (Funcionários)
+ * - Produção e Expedição
+ * - COMEX (Rastreio de Containers)
+ * - Suprimentos (Solicitações e Pedidos de Compra)
+ * - Chat Interno
+ * - Manutenções
+ * - Notas Fiscais (XML NFe)
+ *
+ * @author Paulo (Desenvolvedor Original)
+ * @version 2.0
+ * @since 2024
  */
 
-// Carrega configurações
+// =====================================================================
+// CARREGAMENTO DE DEPENDÊNCIAS
+// =====================================================================
+
+// Configurações globais (DB_HOST, DB_NAME, API_BASE_PATH, etc)
 require_once __DIR__ . '/../config/config.php';
+
+// Conexão MySQLi com o banco de dados
 require_once __DIR__ . '/../config/database.php';
+
+// Configuração de headers CORS para permitir requisições cross-origin
 require_once __DIR__ . '/../config/cors.php';
+
+// Autoloader PSR-4 para classes (Response, Security, Validation)
 require_once __DIR__ . '/../src/autoload.php';
+
+// Funções auxiliares de compatibilidade
 require_once __DIR__ . '/../src/Utils/helpers.php';
+
+// Funções handlers principais (87 funções de processamento de endpoints)
 require_once __DIR__ . '/../src/legacy_functions.php';
+
+// Handlers especializados de estoque com suporte a múltiplas localizações
 require_once __DIR__ . '/../src/estoque_produtos_handlers.php';
 
-// Configura CORS
+// =====================================================================
+// CONFIGURAÇÃO INICIAL
+// =====================================================================
+
+// Configura headers CORS (Access-Control-Allow-Origin, Methods, Headers)
 setup_cors();
 
-// Obtém método HTTP e URI
+// =====================================================================
+// PROCESSAMENTO DA REQUISIÇÃO
+// =====================================================================
+
+// Captura o método HTTP (GET, POST, PUT, DELETE, OPTIONS)
 $method = $_SERVER['REQUEST_METHOD'];
+
+// Captura a URI completa da requisição
+// Exemplo: /sinergy/api/orcamentos/45?status=pendente
 $request_uri = $_SERVER['REQUEST_URI'];
+
+// Base path da API definida em config.php
+// Exemplo: /sinergy/api
 $base_api_path = API_BASE_PATH;
 
-// Remove base path da URI
+// Remove o base path da URI para obter apenas o endpoint
+// /sinergy/api/orcamentos/45 → /orcamentos/45
 if (strpos($request_uri, $base_api_path) === 0) {
     $path = substr($request_uri, strlen($base_api_path));
 } else {
     $path = $request_uri;
 }
 
-// Remove query string do path
+// Remove query string do path (mantém apenas o caminho limpo)
+// /orcamentos/45?status=pendente → /orcamentos/45
 $path_parts = explode('?', $path, 2);
 $path = $path_parts[0];
 
-// Remove /index.php do path se existir
+// Remove /index.php do path se existir (caso seja chamado explicitamente)
+// /index.php/orcamentos → /orcamentos
 $path = str_replace('/index.php', '', $path);
 
-// Normaliza path
+// Normaliza path garantindo formato consistente
+// '' ou '/' → '/status' (endpoint padrão)
+// 'orcamentos' → '/orcamentos' (adiciona barra inicial)
 if (empty($path) || $path === '/') {
     $path = '/status';
 } elseif (substr($path, 0, 1) !== '/') {
     $path = '/' . $path;
 }
 
-// Processa input JSON para POST e PUT
+// =====================================================================
+// PARSING DE DADOS JSON
+// =====================================================================
+
+// Para requisições POST e PUT, lê o corpo da requisição e decodifica JSON
+// O frontend envia dados no formato: { "campo": "valor", ... }
 $input_data = null;
 if (in_array($method, ['POST', 'PUT'])) {
+    // Lê o raw input do corpo da requisição
     $raw_input = file_get_contents('php://input');
+
+    // Decodifica JSON para array associativo PHP
     $input_data = json_decode($raw_input, true);
+
+    // Valida se o JSON é válido (se houver conteúdo)
     if (json_last_error() !== JSON_ERROR_NONE && !empty($raw_input)) {
         sendJsonResponse(['error' => 'JSON inválido'], 400);
     }
 }
 
-// === ROTEAMENTO DA API ===
+// =====================================================================
+// ROTEAMENTO DA API
+// =====================================================================
+//
+// COMO FUNCIONA:
+// 1. O switch(true) permite usar condições complexas em cada case
+// 2. Cada case verifica o path e o método HTTP
+// 3. Pattern matching com preg_match para rotas dinâmicas (ex: /pedidos/123)
+// 4. Chama o handler correspondente passando os dados necessários
+// 5. Handlers estão definidos em legacy_functions.php e estoque_produtos_handlers.php
+//
+// PADRÃO DE NOMENCLATURA DOS HANDLERS:
+// - handleGet*()    : Buscar dados (GET)
+// - handleAdd*()    : Criar novo registro (POST)
+// - handleUpdate*() : Atualizar registro (PUT)
+// - handleDelete*() : Deletar registro (DELETE)
+//
+// EXEMPLO DE FLUXO:
+// Frontend: fetch('API_URL/orcamentos', {method: 'POST', body: JSON.stringify(data)})
+//    ↓
+// Router: case $path === '/orcamentos' && $method === 'POST'
+//    ↓
+// Handler: handleAddOrcamento($input_data)
+//    ↓
+// Backend: INSERT INTO Orcamentos (...) VALUES (...)
+//    ↓
+// Resposta: sendJsonResponse({success: true, id: 45}, 201)
+// =====================================================================
+
 try {
     switch (true) {
-        // Status da API
+        // ============================================================
+        // STATUS DA API (Health Check)
+        // ============================================================
+        // Endpoint para verificar se a API está respondendo
         case $path === '/status':
             handleStatus();
             break;
 
-        // === AUTENTICAÇÃO ===
+        // ============================================================
+        // MÓDULO: AUTENTICAÇÃO E RECUPERAÇÃO DE SENHA
+        // ============================================================
+        // Gestão de login, registro e recuperação de senha
+
+        // POST /register - Cria novo usuário no sistema
         case $path === '/register' && $method === 'POST':
             handleRegister($input_data);
             break;
 
+        // POST /login - Autentica usuário e retorna dados da sessão
         case $path === '/login' && $method === 'POST':
             handleLogin($input_data);
             break;
 
+        // POST /recover-password - Envia email com token de recuperação
         case $path === '/recover-password' && $method === 'POST':
             handleRecoverPassword($input_data);
             break;
 
+        // POST /reset-password - Reseta senha usando token válido
         case $path === '/reset-password' && $method === 'POST':
             handleResetPassword($input_data);
             break;
 
-        // === USUÁRIOS ===
+        // ============================================================
+        // MÓDULO: USUÁRIOS E PERFIL
+        // ============================================================
+        // Gestão de perfis de usuários, dados pessoais e listagens
+
+        // GET/PUT /users/{username} - Busca ou atualiza perfil do usuário
+        // Exemplo: /users/paulo.silva
         case preg_match('/^\/users\/([a-zA-Z0-9_.-]+)$/', $path, $matches):
             $username = $matches[1];
             if ($method === 'GET') {
@@ -90,23 +216,37 @@ try {
             }
             break;
 
+        // GET /usuarios-lista - Retorna lista simplificada de usuários
+        // Usado em dropdowns e seletores no frontend
         case $path === '/usuarios-lista' && $method === 'GET':
-            handleGetUsuariosSimples(); // Usado nos dropdowns
+            handleGetUsuariosSimples();
             break;
-            
+
+        // GET /vendedores - Lista apenas usuários com perfil de vendedor
+        // Usado para atribuir vendedores a orçamentos e pedidos
         case $path === '/vendedores' && $method === 'GET':
             handleGetListaVendedores();
             break;
 
+        // GET /usuarios-sem-vinculo - Lista usuários sem vínculo com funcionários
+        // Usado no cadastro de funcionários para vincular login
         case $path === '/usuarios-sem-vinculo' && $method === 'GET':
             handleGetUsuariosSemVinculo();
             break;
 
+        // GET /usuarios-disponiveis - Alias para usuarios-sem-vinculo
         case $path === '/usuarios-disponiveis' && $method === 'GET':
             handleGetUsuariosSemVinculo();
             break;
 
-        // === BOBINAS ===
+        // ============================================================
+        // MÓDULO: ESTOQUE DE BOBINAS (Matéria-Prima)
+        // ============================================================
+        // Gestão de bobinas de alumínio/aço para produção
+        // Rastreamento de peso, espessura, largura, lotes e fornecedores
+
+        // GET /bobinas - Lista todas as bobinas do estoque
+        // POST /bobinas - Registra entrada de nova bobina
         case $path === '/bobinas':
             if ($method === 'GET') {
                 handleGetBobinas();
@@ -117,6 +257,9 @@ try {
             }
             break;
 
+        // GET /bobinas/{id} - Busca bobina específica
+        // PUT /bobinas/{id} - Atualiza dados da bobina
+        // DELETE /bobinas/{id} - Remove bobina do sistema
         case preg_match('/^\/bobinas\/(\d+)$/', $path, $matches):
             $bobina_id = (int)$matches[1];
             if ($method === 'GET') {
@@ -293,15 +436,33 @@ try {
             }
             break;
 
-        // === ORÇAMENTOS ===
+        // ============================================================
+        // MÓDULO: ORÇAMENTOS (Comercial)
+        // ============================================================
+        // Criação e gestão de orçamentos para clientes
+        // FLUXO: Orçamento → Aprovação → Converte automaticamente em Pedido
+        //
+        // IMPORTANTE: Quando um orçamento é aprovado (status='aprovado'),
+        // o sistema automaticamente:
+        // 1. Cria um registro na tabela Pedidos
+        // 2. Copia todos os itens para ItensPedido
+        // 3. Gera número de pedido sequencial
+        // 4. Cria entrada em ContasReceber (financeiro)
+
+        // GET /orcamentos - Lista todos os orçamentos com filtros
         case $path === '/orcamentos' && $method === 'GET':
             handleGetOrcamentos();
             break;
 
+        // POST /orcamentos - Cria novo orçamento com itens
+        // Usa transação MySQL para garantir consistência
         case $path === '/orcamentos' && $method === 'POST':
             handleAddOrcamento($input_data);
             break;
 
+        // GET /orcamentos/{id} - Busca orçamento específico com itens
+        // PUT /orcamentos/{id} - Atualiza orçamento (aprovar/rejeitar)
+        // DELETE /orcamentos/{id} - Remove orçamento
         case preg_match('/^\/orcamentos\/(\d+)$/', $path, $matches):
             $orcamento_id = (int)$matches[1];
             if ($method === 'GET') {
@@ -314,12 +475,22 @@ try {
                 sendJsonResponse(['error' => 'Método não permitido'], 405);
             }
             break;
-            
-        // === PRODUÇÃO (NOVO FLUXO) ===
+
+        // ============================================================
+        // MÓDULO: PRODUÇÃO (Fluxo de Fabricação)
+        // ============================================================
+        // Gerencia a fila de produção e baixa de itens produzidos
+        // INTEGRAÇÃO: Conecta Pedidos → Produção → Expedição
+
+        // GET /producao/fila - Lista itens pendentes de produção
+        // Busca ItensPedido onde StatusProducao = 'Pendente'
         case $path === '/producao/fila' && $method === 'GET':
             handleGetFilaProducao();
             break;
-            
+
+        // POST /producao/baixar-item - Marca item como produzido
+        // Atualiza StatusProducao de 'Pendente' para 'Concluido'
+        // Registra bobinas utilizadas e sucata gerada
         case $path === '/producao/baixar-item' && $method === 'POST':
             handleBaixarItemProducao($input_data);
             break;
