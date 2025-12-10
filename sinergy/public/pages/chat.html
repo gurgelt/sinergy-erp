@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interno - Sinergy</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/chat.css"> <link rel="stylesheet" href="../assets/css/notifications.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link"><img src="assets/images/sinergy_logo.png" class="sidebar-logo"></a>
+            <button id="sidebar-toggle" class="btn-toggle-menu"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="index.html">Home</a></li>
+                    <li class="items-nav active"><a href="chat.html" class="active">Chat</a></li>
+                    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="chat-container">
+        <div class="chat-sidebar">
+            <div class="sidebar-header">
+                <h3>Mensagens</h3>
+            </div>
+            <div class="users-list" id="users-list">
+                <div style="padding:20px; text-align:center;">Carregando...</div>
+            </div>
+        </div>
+
+        <div class="chat-main">
+            <div class="chat-header" id="chat-header" style="display:none;">
+                <div class="chat-user-info">
+                    <div class="avatar-small" id="chat-avatar"></div>
+                    <div>
+                        <h4 id="chat-username">Nome Usuário</h4>
+                        <span id="chat-status" class="status-text">Offline</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="empty-chat">
+                    <i class="fas fa-comments" style="font-size:50px; color:#ccc;"></i>
+                    <p>Selecione um usuário para conversar.</p>
+                </div>
+            </div>
+
+            <div class="chat-input-area" id="chat-input-area" style="display:none;">
+                <form id="form-chat">
+                    <input type="text" id="input-mensagem" placeholder="Digite sua mensagem..." autocomplete="off">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/sidebar.js"></script>
+    <script src="assets/js/chat.js"></script> </body>
+</html>

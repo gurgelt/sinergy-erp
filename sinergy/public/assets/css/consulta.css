@@ -1,0 +1,79 @@
+/* styles/consulta.css */
+
+.consulta-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.form-actions-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-actions-center .btn {
+    padding: 12px 25px;
+    font-size: 16px;
+}
+
+/* Card de Resultado */
+.result-card {
+    margin-top: 30px;
+    border-top: 4px solid #3498db;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.result-card:not(.hidden) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.result-summary {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.result-item span {
+    font-size: 16px;
+    color: #64748b;
+}
+
+.result-item strong {
+    font-size: 24px;
+    color: #334155;
+    margin-top: 5px;
+}
+
+/* Mensagem de Status */
+.status-message {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status-disponivel {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.status-indisponivel {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.hidden {
+    display: none;
+}

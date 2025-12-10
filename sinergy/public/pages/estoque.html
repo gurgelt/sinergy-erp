@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estoque</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/estoque.css" />
+    <link rel="stylesheet" href="../assets/css/estoque-produtos.css" />
+    <link rel="stylesheet" href="../assets/css/notifications.css" />
+    <link rel="stylesheet" href="../assets/css/nav.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.ico"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  </head>
+  <body>
+    <div id="loader-overlay">
+      <div class="loader-spinner"></div>
+    </div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    <li class="items-nav" data-module="diretoria"><a href="diretoria.html"><span>Diretoria</span></a></li>
+                    <li class="items-nav has-submenu"><a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="suprimentos.html">Gestão de Compras</a></li><li><a href="compras.html">Solicitações de Compra</a></li></ul></li>
+                    <li class="items-nav has-submenu active"><a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu" style="display: block;"><li><a href="estoque.html" class="active">Estoque</a></li><li><a href="saldo.html">Saldo do Estoque</a></li></ul></li>
+                    <li class="items-nav has-submenu"><a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="orcamentos.html">Orçamentos</a></li><li><a href="pedidos.html">Pedidos</a></li><li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li></ul></li>
+                    <li class="items-nav has-submenu"><a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="financeiro.html">Geral</a></li><li><a href="contasapagar.html">Contas a pagar</a></li><li><a href="contasareceber.html">Contas a receber</a></li><li><a href="tesouraria.html">Tesouraria</a></li></ul></li>
+                    <li class="items-nav has-submenu"><a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="informacoes.html">Informações</a></li><li><a href="documentos.html">Documentos</a></li><li><a href="rastreio.html">Rastreio</a></li></ul></li>
+                    <li class="items-nav has-submenu"><a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="funcionarios.html">Funcionários</a></li></ul></li>
+                    <li class="items-nav"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>
+                    <li class="items-nav"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+      <div class="section-title">Estoque</div>
+      <div class="search-container">
+        <input type="text" id="search-bobina" placeholder="Buscar..." />
+      </div>
+      <div id="notification-bell-icon" class="notification-icon">
+          <i class="fas fa-bell"></i>
+          <div id="notification-dropdown" class="notification-dropdown">
+              <div class="notification-dropdown-header">Notificações <span id="notification-count">(0)</span></div>
+              <div id="notification-dropdown-list"></div>
+          </div>
+      </div>
+      <div class="user-profile" id="user-profile-container">
+          <div class="avatar"><img src="https://i.pravatar.cc/100" id="user-avatar"></div>
+          <div class="user-info"><div class="user-name" id="user-name">...</div><div class="user-email" id="user-email">...</div></div>
+          <i class="fas fa-chevron-down dropdown-arrow"></i>
+          <div class="dropdown-menu" id="user-dropdown-menu">
+              <a href="meus-dados.html" class="dropdown-item">Meus Dados</a>
+              <a href="#" id="logout-btn" class="dropdown-item">Sair</a>
+          </div>
+      </div>
+    </div>
+
+    <main class="conteudo-principal">
+      <div class="estoque-mode-toggle">
+        <button class="toggle-btn active" onclick="toggleEstoqueMode('bobinas')">
+          <i class="fas fa-industry"></i> Estoque de Bobinas
+        </button>
+        <button class="toggle-btn" onclick="toggleEstoqueMode('produtos')">
+          <i class="fas fa-boxes"></i> Estoque de Produtos
+        </button>
+      </div>
+
+      <div id="estoque-bobinas-section" class="estoque-section active">
+        <div class="estoque-container">
+          <div class="estoque-header">
+            <h2>Bobinas em Estoque</h2>
+            <div class="header-actions">
+              <button id="btn-nova-bobina" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nova Bobina
+              </button>
+              <button id="btn-exportar-estoque" class="btn btn-secondary">
+                <i class="fas fa-file-export"></i> Exportar
+              </button>
+              
+              <div class="filter-container">
+                <select id="filter-tipo" class="filter-select">
+                  <option value="">Todos os Tipos</option>
+                  <option value="Super-Cana">Super-Cana</option>
+                  <option value="Meia-Cana">Meia-Cana</option>
+                  <option value="Meia-Cana Transvision">Meia-Cana Transvision</option>
+                  <option value="Guia 50">Guia 50</option>
+                  <option value="Guia 60">Guia 60</option>
+                  <option value="Guia 70">Guia 70</option>
+                  <option value="Guia 100">Guia 100</option>
+                  <option value="Soleira">Soleira</option>
+                  <option value="Eixo">Eixo</option>
+                </select>
+                <select id="filter-espessura" class="filter-select">
+                  <option value="">Todas as Espessuras</option>
+                  <option value="1.20">1.20 mm</option>
+                  <option value="0.80">0.80 mm</option>
+                </select>
+                <select id="filter-largura" class="filter-select">
+                  <option value="">Todas as Larguras</option>
+                  <option value="388">388 mm</option>
+                  <option value="238">238 mm</option>
+                  <option value="128">128 mm</option>
+                  <option value="137">137 mm</option>
+                  <option value="136">136 mm</option>
+                  <option value="165">165 mm</option>
+                  <option value="225">225 mm</option>
+                  <option value="125">125 mm</option>
+                  <option value="175">175 mm</option>
+                </select>
+                <select id="filter-mes" class="filter-select">
+                  <option value="">Todos os Meses</option>
+                  <option value="01">Janeiro</option>
+                  <option value="02">Fevereiro</option>
+                  <option value="03">Março</option>
+                  <option value="04">Abril</option>
+                  <option value="05">Maio</option>
+                  <option value="06">Junho</option>
+                  <option value="07">Julho</option>
+                  <option value="08">Agosto</option>
+                  <option value="09">Setembro</option>
+                  <option value="10">Outubro</option>
+                  <option value="11">Novembro</option>
+                  <option value="12">Dezembro</option>
+                </select>
+                <select id="filter-natureza-operacao" class="filter-select">
+                  <option value="">Todas as Naturezas</option>
+                  <option value="Entrada">Entrada</option>
+                  <option value="Saída">Saída</option>
+                </select>
+                <select id="filter-tipo-movimentacao" class="filter-select">
+                  <option value="">Todos os Tipos de Mov.</option>
+                  <option value="Compra">Compra</option>
+                  <option value="Saída Perfuração">Saída Perfuração</option>
+                  <option value="Chegada Perfuração">Chegada Perfuração</option>
+                  <option value="Produção">Produção</option>
+                  <option value="Venda">Venda</option>
+                </select>
+                <div class="sort-container">
+                  <button id="btn-sort-date" class="btn btn-secondary btn-sort">
+                    <i class="fas fa-calendar-alt"></i> Ordenar por Data
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table id="tabela-bobinas" class="data-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Fornecedor</th>
+                  <th>NF</th>
+                  <th>Tipo</th>
+                  <th>Lote</th>
+                  <th>Esp</th>
+                  <th>Larg</th>
+                  <th>Peso</th>
+                  <th>Operação</th>
+                  <th>Movim.</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <button id="prev-page" class="btn-page"><i class="fas fa-chevron-left"></i></button>
+            <div class="page-numbers">
+              <span class="current-page">1</span> de <span id="total-pages">1</span>
+            </div>
+            <button id="next-page" class="btn-page"><i class="fas fa-chevron-right"></i></button>
+          </div>
+
+          <div class="estoque-summary">
+            <div class="summary-card">
+              <div class="summary-icon"><i class="fas fa-weight-hanging"></i></div>
+              <div class="summary-info">
+                <h3>Peso Total</h3>
+                <p id="peso-total">0 kg</p>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-icon"><i class="fas fa-boxes"></i></div>
+              <div class="summary-info">
+                <h3>Bobinas</h3>
+                <p id="total-bobinas">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="estoque-produtos-section" class="estoque-section">
+        
+        <div class="dashboard-stats">
+          <div class="stat-card-produto">
+            <div class="stat-header">
+              <div class="stat-icon-produto bg-primary"><i class="fas fa-boxes"></i></div>
+              <div class="stat-content">
+                <h3>Total de Produtos</h3>
+                <div class="stat-value-produto" id="stat-total-produtos">0</div>
+              </div>
+            </div>
+          </div>
+          <div class="stat-card-produto success">
+            <div class="stat-header">
+              <div class="stat-icon-produto bg-success"><i class="fas fa-check-circle"></i></div>
+              <div class="stat-content">
+                <h3>Com Estoque</h3>
+                <div class="stat-value-produto" id="stat-com-estoque">0</div>
+              </div>
+            </div>
+          </div>
+          <div class="stat-card-produto danger">
+            <div class="stat-header">
+              <div class="stat-icon-produto bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
+              <div class="stat-content">
+                <h3>Críticos/Zerados</h3>
+                <div class="stat-value-produto" id="stat-criticos">0</div>
+              </div>
+            </div>
+          </div>
+          <div class="stat-card-produto warning">
+            <div class="stat-header">
+              <div class="stat-icon-produto bg-warning"><i class="fas fa-exclamation-circle"></i></div>
+              <div class="stat-content">
+                <h3>Estoque Baixo</h3>
+                <div class="stat-value-produto" id="stat-baixos">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controles-estoque-produtos">
+          <div class="filtros-estoque-produtos">
+            <select id="filter-status-estoque" class="filter-select">
+              <option value="todos">Todos os Status</option>
+              <option value="Normal">Normal</option>
+              <option value="Baixo">Baixo</option>
+              <option value="Crítico">Crítico</option>
+              <option value="Zerado">Zerado</option>
+              <option value="Excesso">Excesso</option>
+            </select>
+
+            <select id="filter-classe-estoque" class="filter-select">
+              <option value="">Todas as Classes</option>
+              <option value="Lâminas">Lâminas</option>
+              <option value="Máquina">Máquina</option>
+              <option value="Metal">Metal</option>
+              <option value="Motores">Motores</option>
+              <option value="Acessórios">Acessórios</option>
+              <option value="Portas">Portas</option>
+              <option value="Outros">Outros</option>
+            </select>
+
+            <select id="filter-localizacao-estoque" class="filter-select">
+              <option value="">Todas as Localizações</option>
+              <option value="João Mafra">João Mafra</option>
+              <option value="Itapeva">Itapeva</option>
+              <option value="Ilíria">Ilíria</option>
+              <option value="Casarão">Casarão</option>
+              <option value="Inhaíba">Inhaíba</option>
+            </select>
+
+            <input type="text" id="search-produto-estoque" placeholder="Buscar produto..." />
+          </div>
+        </div>
+
+        <div class="tabela-estoque-container">
+          <table class="tabela-estoque-produtos">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Classe</th>
+                <th>Localização</th>
+                <th>Unidade</th>
+                <th class="text-center">Qtd Atual</th>
+                <th class="text-center">Mínimo</th>
+                <th class="text-center">Status</th>
+                <th class="text-center" style="width: 150px;">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-estoque-produtos">
+              <tr><td colspan="8" class="text-center">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+            <button id="btn-prev-page-prod" class="btn-page"><i class="fas fa-chevron-left"></i></button>
+            <div class="page-numbers">
+              <span id="current-page-prod">1</span> de <span id="total-pages-prod">1</span>
+            </div>
+            <button id="btn-next-page-prod" class="btn-page"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <div id="modal-estoque-produto" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+          <div class="modal-header">
+            <h2 id="modal-title-estoque">Editar Estoque</h2>
+            <button class="close-modal" id="close-modal-estoque">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="form-estoque-produto">
+              <input type="hidden" id="produto-id-hidden" />
+              
+              <div class="form-group">
+                <label>Classe</label>
+                <select id="input-classe" class="form-control">
+                    <option value="">Selecione...</option>
+                    <option value="Lâminas">Lâminas</option>
+                    <option value="Máquina">Máquina</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Motores">Motores</option>
+                    <option value="Acessórios">Acessórios</option>
+                    <option value="Portas">Portas</option>
+                    <option value="Outros">Outros</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                    <label>Qtd Atual *</label>
+                    <input type="number" id="input-quantidade" class="form-control" step="0.01" required />
+                </div>
+                <div class="form-group">
+                    <label>Qtd Mínima</label>
+                    <input type="number" id="input-qtd-minima" class="form-control" step="0.01" value="0" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Localização (Só altere se necessário)</label>
+                <select id="input-localizacao" class="form-control">
+                    <option value="">Selecione...</option>
+                    <option value="João Mafra">João Mafra</option>
+                    <option value="Itapeva">Itapeva</option>
+                    <option value="Ilíria">Ilíria</option>
+                    <option value="Casarão">Casarão</option>
+                    <option value="Inhaíba">Inhaíba</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Observação</label>
+                <textarea id="input-observacao-estoque" class="form-control" rows="2"></textarea>
+              </div>
+              
+              <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="btn-cancelar-estoque">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-movimentacao" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+          <div class="modal-header">
+            <h2 id="modal-title-movimentacao">Movimentar</h2>
+            <button class="close-modal" id="close-modal-movimentacao">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="form-movimentacao">
+              <input type="hidden" id="movimentacao-produto-id" />
+              <input type="hidden" id="movimentacao-tipo" />
+              
+              <div class="form-group">
+                  <label>Localização *</label>
+                  <select id="input-movimentacao-localizacao" class="form-control" required>
+                      <option value="">Selecione...</option>
+                      <option value="João Mafra">João Mafra</option>
+                      <option value="Itapeva">Itapeva</option>
+                      <option value="Ilíria">Ilíria</option>
+                      <option value="Casarão">Casarão</option>
+                      <option value="Inhaíba">Inhaíba</option>
+                  </select>
+              </div>
+
+              <div class="info-estoque-atual" id="info-estoque-atual" style="margin-bottom:15px; font-weight:bold; color:#3498db;"></div>
+              
+              <div class="form-group">
+                  <label>Quantidade *</label>
+                  <input type="number" id="input-quantidade-movimentacao" class="form-control" step="0.01" min="0.01" required />
+              </div>
+              <div class="form-group">
+                  <label>Motivo *</label>
+                  <input type="text" id="input-motivo" class="form-control" placeholder="Ex: Venda, Compra, Ajuste..." required />
+              </div>
+              <div class="form-group">
+                  <label>Observação</label>
+                  <textarea id="input-observacao-movimentacao" class="form-control" rows="2"></textarea>
+              </div>
+              
+              <div class="form-actions">
+                  <button type="button" class="btn btn-secondary" id="btn-cancelar-movimentacao">Cancelar</button>
+                  <button type="submit" id="btn-confirmar-movimentacao" class="btn btn-primary">Confirmar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-bobina" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="modal-title">Nova Bobina</h2>
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="modal-body">
+            <form id="form-bobina">
+              <input type="hidden" id="bobina-id" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Tipo</label>
+                  <select id="tipo-material" required>
+                    <option value="">Selecione</option>
+                    <option value="Super-Cana">Super-Cana</option>
+                    <option value="Meia-Cana">Meia-Cana</option>
+                    <option value="Meia-Cana Transvision">Meia-Cana Transvision</option>
+                    <option value="Guia 50">Guia 50</option>
+                    <option value="Guia 60">Guia 60</option>
+                    <option value="Guia 70">Guia 70</option>
+                    <option value="Guia 100">Guia 100</option>
+                    <option value="Soleira">Soleira</option>
+                    <option value="Eixo">Eixo</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Espessura</label>
+                  <select id="espessura-chapa" required>
+                    <option value="">Selecione</option>
+                    <option value="1.20">1.20 mm</option>
+                    <option value="0.80">0.80 mm</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Largura</label>
+                  <select id="largura-chapa" required>
+                    <option value="">Selecione</option>
+                    <option value="125">125 mm</option>
+                    <option value="136">136 mm</option>
+                    <option value="165">165 mm</option>
+                    <option value="175">175 mm</option>
+                    <option value="225">225 mm</option>
+                    <option value="238">238 mm</option>
+                    <option value="388">388 mm</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Fornecedor</label>
+                  <input type="text" id="fornecedor" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Nota Fiscal</label>
+                  <input type="text" id="nota-fiscal" required />
+                </div>
+                <div class="form-group">
+                  <label>Data Receb.</label>
+                  <input type="date" id="data-recebimento" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Lote (LmmAA-x-x)</label>
+                  <input type="text" id="lote" required placeholder="Ex: L0523-1-1" />
+                </div>
+                <div class="form-group">
+                  <label>Peso (kg)</label>
+                  <input type="number" id="peso-bobina" step="0.01" min="0" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Natureza</label>
+                  <select id="natureza-operacao" required>
+                    <option value="Entrada">Entrada</option>
+                    <option value="Saída">Saída</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Movimentação</label>
+                  <select id="tipo-movimentacao" required>
+                    <option value="Compra">Compra</option>
+                    <option value="Saída Perfuração">Saída Perfuração</option>
+                    <option value="Chegada Perfuração">Chegada Perfuração</option>
+                    <option value="Produção">Produção</option>
+                    <option value="Venda">Venda</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group full-width">
+                <label>Observação</label>
+                <textarea id="observacao" rows="3"></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-secondary cancel-modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-estoque-produto" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+          <div class="modal-header">
+            <h2 id="modal-title-estoque">Editar Estoque</h2>
+            <button class="close-modal" id="close-modal-estoque">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="form-estoque-produto">
+              <input type="hidden" id="produto-id-hidden" />
+              
+              <div class="form-group" style="display: none;">
+                <label>Produto</label>
+                <select id="select-produto" class="form-control">
+                    <option value="">Selecione...</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Classe</label>
+                <select id="input-classe" class="form-control">
+                    <option value="">Selecione...</option>
+                    <option value="Lâminas">Lâminas</option>
+                    <option value="Máquina">Máquina</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Motores">Motores</option>
+                    <option value="Acessórios">Acessórios</option>
+                    <option value="Portas">Portas</option>
+                    <option value="Outros">Outros</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                    <label>Qtd Atual *</label>
+                    <input type="number" id="input-quantidade" class="form-control" step="0.01" required />
+                </div>
+                <div class="form-group">
+                    <label>Mínimo</label>
+                    <input type="number" id="input-qtd-minima" class="form-control" step="0.01" value="0" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Localização</label>
+                <select id="input-localizacao" class="form-control">
+                    <option value="">Selecione o galpão...</option>
+                    <option value="João Mafra">João Mafra</option>
+                    <option value="Itapeva">Itapeva</option>
+                    <option value="Ilíria">Ilíria</option>
+                    <option value="Casarão">Casarão</option>
+                    <option value="Inhaíba">Inhaíba</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Observação</label>
+                <textarea id="input-observacao-estoque" class="form-control" rows="2"></textarea>
+              </div>
+              
+              <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="btn-cancelar-estoque">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    <div id="modal-movimentacao" class="modal">
+      <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-header">
+          <h2 id="modal-title-movimentacao">Movimentar</h2>
+          <button class="close-modal" id="close-modal-movimentacao">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="form-movimentacao">
+            <input type="hidden" id="movimentacao-produto-id" />
+            <input type="hidden" id="movimentacao-tipo" />
+            
+            <div class="form-group">
+                <label>Localização de Origem/Destino *</label>
+                <select id="input-movimentacao-localizacao" class="form-control" required>
+                    <option value="">Selecione...</option>
+                    <option value="João Mafra">João Mafra</option>
+                    <option value="Itapeva">Itapeva</option>
+                    <option value="Ilíria">Ilíria</option>
+                    <option value="Casarão">Casarão</option>
+                    <option value="Inhaíba">Inhaíba</option>
+                </select>
+            </div>
+    
+            <div class="info-estoque-atual" id="info-estoque-atual" style="margin-bottom:15px; font-weight:bold; color:#3498db;"></div>
+            <div class="form-group"><label>Quantidade *</label><input type="number" id="input-quantidade-movimentacao" class="form-control" step="0.01" required /></div>
+            <div class="form-group"><label>Motivo *</label><input type="text" id="input-motivo" class="form-control" required /></div>
+            <div class="form-group"><label>Observação</label><textarea id="input-observacao-movimentacao" class="form-control" rows="2"></textarea></div>
+            <div class="form-actions"><button type="button" class="btn btn-secondary" id="btn-cancelar-movimentacao">Cancelar</button><button type="submit" class="btn btn-primary">Confirmar</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+      
+      <div id="modal-confirma-exclusao" class="modal"><div class="modal-content"><div class="modal-header"><h2>Confirmar Exclusão</h2><button class="close-modal"><i class="fas fa-times"></i></button></div><div class="modal-body"><p>Tem certeza que deseja excluir <span id="lote-exclusao"></span>?</p><div class="form-actions"><button type="button" class="btn btn-secondary cancel-modal">Cancelar</button><button type="button" id="btn-confirma-exclusao" class="btn btn-danger">Excluir</button></div></div></div></div>
+      <div id="modal-detalhes" class="modal"><div class="modal-content"><div class="modal-header"><h2>Detalhes</h2><button class="close-modal"><i class="fas fa-times"></i></button></div><div class="modal-body"><div class="detalhes-header"><div class="lote-badge" id="detalhe-lote"></div><div class="status-badge" id="detalhe-status"></div></div><div class="detalhes-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"><div class="detalhe-item"><strong>Fornecedor:</strong> <span id="detalhe-fornecedor"></span></div><div class="detalhe-item"><strong>Tipo:</strong> <span id="detalhe-tipo"></span></div><div class="detalhe-item"><strong>Espessura:</strong> <span id="detalhe-espessura"></span></div><div class="detalhe-item"><strong>Largura:</strong> <span id="detalhe-largura"></span></div><div class="detalhe-item"><strong>Peso:</strong> <span id="detalhe-peso"></span></div></div><div class="detalhes-acoes" style="margin-top:20px;"><button id="btn-editar-detalhe" class="btn btn-secondary">Editar</button><button id="btn-excluir-detalhe" class="btn btn-danger">Excluir</button></div></div></div></div>
+
+    </main>
+
+    <div id="notification-container"></div>
+    
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/estoque.js"></script>
+    <script src="../assets/js/estoque-produtos.js"></script>
+    
+    <script>
+      function toggleEstoqueMode(mode) {
+        document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.estoque-section').forEach(section => section.classList.remove('active'));
+        event.target.closest('.toggle-btn').classList.add('active');
+        document.getElementById(`estoque-${mode}-section`).classList.add('active');
+        localStorage.setItem('estoqueMode', mode);
+        if(mode === 'produtos') window.initializeEstoqueProdutos && window.initializeEstoqueProdutos();
+      }
+      window.addEventListener('DOMContentLoaded', () => {
+        const savedMode = localStorage.getItem('estoqueMode') || 'bobinas';
+        const btn = document.querySelector(`[onclick="toggleEstoqueMode('${savedMode}')"]`);
+        if (btn) btn.click();
+      });
+    </script>
+  </body>
+</html>

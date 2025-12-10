@@ -1,0 +1,421 @@
+/* styles/nav.css - Estilos de Navegação e Submenu - VERSÃO MODERNA */
+
+/* Container */
+.style-nav {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 0;
+}
+
+/* Scrollbar moderna e fina */
+.style-nav::-webkit-scrollbar { 
+    width: 4px; 
+}
+.style-nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+.style-nav::-webkit-scrollbar-thumb { 
+    background: rgba(255,255,255,0.15); 
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.style-nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.ul-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.items-nav {
+    width: 100%;
+    margin-bottom: 2px;
+    position: relative;
+}
+
+/* Link Principal (Pai) */
+.items-nav > a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 0;
+}
+
+/* Efeito de brilho ao hover */
+.items-nav > a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.items-nav > a:hover::after {
+    transform: translateX(100%);
+}
+
+.items-nav > a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding-left: 24px;
+    border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Ícones */
+.items-nav > a::before {
+    opacity: 0.85;
+    transition: all 0.25s;
+    filter: brightness(1);
+}
+
+.items-nav > a:hover::before {
+    opacity: 1;
+    filter: brightness(1.2);
+    transform: scale(1.1);
+}
+
+/* Texto do Link */
+.items-nav > a span {
+    opacity: 1;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+/* Seta do Submenu - MELHORADA */
+.submenu-arrow {
+    margin-left: auto;
+    font-size: 10px;
+    opacity: 0.6;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.items-nav > a:hover .submenu-arrow {
+    opacity: 1;
+}
+
+/* === ESTADOS ATIVOS - CORRIGIDOS === */
+
+/* 1. Item Pai com Submenu Aberto */
+.items-nav.has-submenu.open > a {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border-left-color: rgba(255, 255, 255, 0.4);
+}
+
+.items-nav.has-submenu.open > a .submenu-arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+.items-nav.has-submenu.open > a::before {
+    opacity: 1;
+    filter: brightness(1.2);
+}
+
+/* 2. Link Simples Ativo (Home, Manutenções, etc) */
+.items-nav:not(.has-submenu) > a.active {
+    background: linear-gradient(90deg, rgba(52, 152, 219, 0.2), rgba(52, 152, 219, 0.05));
+    color: #63b3ed;
+    border-left-color: #3498db;
+    font-weight: 600;
+    box-shadow: inset 0 0 20px rgba(52, 152, 219, 0.1);
+}
+
+.items-nav:not(.has-submenu) > a.active::before {
+    opacity: 1;
+    filter: brightness(1.3);
+}
+
+/* === SUBMENU (Acordeão) === */
+.submenu {
+    display: none; /* JS controla */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+    width: 100%;
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        max-height: 500px;
+        transform: translateY(0);
+    }
+}
+
+/* Links do Submenu (FILHOS) */
+.submenu li {
+    position: relative;
+}
+
+.submenu li a {
+    padding: 12px 20px 12px 56px;
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border-left: 3px solid transparent;
+    height: auto;
+    font-weight: 400;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+/* Indicador visual de submenu */
+.submenu li a::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.submenu li a:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding-left: 60px;
+}
+
+.submenu li a:hover::before {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.5);
+}
+
+/* Submenu Link Ativo (Página Atual) */
+.submenu li a.active {
+    color: #63b3ed;
+    font-weight: 600;
+    border-left-color: #3498db;
+    background: linear-gradient(90deg, rgba(52, 152, 219, 0.15), transparent);
+}
+
+.submenu li a.active::before {
+    background: #3498db;
+    transform: scale(1.5);
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.6);
+}
+
+/* === REGRAS PARA QUANDO ESTÁ RECOLHIDO (SEM MOUSE) === */
+
+/* Esconde textos e setas */
+body.sidebar-collapsed .cabecalho:not(:hover) .items-nav > a span,
+body.sidebar-collapsed .cabecalho:not(:hover) .submenu-arrow {
+    opacity: 0;
+    width: 0;
+    display: none;
+}
+
+/* Centraliza ícones */
+body.sidebar-collapsed .cabecalho:not(:hover) .items-nav > a {
+    padding: 14px 0;
+    justify-content: center;
+    border-left-color: transparent;
+}
+
+body.sidebar-collapsed .cabecalho:not(:hover) .items-nav > a::before {
+    margin-right: 0;
+}
+
+/* Fecha submenus */
+body.sidebar-collapsed .cabecalho:not(:hover) .submenu {
+    display: none !important;
+}
+
+/* Remove efeito hover de padding quando colapsado */
+body.sidebar-collapsed .cabecalho:not(:hover) .items-nav > a:hover {
+    padding-left: 0;
+}
+
+/* === REGRAS PARA QUANDO ESTÁ RECOLHIDO + MOUSE EM CIMA (HOVER) === */
+
+/* Recupera o layout normal */
+body.sidebar-collapsed .cabecalho:hover .items-nav > a {
+    padding: 14px 20px;
+    justify-content: flex-start;
+}
+
+body.sidebar-collapsed .cabecalho:hover .items-nav > a::before {
+    margin-right: 15px;
+}
+
+body.sidebar-collapsed .cabecalho:hover .items-nav > a span,
+body.sidebar-collapsed .cabecalho:hover .submenu-arrow {
+    opacity: 1;
+    display: inline;
+}
+
+body.sidebar-collapsed .cabecalho:hover .items-nav > a:hover {
+    padding-left: 24px;
+}
+
+/* === TOOLTIP PARA MODO COLAPSADO === */
+body.sidebar-collapsed .cabecalho:not(:hover) .items-nav > a {
+    position: relative;
+}
+
+body.sidebar-collapsed .cabecalho:not(:hover) .items-nav > a:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 13px;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: tooltipFade 0.2s;
+    pointer-events: none;
+}
+
+@keyframes tooltipFade {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    /* Em mobile, força a sidebar a ficar colapsada */
+    .cabecalho {
+        width: 70px;
+    }
+    
+    .conteudo-principal {
+        margin-left: 70px;
+    }
+    
+    .top-bar {
+        left: 70px;
+    }
+    
+    /* Ao tocar/hover expande */
+    .cabecalho:hover,
+    .cabecalho:focus-within {
+        width: 240px;
+        box-shadow: 5px 0 30px rgba(0,0,0,0.4);
+    }
+}
+
+@media (max-width: 480px) {
+    /* Em telas muito pequenas, sidebar pode sobrepor */
+    .cabecalho {
+        width: 60px;
+    }
+    
+    .conteudo-principal {
+        margin-left: 60px;
+    }
+    
+    .top-bar {
+        left: 60px;
+    }
+}
+
+/* === MELHORIAS DE ACESSIBILIDADE === */
+.items-nav > a:focus,
+.submenu li a:focus {
+    outline: 2px solid rgba(52, 152, 219, 0.5);
+    outline-offset: -2px;
+}
+
+/* === ANIMAÇÃO DE LOADING (OPCIONAL) === */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.items-nav.loading > a {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ========================================================================== */
+/* === ITENS DE MENU BLOQUEADOS (PERMISSÃO NEGADA) === */
+/* ========================================================================== */
+
+/* Estilo do container bloqueado */
+.items-nav.restricted {
+    cursor: not-allowed !important;
+    opacity: 0.6; /* Deixa o item "apagado" */
+    background-color: rgba(0, 0, 0, 0.1); /* Fundo levemente mais escuro */
+    position: relative;
+}
+
+/* Estilo do link bloqueado */
+.items-nav.restricted > a {
+    pointer-events: none; /* IMPEDE O CLIQUE via CSS */
+    color: #94a3b8; /* Texto cinza */
+    border-left: 3px solid #64748b; /* Borda cinza em vez de transparente */
+}
+
+/* Ícone original fica cinza */
+.items-nav.restricted > a::before {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+/* Esconde a seta de submenu original */
+.items-nav.restricted .submenu-arrow {
+    display: none !important;
+}
+
+/* Ícone de Cadeado */
+.items-nav.restricted .lock-icon {
+    margin-left: auto; /* Empurra para a direita */
+    color: #e74c3c; /* Vermelho suave */
+    font-size: 12px;
+    opacity: 1 !important;
+    display: inline-block !important;
+}
+
+/* Hover no bloqueado (mostra cursor de proibido) */
+.items-nav.restricted:hover > a {
+    background-color: rgba(0, 0, 0, 0.1); /* Não brilha como os outros */
+    padding-left: 20px; /* Não move para a direita */
+    color: #94a3b8;
+}

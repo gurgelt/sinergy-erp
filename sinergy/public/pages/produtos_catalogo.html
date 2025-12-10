@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/produtos_catalogo.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+</head>
+<body>
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu active">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu" style="display: block;"> <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html" class="active">Catálogo de Produtos</a></li> </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    <li class="items-nav"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Catálogo de Produtos</div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar produto...">
+        </div>
+        
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">Notificações <span id="notification-count">(0)</span></div>
+                <div id="notification-dropdown-list"><div class="notification-empty-state">Nenhuma notificação.</div></div>
+            </div>
+        </div>
+
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar"><img src="https://i.pravatar.cc/100" id="user-avatar"></div>
+            <div class="user-info"><div class="user-name" id="user-name">...</div></div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item"><i class="fas fa-user-circle"></i><span>Meus Dados</span></a>
+                <a href="#" id="logout-btn" class="dropdown-item"><i class="fas fa-sign-out-alt"></i><span>Sair</span></a>
+            </div>
+         </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px;">
+            <h2 style="margin:0; color: #2c3e50;">Gerenciar Produtos</h2>
+            <button id="btn-novo-produto" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Novo Produto
+            </button>
+        </div>
+
+        <div class="table-container" style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nome do Item</th>
+                        <th>Unidade</th>
+                        <th>Preço Serralheria</th>
+                        <th>Preço Consumidor</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="produtos-tbody">
+                    </tbody>
+            </table>
+            
+            <div class="pagination-container">
+                <button id="btn-prev-page" class="btn btn-secondary btn-sm" disabled>
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </button>
+                <span id="page-info" style="font-size: 14px; align-self: center; font-weight: 500; color: #64748b;">Página 1</span>
+                <button id="btn-next-page" class="btn btn-secondary btn-sm">
+                    Próxima <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-produto" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2 id="modal-title">Novo Produto</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-produto">
+                    <input type="hidden" id="produto-id">
+                    
+                    <div class="form-group">
+                        <label>Nome do Item *</label>
+                        <input type="text" id="input-nome" class="form-control" required placeholder="Ex: Motor AC 200">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Unidade de Medida *</label>
+                            <select id="input-unidade" class="form-control" required>
+                                <option value="un">Unidade (un)</option>
+                                <option value="m">Metro (m)</option>
+                                <option value="m²">Metro Quadrado (m²)</option>
+                                <option value="kg">Quilograma (kg)</option>
+                                <option value="br">Barra (br)</option>
+                                <option value="pc">Peça (pc)</option>
+                                <option value="cx">Caixa (cx)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Preço Serralheria (R$)</label>
+                            <input type="number" id="input-preco-serralheria" class="form-control" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Preço Consumidor (R$)</label>
+                            <input type="number" id="input-preco-consumidor" class="form-control" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-salvar">Salvar Produto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-exclusao" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Excluir Produto</h2>
+                <button class="close-modal" id="close-exclusao">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir este produto?</p>
+                <p><strong id="nome-exclusao" style="color: #e74c3c;"></strong></p>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btn-cancelar-exclusao">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btn-confirmar-exclusao">Sim, Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/produtos_catalogo.js"></script>
+</body>
+</html>

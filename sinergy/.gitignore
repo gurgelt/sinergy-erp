@@ -1,0 +1,61 @@
+# Arquivos de Ambiente e Configuração
+.env
+.env.local
+.env.*.local
+
+# Logs e Debug
+logs/
+!logs/.gitkeep
+*.log
+error_log
+debug.log
+
+# Backups
+backups/
+*.backup
+*.bak
+
+# Arquivos do Sistema Operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.buildpath
+
+# Dependências
+vendor/
+node_modules/
+bower_components/
+
+# Arquivos temporários
+tmp/
+temp/
+cache/
+*.tmp
+*.cache
+
+# Uploads (dependendo do projeto, pode querer versionar algumas imagens)
+uploads/*
+!uploads/.gitkeep
+
+# Arquivos de sessão
+sessions/
+
+# Arquivos de compilação/build
+dist/
+build/
+*.min.js
+*.min.css

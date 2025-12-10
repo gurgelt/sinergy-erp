@@ -1,0 +1,636 @@
+/* common.css - Estilos comuns para componentes reutilizáveis em todas as páginas */
+
+/* Botões */
+.btn {
+    background-color: #e9ecef;
+    border: none;
+    border-radius: 4px;
+    color: #334155;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background-color: #dee2e6;
+}
+
+.btn.primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn.primary:hover {
+    background-color: #2980b9;
+}
+
+.btn.secondary {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+.btn.secondary:hover {
+    background-color: #e9ecef;
+}
+
+.btn.outline {
+    background-color: transparent;
+    border: 1px solid #cbd5e1;
+}
+
+.btn.outline:hover {
+    background-color: #f8f9fa;
+}
+
+.btn.small {
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+/* Botões de ação com ícones */
+.btn-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: #f1f5f9;
+    opacity: 1;
+}
+
+.btn-icon.edit {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z'/%3E%3C/svg%3E");
+}
+
+.btn-icon.view {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/%3E%3C/svg%3E");
+}
+
+.btn-icon.delete {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z'/%3E%3C/svg%3E");
+}
+
+.btn-icon.download {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E");
+}
+
+.btn-icon.refresh {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z'/%3E%3C/svg%3E");
+}
+
+.btn-icon.more {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E");
+}
+
+.btn-icon.share {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z'/%3E%3C/svg%3E");
+}
+
+.btn-icon.reply {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23475569' viewBox='0 0 24 24'%3E%3Cpath d='M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z'/%3E%3C/svg%3E");
+}
+
+/* Cards */
+.card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.card-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #334155;
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Status Tags */
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status.ok {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.status.ok::before {
+    background-color: #10b981;
+}
+
+.status.warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.status.warning::before {
+    background-color: #f59e0b;
+}
+
+.status.danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.status.danger::before {
+    background-color: #ef4444;
+}
+
+.status.info {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.status.info::before {
+    background-color: #3b82f6;
+}
+
+.status.new {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+.status.new::before {
+    background-color: #8b5cf6;
+}
+
+.status.processing {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.status.processing::before {
+    background-color: #3b82f6;
+}
+
+/* Tabelas */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.data-table th {
+    background-color: #f8f9fa;
+    color: #475569;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.data-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table td.actions {
+    display: flex;
+    gap: 5px;
+}
+
+.data-table.small {
+    font-size: 13px;
+}
+
+.data-table.small th {
+    padding: 10px 12px;
+}
+
+.data-table.small td {
+    padding: 8px 12px;
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-page {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e9ecef;
+    background-color: white;
+    color: #334155;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-page:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-page.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.page-info {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Formulários */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #475569;
+    font-size: 14px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    color: #334155;
+    background-color: white;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-help {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Ver tudo */
+.view-all {
+    text-align: center;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.view-all a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.view-all a:hover {
+    text-decoration: underline;
+}
+
+/* Header da página */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    color: #334155;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Remover sublinhado de todos os botões e links de ação */
+.btn,
+.highlight-link,
+.alert-action,
+.help-link,
+.view-all a {
+    text-decoration: none;
+}
+
+.btn:hover,
+.highlight-link:hover,
+.alert-action:hover,
+.help-link:hover,
+.view-all a:hover {
+    text-decoration: none;
+}
+
+/* Também remover sublinhado dos links de navegação específicos */
+.welcome-actions a {
+    text-decoration: none;
+}
+
+.welcome-actions a:hover {
+    text-decoration: none;
+}
+
+/* ===== ESTILOS DA TELA DE LOADING ===== */
+
+#loader-overlay {
+    /* Posicionamento para cobrir toda a tela */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Cor de fundo e centralização do spinner */
+    background-color: #ffffff; /* Fundo branco sólido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Garante que fique por cima de tudo */
+    z-index: 99999; 
+    
+    /* Transição suave para o desaparecimento */
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+}
+
+/* Classe que será adicionada via JS para esconder o loader */
+#loader-overlay.hidden {
+    opacity: 0;
+    /* Impede que o elemento bloqueie cliques quando estiver invisível */
+    pointer-events: none; 
+}
+
+/* A animação do círculo girando (spinner) */
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #f3f3f3; /* Cinza claro da borda */
+    border-top: 6px solid #003366; /* Azul da sua marca */
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+}
+
+/* ===== ESTILOS DO DROPDOWN DE USUÁRIO ===== */
+
+.user-profile {
+    position: relative; /* Essencial para posicionar o dropdown */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.user-profile:hover {
+    background-color: #f1f5f9; /* Fundo cinza claro ao passar o mouse */
+}
+
+.user-profile .dropdown-arrow {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #64748b;
+    transition: transform 0.3s ease;
+}
+
+.user-profile.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    display: none; /* Escondido por padrão */
+    position: absolute;
+    top: 110%; /* Aparece abaixo do perfil */
+    right: 0;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e2e8f0;
+    z-index: 1001; /* Garante que fique sobre outros elementos */
+    padding: 8px 0;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.dropdown-menu.visible {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    gap: 10px; /* ADICIONE ESTA LINHA para espaçamento entre os itens flex */
+    color: #334155;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f5f9;
+}
+
+.dropdown-item i {
+    width: 28px;
+    text-align: center;
+    /* margin-right: 16px; */
+    color: #64748b;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animação de rotação */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsividade para elementos comuns */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .page-header .actions {
+        width: 100%;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .form-row .form-group {
+        min-width: 100%;
+    }
+}
+
+/* ============================================== */
+/* === ESTILOS GLOBAIS DE MODAL === */
+/* ============================================== */
+
+/* Esconde o modal por padrão */
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Garante que fique acima da top-bar (99) */
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Mostra o modal quando a classe .active é adicionada via JS */
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Conteúdo padrão do modal */
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 900px; /* Um padrão largo, pode ser sobreposto */
+    max-height: 90vh; /* Altura máxima */
+    overflow-y: auto; /* Scroll dentro do modal */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Animação de entrada */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* Cabeçalho fixo ao rolar */
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #95a5a6;
+    line-height: 1;
+}
+.close-modal:hover {
+    color: #2c3e50;
+}
+
+.modal-body {
+    padding: 20px 25px;
+    overflow-y: auto; /* Permite scroll apenas no corpo */
+}
+
+/* Rodapé padrão do modal */
+.modal-footer {
+    padding: 15px 25px;
+    border-top: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #f9fafb;
+    border-radius: 0 0 8px 8px;
+    gap: 10px;
+}

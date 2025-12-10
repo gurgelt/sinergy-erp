@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comex - Documentos</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    
+    <link rel="stylesheet" href="../assets/css/documentos.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Documentos de Comex</div>
+        <div class="search-container">
+            <input type="text" placeholder="Buscar...">
+        </div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                </div>
+        </div>
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="#" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="page-header">
+            <h1>Gerador de Documentos</h1>
+        </div>
+        <p style="margin-bottom: 20px; color: #64748b;">Selecione o tipo de documento que deseja gerar.</p>
+
+        <div class="documentos-actions">
+            <button id="btn-gerar-invoice" class="btn btn-primary">
+                <i class="fas fa-file-invoice-dollar"></i> Gerar Invoice
+            </button>
+            </div>
+    </main> <div id="notification-container"></div>
+
+    <div id="modal-invoice" class="modal"> <div class="modal-content" style="max-width: 1100px;">
+            <div class="modal-header">
+                <h2>Gerador de Invoice</h2>
+                <button class="close-modal" id="close-invoice-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="invoice-controls">
+                    <div>
+                        <label for="empresaSelect"><strong>Cliente (Buyer):</strong></label>
+                        <select id="empresaSelect" class="form-control" style="width: 250px;"></select>
+                    </div>
+                    <div>
+                        <label><input type="radio" name="precoTipo" value="serralheria" checked> Preço 1 (Serralheria)</label>
+                        <label><input type="radio" name="precoTipo" value="consumidor"> Preço 2 (Consumidor)</label>
+                    </div>
+                    <button class="btn btn-primary" id="btn-imprimir-invoice">
+                        <i class="fas fa-print"></i> Gerar PDF / Imprimir
+                    </button>
+                </div>
+
+                <div id="invoice-content-wrapper">
+                    <header class="invoice-header">
+                        <h1 id="shipperNameHeader" contenteditable="true">SUA EMPRESA (Sinergy)</h1>
+                        <p id="shipperAddress" contenteditable="true">Seu Endereço, Número, Bairro, Cidade-UF, CEP</p>
+                        <h2>INVOICE</h2>
+                    </header>
+
+                    <section class="invoice-grid-container">
+                        <div class="info-box">
+                            <p><strong>Shipped By:</strong> <span id="shippedBy" contenteditable="true">SUA EMPRESA (Sinergy)</span></p>
+                            <p><strong>Buyer:</strong> <span id="buyerName"></span></p>
+                            <p class="buyer-details" id="buyerAddress1"></p>
+                            <p class="buyer-details" id="buyerAddress2"></p>
+                            <p><strong>CNPJ/CPF:</strong> <span id="buyerCNPJ"></span></p>
+                            <p><strong>Tel:</strong> <span id="buyerTel"></span></p>
+                            <p><strong>Description:</strong> <span id="description" contenteditable="true">Motores p/ Portas de Enrolar, Acessórios, Portas Hospitalares</span></p>
+                            <p><strong>Delivery Date:</strong> <span id="deliveryDate" contenteditable="true">Immediate</span></p>
+                        </div>
+
+                        <div class="details-box">
+                            <p><strong>ISSUE DATE:</strong> <span id="issueDate" contenteditable="true"></span></p>
+                            <p><strong>INVOICE NO.:</strong> <span id="invoiceNo" contenteditable="true"></span></p>
+                            <p><strong>DATE:</strong> <span id="invoiceDate" contenteditable="true"></span></p>
+                            <p><strong>CURRENCY:</strong> <span id="currency" contenteditable="true">USD Dollar.</span></p>
+                            <p><strong>CREDIT NO.:</strong> <span id="creditNo" contenteditable="true"></span></p>
+                            <p><strong>DRAWEE:</strong> <span id="drawee" contenteditable="true"></span></p>
+                            <p><strong>PER. S.S.:</strong> <span id="perSS" contenteditable="true"></span></p>
+                            <p><strong>ON BOARD DATE:</strong> <span id="onBoardDate" contenteditable="true"></span></p>
+                            <p><strong>FROM:</strong> <span id="fromLocation" contenteditable="true">Santos, BR</span></p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <table class="invoice-items-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%;">Item</th>
+                                    <th>Description of Goods</th>
+                                    <th style="width:10%;" class="text-right">Quantity</th>
+                                    <th style="width:12%;" class="text-right">Unit Price</th>
+                                    <th style="width:15%;" class="text-right">Amount</th>
+                                    <th class="no-print" style="width:5%;">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="invoiceItems">
+                                </tbody>
+                            <tfoot>
+                                <tr class="total-row">
+                                    <td colspan="4" class="text-right">Total FOB:</td>
+                                    <td class="text-right" id="totalFOB">$ 0.00</td>
+                                    <td class="no-print action-cell">
+                                        <button id="addNewItemBtn" class="add-btn">+</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </section>
+                    
+                    <section class="invoice-footer-section">
+                        <div>
+                            <p><strong>CUST. PO Number:</strong> <span id="poNumber" contenteditable="true"></span></p>
+                            <p><strong>Shipping Terms:</strong> <span id="shippingTerms" contenteditable="true">FOB Santos</span></p>
+                            <p><strong>Terms of Payment:</strong> <span id="paymentTerms" contenteditable="true"></span></p>
+                            <p><strong>TOTAL WEIGHT:</strong> <span id="totalWeight" contenteditable="true"></span></p>
+                            <p><strong>SAY TOTAL IN US DOLLAR:</strong> <span id="totalInWords" contenteditable="true"></span></p>
+                        </div>
+                        <div>
+                             <p><strong>MARKS:</strong></p>
+                             <p><strong>TO:</strong> <span id="marksTo"></span></p>
+                             <p><strong>FROM:</strong> <span id="marksFrom" contenteditable="true">SINERGY</span></p>
+
+                             <div class="signature-box">
+                                <p id="signatureName" contenteditable="true">SINERGY COMEX</p>
+                             </div>
+                        </div>
+                    </section>
+                </div> </div>
+        </div>
+    </div> <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    
+    <script src="../assets/js/documentos.js" defer></script>
+</body>
+</html>

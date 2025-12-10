@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comex - Informações</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    
+    <link rel="stylesheet" href="../assets/css/informacoes.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Informações de Comex</div>
+        <div class="search-container">
+            <input type="text" placeholder="Buscar...">
+        </div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="#" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="page-header">
+            <h1>Cotações e Informações</h1>
+        </div>
+
+        <div class="cotacao-container">
+            <div class="cotacao-card dollar">
+                <div class="cotacao-header">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h2>Dólar Americano (USD)</h2>
+                </div>
+                <div class="cotacao-body">
+                    <span class="cotacao-label">Valor de Venda (BRL)</span>
+                    <div class="cotacao-valor" id="cotacao-valor-usd">
+                        R$ ...
+                    </div>
+                </div>
+                <div class="cotacao-footer">
+                    <span id="cotacao-timestamp-usd">Atualizando...</span>
+                </div>
+            </div>
+
+            <div class="cotacao-card euro">
+                <div class="cotacao-header">
+                    <i class="fas fa-euro-sign"></i>
+                    <h2>Euro (EUR)</h2>
+                </div>
+                <div class="cotacao-body">
+                    <span class="cotacao-label">Valor de Venda (BRL)</span>
+                    <div class="cotacao-valor" id="cotacao-valor-eur">
+                        R$ ...
+                    </div>
+                </div>
+                <div class="cotacao-footer">
+                    <span id="cotacao-timestamp-eur">Atualizando...</span>
+                </div>
+            </div>
+
+            <div class="cotacao-card yuan">
+                <div class="cotacao-header">
+                    <i class="fas fa-yen-sign"></i>
+                    <h2>Yuan Chinês (CNY)</h2>
+                </div>
+                <div class="cotacao-body">
+                    <span class="cotacao-label">Valor de Venda (BRL)</span>
+                    <div class="cotacao-valor" id="cotacao-valor-cny">
+                        R$ ...
+                    </div>
+                </div>
+                <div class="cotacao-footer">
+                    <span id="cotacao-timestamp-cny">Atualizando...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-header" style="margin-top: 30px; border-top: 1px solid #e9ecef; padding-top: 20px;">
+            <h1>Procedimentos e Status</h1>
+        </div>
+
+        <div class="info-comex-container">
+            
+            <div class="info-card">
+                <div class="info-card-header">
+                    <i class="fas fa-box-archive"></i>
+                    <h3>Status de Containers</h3>
+                </div>
+                <div class="info-card-body">
+                    <p>Acompanhe os próximos containers em trânsito.</p>
+                    <ul class="info-list">
+                        <li><strong>Container #A123 (Motores):</strong> ETA: 20/12/2025</li>
+                        <li><strong>Container #B456 (Acessórios):</strong> Em desembaraço</li>
+                        <li><strong>Container #C789 (Portas Hosp.):</strong> No mar</li>
+                    </ul>
+                    <a href="rastreio.html" class="info-link">Ver Rastreio Completo</a>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-header">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Importação de Motores</h3>
+                </div>
+                <div class="info-card-body">
+                    <p>Informações sobre o principal produto de importação.</p>
+                    <ul class="info-list">
+                        <li><strong>Próximo Pedido:</strong> 05/01/2026</li>
+                        <li><strong>Fornecedor Principal:</strong> TechMotors Asia</li>
+                        <li><strong>Contato:</strong> Sr. Wei (email@exemplo.com)</li>
+                    </ul>
+                    <a href="#" class="info-link">Ver Documentos</a>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-header">
+                    <i class="fas fa-door-open"></i>
+                    <h3>Acessórios e Portas Hosp.</h3>
+                </div>
+                <div class="info-card-body">
+                    <p>Status de importações de acessórios e portas hospitalares.</p>
+                    <ul class="info-list">
+                        <li><strong>Acessórios:</strong> Estoque OK</li>
+                        <li><strong>Portas Hospitalares:</strong> Em produção (Fornecedor MedDoors)</li>
+                        <li><strong>Última Atualização:</strong> 13/11/2025</li>
+                    </ul>
+                    <a href="#" class="info-link">Ver Pedidos</a>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-header">
+                    <i class="fas fa-file-invoice"></i>
+                    <h3>Procedimentos Internos</h3>
+                </div>
+                <div class="info-card-body">
+                    <p>Links úteis e procedimentos da empresa para Comex.</p>
+                    <ul class="info-list">
+                        <li><a href="#">Manual de Desembaraço</a></li>
+                        <li><a href="#">Planilha de Custos (NCM)</a></li>
+                        <li><a href="#">Contato Despachante</a></li>
+                    </ul>
+                    <a href="documentos.html" class="info-link">Ir para Documentos</a>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="page-header" style="margin-top: 30px; border-top: 1px solid #e9ecef; padding-top: 20px;">
+            <h1>Notícias Relevantes do Mercado</h1>
+        </div>
+
+        <div id="market-news-container" class="news-list-container">
+            <div class="news-loading">
+                <div class="loader-spinner" style="margin: 0 auto; border-top: 6px solid #3498db;"></div>
+                <p style="text-align: center; margin-top: 15px; color: #64748b;">Buscando últimas notícias...</p>
+            </div>
+        </div>
+        </main>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    
+    <script src="../assets/js/informacoes.js" defer></script>
+</body>
+</html>

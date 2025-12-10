@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suprimentos e Logística</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/suprimentos.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <style>
+        .autocomplete-suggestions {
+            border: 1px solid #e2e8f0;
+            border-top: none;
+            max-height: 150px;
+            overflow-y: auto;
+            background: #fff;
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .autocomplete-suggestion {
+            padding: 8px 10px;
+            cursor: pointer;
+        }
+        .autocomplete-suggestion:hover { background-color: #f1f5f9; }
+        .input-group-search { position: relative; }
+    </style>
+</head>
+<body>
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            <button id="sidebar-toggle" class="btn-toggle-menu"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    <li class="items-nav" data-module="diretoria"><a href="diretoria.html"><span>Diretoria</span></a></li>
+                    <li class="items-nav has-submenu active"><a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu" style="display:block;"><li><a href="suprimentos.html" class="active">Gestão de Compras</a></li><li><a href="compras.html">Solicitações de Compra</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="estoque"><a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="estoque.html">Estoque</a></li><li><a href="saldo.html">Saldo do Estoque</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="comercial"><a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="orcamentos.html">Orçamentos</a></li><li><a href="pedidos.html">Pedidos</a></li><li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="financeiro"><a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="financeiro.html">Geral</a></li><li><a href="contasapagar.html">Contas a pagar</a></li><li><a href="contasareceber.html">Contas a receber</a></li><li><a href="tesouraria.html">Tesouraria</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="comex"><a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="informacoes.html">Informações</a></li><li><a href="documentos.html">Documentos</a></li><li><a href="rastreio.html">Rastreio</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="rh"><a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="funcionarios.html">Funcionários</a></li></ul></li>
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Gestão de Suprimentos</div>
+        <div class="search-container"><input type="text" id="search-input" placeholder="Buscar solicitação..."></div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">Notificações <span id="notification-count">(0)</span></div>
+                <div id="notification-dropdown-list"><div class="notification-empty-state">Nenhuma notificação.</div></div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar"><img src="https://i.pravatar.cc/100" alt="Avatar" id="user-avatar"></div>
+            <div class="user-info"><div class="user-name" id="user-name">...</div><div class="user-email" id="user-email">...</div></div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item"><i class="fas fa-user-circle"></i><span>Meus Dados</span></a>
+                <a href="#" id="logout-btn" class="dropdown-item"><i class="fas fa-sign-out-alt"></i><span>Sair</span></a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="suprimentos-header">
+            <div class="header-left">
+                <h2>Pedidos de Compra</h2>
+            </div>
+            <div class="header-actions">
+                <button id="btn-gerenciar-fornecedores" class="btn btn-secondary">
+                    <i class="fas fa-truck"></i> Fornecedores
+                </button>
+                <button id="btn-nova-compra" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nova Compra
+                </button>
+            </div>
+        </div>
+
+        <div class="suprimentos-filters">
+            <div class="filter-group" style="flex: 2;">
+                <label>Buscar</label>
+                <div class="filter-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="filter-search" placeholder="Fornecedor, Nº Pedido ou Item...">
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>Status</label>
+                <select id="filter-status" class="filter-select">
+                    <option value="todos">Todos</option>
+                    <option value="Solicitado">Solicitado</option>
+                    <option value="Em Trânsito">Em Trânsito</option>
+                    <option value="Entregue">Entregue</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Previsão de Entrega</label>
+                <input type="date" id="filter-data-entrega" class="filter-date">
+            </div>
+        </div>
+
+        <div class="suprimentos-stats">
+            <div class="stat-card"><div class="stat-icon bg-blue"><i class="fas fa-clipboard-list"></i></div><div class="stat-info"><div class="stat-label">Pedidos em Aberto</div><div class="stat-value" id="kpi-abertos">0</div></div></div>
+            <div class="stat-card"><div class="stat-icon bg-yellow"><i class="fas fa-shipping-fast"></i></div><div class="stat-info"><div class="stat-label">Em Trânsito</div><div class="stat-value" id="kpi-transito">0</div></div></div>
+            <div class="stat-card"><div class="stat-icon bg-green"><i class="fas fa-check-circle"></i></div><div class="stat-info"><div class="stat-label">Recebidos Mês</div><div class="stat-value" id="kpi-recebidos">0</div></div></div>
+            <div class="stat-card"><div class="stat-icon bg-purple"><i class="fas fa-dollar-sign"></i></div><div class="stat-info"><div class="stat-label">Total Compras (Mês)</div><div class="stat-value" id="kpi-valor">R$ 0,00</div></div></div>
+        </div>
+
+        <div class="table-container">
+            <table class="data-table" id="tabela-compras">
+                <thead><tr><th>Nº Pedido</th><th>Fornecedor</th><th>Data Pedido</th><th>Prev. Entrega</th><th>Valor Total</th><th>Status</th><th class="text-center">Ações</th></tr></thead>
+                <tbody id="compras-tbody"><tr><td colspan="7" class="text-center">Carregando dados...</td></tr></tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="modal-compra" class="modal">
+        <div class="modal-content" style="max-width: 950px;">
+            <div class="modal-header">
+                <h2 id="modal-title-compra">Novo Pedido de Compra</h2>
+                <button class="close-modal" id="close-modal-compra">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-compra">
+                    <input type="hidden" id="compra-id">
+                    <div class="form-section">
+                        <h3>Dados do Pedido</h3>
+                        <div class="form-row">
+                            <div class="form-group flex-2 input-group-search">
+                                <label>Fornecedor *</label>
+                                <input type="text" id="input-fornecedor" class="form-control" required placeholder="Digite para buscar..." autocomplete="off">
+                                <div id="sugestoes-fornecedor" class="autocomplete-suggestions"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Nº Pedido</label>
+                                <input type="text" id="input-numero" class="form-control" placeholder="(Automático)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Data do Pedido *</label>
+                                <input type="date" id="input-data-pedido" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Previsão Entrega</label>
+                                <input type="date" id="input-data-entrega" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Status *</label>
+                                <select id="input-status" class="form-control"><option value="Solicitado">Solicitado</option><option value="Em Trânsito">Em Trânsito</option><option value="Entregue">Entregue</option><option value="Cancelado">Cancelado</option></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Itens da Compra</h3>
+                        <div class="item-input-container">
+                            <div class="form-row" style="align-items: flex-end;">
+                                <div class="form-group flex-2"><label>Material / Item</label><input type="text" id="item-nome" class="form-control" placeholder="Ex: Bobina Aço 0.80"></div>
+                                <div class="form-group" style="max-width: 100px;"><label>Qtd.</label><input type="number" id="item-qtd" class="form-control" placeholder="0" min="0.01" step="0.01"></div>
+                                <div class="form-group" style="max-width: 100px;"><label>Unid.</label><select id="item-unidade" class="form-control"><option value="kg">kg</option><option value="un">un</option><option value="m">m</option><option value="cx">cx</option></select></div>
+                                <div class="form-group" style="max-width: 150px;"><label>Valor Unit. (R$)</label><input type="number" id="item-valor" class="form-control" step="0.01" placeholder="0,00"></div>
+                                <div class="form-group" style="max-width: 120px;"><button type="button" id="btn-add-item" class="btn btn-secondary" style="width: 100%;"><i class="fas fa-plus"></i> Adicionar</button></div>
+                            </div>
+                        </div>
+                        <div class="table-container" style="max-height: 250px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 6px;">
+                            <table class="data-table small">
+                                <thead><tr><th>Item</th><th class="text-right">Qtd.</th><th class="text-right">Vl. Unit.</th><th class="text-right">Total</th><th class="text-center" style="width: 60px;">Ação</th></tr></thead>
+                                <tbody id="tbody-itens-compra"></tbody>
+                            </table>
+                        </div>
+                        <div class="totais-container">
+                            <span class="total-label">Valor Total do Pedido:</span>
+                            <span class="total-value" id="total-pedido">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label>Observações / Dados de Rastreio</label>
+                            <textarea id="input-obs" class="form-control" rows="2" placeholder="Transportadora, Código de Rastreio, Link, etc..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar-compra">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-salvar-compra">Salvar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-lista-fornecedores" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2>Gerenciar Fornecedores</h2>
+                <button class="close-modal" id="close-lista-fornecedores">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="header-actions" style="margin-bottom: 20px;">
+                    <input type="text" id="search-fornecedor-lista" placeholder="Buscar fornecedor..." class="form-control" style="max-width: 300px;">
+                    <button id="btn-novo-fornecedor-modal" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Fornecedor</button>
+                </div>
+                <div class="table-container" style="max-height: 500px; overflow-y: auto;">
+                    <table class="data-table">
+                        <thead><tr><th>Nome Fantasia</th><th>CNPJ</th><th>Tipo</th><th>Cidade</th><th>Ações</th></tr></thead>
+                        <tbody id="tbody-fornecedores"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-fornecedor-form" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2 id="title-fornecedor-form">Novo Fornecedor</h2>
+                <button class="close-modal" id="close-fornecedor-form">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-fornecedor">
+                    <input type="hidden" id="fornecedor-id">
+                    <div class="form-row">
+                        <div class="form-group flex-2"><label>Nome Fantasia *</label><input type="text" id="f-nome" class="form-control" required></div>
+                        <div class="form-group"><label>CNPJ *</label><input type="text" id="f-cnpj" class="form-control" required></div>
+                    </div>
+                    <div class="form-group"><label>Razão Social</label><input type="text" id="f-razao" class="form-control"></div>
+                    <div class="form-row">
+                        <div class="form-group flex-2"><label>Endereço</label><input type="text" id="f-endereco" class="form-control"></div>
+                        <div class="form-group"><label>CEP</label><input type="text" id="f-cep" class="form-control"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group flex-2"><label>Cidade/UF</label><input type="text" id="f-cidade" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Tipo *</label>
+                            <select id="f-tipo" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                <option value="Motores">Motores</option>
+                                <option value="Bobinas">Bobinas</option>
+                                <option value="Aço em Geral">Aço em Geral</option>
+                                <option value="Logística">Logística</option>
+                                <option value="Suprimentos">Suprimentos</option>
+                                <option value="Limpeza">Limpeza</option>
+                                <option value="Serviços">Serviços</option>
+                                <option value="Alimentício">Alimentício</option>
+                                <option value="Manutenção">Manutenção</option>
+                                <option value="Infraestrutura">Infraestrutura</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar-fornecedor">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js?v=2024.12" defer></script>
+    <script src="../assets/js/notifications.js?v=2024.12" defer></script>
+    <script src="../assets/js/sidebar.js?v=2024.12" defer></script>
+    <script src="../assets/js/suprimentos.js?v=2024.12.04e" defer></script>
+</body>
+</html>

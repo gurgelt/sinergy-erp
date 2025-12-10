@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas Fiscais - Entrada XML</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/orcamentos.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <style>
+        .upload-container {
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 10px; 
+            margin-bottom: 30px; 
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .upload-area {
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 0; /* Ajuste para ficar dentro do container */
+        }
+        .upload-area:hover { background: #e8f4fd; border-color: #2980b9; }
+        .upload-area i { font-size: 40px; color: #3498db; margin-bottom: 15px; }
+        .upload-area p { color: #555; margin: 0; font-weight: 500; font-size: 16px; }
+        .upload-area small { color: #888; display: block; margin-top: 5px; }
+        
+        #file-input { display: none; }
+        
+        /* Estilo do Select de Local */
+        .local-selector {
+            margin-bottom: 20px;
+        }
+        .local-selector label {
+            font-weight: 700;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        .local-selector select {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 1rem;
+            color: #2c3e50;
+            background-color: white;
+            cursor: pointer;
+        }
+        .local-selector select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="loader-overlay" style="display: none;">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" class="logo-link"><img src="../assets/images/sinergy_logo.png" class="sidebar-logo"></a>
+            <button id="sidebar-toggle" class="btn-toggle-menu"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    <li class="items-nav" data-module="diretoria"><a href="diretoria.html"><span>Diretoria</span></a></li>
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                            <li><a href="notas_fiscais.html">Notas Fiscais (XML)</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu active" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu" style="display: block;">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html" class="active">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Importação de Notas Fiscais (XML)</div>
+            <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">Notificações <span id="notification-count">(0)</span></div>
+                <div id="notification-dropdown-list"><div class="notification-empty-state">Nenhuma notificação no momento.</div></div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar"><img src="https://i.pravatar.cc/100" alt="Avatar" id="user-avatar"></div>
+            <div class="user-info"><div class="user-name" id="user-name">...</div><div class="user-email" id="user-email">...</div></div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" class="dropdown-item"><i class="fas fa-user-circle"></i> <span>Meus Dados</span></a>
+                <a href="#" id="logout-btn" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> <span>Sair</span></a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        
+        <div class="upload-container">
+            
+            <div class="local-selector">
+                <label for="select-local-destino">
+                    <i class="fas fa-map-marker-alt" style="color: #e74c3c; margin-right: 5px;"></i> 
+                    Onde dar entrada no estoque?
+                </label>
+                <select id="select-local-destino" class="form-control">
+                    <option value="João Mafra">Unidade João Mafra</option>
+                    <option value="Itapeva">Unidade Itapeva</option>
+                </select>
+            </div>
+
+            <div class="upload-area" id="drop-zone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Clique ou arraste o arquivo XML da NFe aqui</p>
+                <small>Os produtos serão somados ao estoque da unidade selecionada acima.</small>
+                <input type="file" id="file-input" accept=".xml">
+            </div>
+        </div>
+
+        <div class="orcamentos-header">
+            <div class="header-left">
+                <h2>Histórico de Importações</h2>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="carregarNotas()"><i class="fas fa-sync"></i> Atualizar</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Emissão</th>
+                        <th>Número / Série</th>
+                        <th>Fornecedor</th>
+                        <th>Localização</th>
+                        <th>Valor Total</th>
+                        <th>Importado em</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-notas-body">
+                    <tr><td colspan="6" class="text-center">Carregando...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="modal-detalhes-nota" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2>Detalhes da Nota Fiscal</h2>
+                <button class="close-modal" onclick="fecharModalNota()">&times;</button>
+            </div>
+            <div class="modal-body">
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e9ecef;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <p style="color:#888; font-size:12px;">FORNECEDOR</p>
+                            <h3 id="det-fornecedor" style="margin:0; font-size:16px;">-</h3>
+                            <p id="det-cnpj" style="margin:5px 0 0; font-size:13px; color:#555;">-</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="color:#888; font-size:12px;">NOTA / SÉRIE</p>
+                            <h3 style="margin:0; font-size:16px;"><span id="det-numero">-</span> / <span id="det-serie">-</span></h3>
+                            <p id="det-data" style="margin:5px 0 0; font-size:13px; color:#555;">Emissão: -</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ddd;">
+                        <p style="color:#888; font-size:12px;">CHAVE DE ACESSO</p>
+                        <p id="det-chave" style="font-family: monospace; background: #fff; padding: 5px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px; word-break: break-all;">-</p>
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 10px; color: #3498db;">Produtos da Nota</h4>
+                <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                    <table class="data-table" style="font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th>Cód.</th>
+                                <th>Descrição</th>
+                                <th>NCM</th>
+                                <th>CFOP</th>
+                                <th>Und.</th>
+                                <th>Qtd.</th>
+                                <th>V. Unit.</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="det-itens-body"></tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 20px; text-align: right; font-size: 18px; font-weight: bold; color: #2c3e50;">
+                    Valor Total: <span id="det-total" style="color: #27ae60;">R$ 0,00</span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="fecharModalNota()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js?v=1.0"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/notas_fiscais.js?v=2.17"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+/* Movimentações */
+
+.movimentacoes-section {
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 20px;
+}
+
+.movimentacoes-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-controls input[type="text"],
+.filter-controls select,
+.filter-controls input[type="date"] {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    flex: 1;
+    min-width: 150px;
+    color: #414141;
+}
+
+.filter-controls button {
+    padding: 10px 15px;
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+/* Botão "Aplicar Filtros" - Fundo Verde */
+#applyFilters {
+    background-color: var(--success-color, #209e3dea);
+    color: white;
+    font-size: 14px;
+}
+
+#applyFilters:hover {
+    background-color: var(--success-dark, #3db156);
+    color: white;
+}
+
+/* Botão "Limpar Filtros" - Fundo Vermelho */
+#clearFilters {
+    background-color: var(--danger-color, #cf2f2ff3);
+    color: white;
+    font-size: 14px;
+}
+
+#clearFilters:hover {
+    background-color: var(--danger-dark, #c82333);
+    color: white;
+}
+
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+#movimentacoesTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#movimentacoesTable th,
+#movimentacoesTable td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: #2C3E50;
+}
+
+#movimentacoesTable th {
+    background-color: var(--light-gray);
+    color: var(--text-color-dark);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#movimentacoesTable tbody tr:hover {
+    background-color: var(--hover-light);
+}
+
+#movimentacoesTable tbody tr:nth-child(even) {
+    background-color: var(--background-color);
+}
+
+.movimentacoes-section h2 {
+    color: #2C3E50;
+    text-align: left;
+}
+
+#movimentacoesTable th {
+    background-color: var(--light-gray);
+    color: #2C3E50;
+}
+
+#movimentacoesTable td {
+    color: #2C3E50;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.delete-btn:active {
+    transform: scale(0.95);
+}
+
+.delete-btn i {
+    font-size: 12px;
+}
+
+/* Estilo para a coluna de ações */
+#movimentacoesTable th:last-child,
+#movimentacoesTable td:last-child {
+    text-align: center;
+    width: 80px;
+    min-width: 80px;
+}
+
+/* Estilos para o modal de confirmação */
+.modal-sm {
+    max-width: 450px;
+}
+
+.modal-body.text-center {
+    text-align: center;
+}
+
+.modal-header .warning-icon {
+    color: #f39c12; /* Laranja/Amarelo de aviso */
+    margin-right: 10px;
+}
+
+#mensagem-exclusao {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+#item-a-excluir {
+    font-weight: bold;
+    color: #34495e;
+}
+
+.warning-text {
+    font-size: 14px;
+    color: #e74c3c; /* Vermelho para o aviso */
+}
+
+.modal .form-actions {
+    margin-top: 20px;
+    justify-content: center;
+}
+
+/* Estilos básicos do Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 50px auto;
+    border-radius: 8px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #95a5a6;
+}
+
+.modal-body {
+    padding: 20px 25px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Estilos para o modal de confirmação (menor e centralizado) */
+.modal-sm {
+    max-width: 450px;
+}
+
+.modal-body.text-center {
+    text-align: center;
+}
+
+.modal-header .warning-icon {
+    color: #f39c12; /* Laranja/Amarelo de aviso */
+    margin-right: 10px;
+}
+
+#mensagem-exclusao {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+#item-a-excluir {
+    font-weight: bold;
+    color: #34495e;
+}
+
+.warning-text {
+    font-size: 14px;
+    color: #e74c3c; /* Vermelho para o aviso */
+}
+
+.modal .form-actions {
+    margin-top: 25px;
+    justify-content: center;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .delete-btn {
+        padding: 4px 6px;
+        font-size: 10px;
+        min-width: 25px;
+        height: 25px;
+    }
+    
+    #movimentacoesTable th:last-child,
+    #movimentacoesTable td:last-child {
+        width: 60px;
+        min-width: 60px;
+    }
+    
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-controls input[type="text"],
+    .filter-controls select,
+    .filter-controls input[type="date"],
+    .filter-controls button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Estilo para o container do botão "Carregar Mais" */
+.load-more-container {
+    text-align: center;
+    padding: 20px 0;
+}

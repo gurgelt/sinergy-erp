@@ -1,0 +1,241 @@
+/* styles/documentos.css */
+
+/* Botão principal da página */
+.documentos-actions {
+    display: flex;
+    gap: 15px;
+}
+
+/* --- ESTILOS DO MODAL E DA INVOICE --- */
+
+.invoice-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.invoice-controls label {
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+/* O "papel" branco da invoice dentro do modal */
+#invoice-content-wrapper {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 900px; /* Largura de uma folha A4 */
+    margin: 0 auto; /* Centraliza a folha */
+    font-family: Arial, sans-serif;
+    font-size: 11px; /* Tamanho de fonte padrão para invoice */
+    color: #000;
+}
+
+.invoice-header h1 {
+    font-size: 18px;
+    margin: 0;
+}
+.invoice-header p {
+    font-size: 11px;
+    margin: 3px 0;
+}
+.invoice-header h2 {
+    font-size: 22px;
+    text-align: center;
+    border-bottom: 2px solid #000;
+    margin: 15px 0 10px 0;
+    padding-bottom: 5px;
+}
+
+.invoice-grid-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+.info-box, .details-box {
+    flex: 1;
+}
+.info-box p, .details-box p {
+    margin: 4px 0;
+}
+.info-box strong, .details-box strong {
+    width: 90px;
+    display: inline-block;
+}
+.buyer-details {
+    padding-left: 94px; /* Alinha endereço do comprador */
+}
+
+/* Tabela de Itens (Estilo do seu style.css, mas com botões Sinergy) */
+.invoice-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-top: 10px;
+    line-height: 1.3;
+}
+
+.invoice-items-table th, .invoice-items-table td {
+    border: 1px solid #000;
+    padding: 4px 5px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.invoice-items-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.invoice-items-table td.text-right {
+    text-align: right;
+}
+
+.item-no {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Footer da Invoice */
+.invoice-footer-section {
+    margin-top: 10px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.invoice-footer-section > div {
+    flex: 1;
+}
+.bank-details {
+    border: 1px solid #000;
+    padding: 5px;
+    margin-top: 5px;
+}
+.signature-box {
+    border-top: 1px solid #000;
+    margin-top: 60px;
+    padding-top: 5px;
+    text-align: center;
+}
+
+/* Botões da Tabela (Estilo Sinergy adaptado) */
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 6px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+}
+.delete-btn:hover { background-color: #c0392b; }
+
+.add-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 6px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+}
+.add-btn:hover { background-color: #27ae60; }
+
+/* Torna campos editáveis parecidos com os do Sinergy */
+[contenteditable="true"] {
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px dashed #bdc3c7;
+    background-color: #f8f9fa;
+}
+[contenteditable="true"]:hover, [contenteditable="true"]:focus {
+    border: 1px dashed #3498db;
+    background-color: #fff;
+    outline: none;
+}
+
+/* Oculta o select e mostra o span (nome do produto) */
+.produto-select {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.produto-nome {
+    display: none; /* Escondido por padrão, JS o exibe */
+}
+
+/* --- ESTILOS DE IMPRESSÃO (CORRIGIDO) --- */
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Esconde TUDO que não for a invoice */
+    .no-print,
+    .cabecalho,
+    .top-bar,
+    .modal-header,
+    .invoice-controls,
+    .documentos-actions,
+    .page-header,
+    main.conteudo-principal,         /* <-- CORREÇÃO: Esconde o <main> */
+    #notification-container,      /* <-- CORREÇÃO: Esconde o container de notificações */
+    #loader-overlay {             /* <-- CORREÇÃO: Esconde o loader */
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Expande o modal e o wrapper */
+    .modal {
+        position: static !important;
+        display: block !important;
+        overflow: visible !important;
+        height: auto !important;
+    }
+    .modal-content, .modal-body {
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+    }
+    #invoice-content-wrapper {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+
+    /* Exibe o nome do produto e esconde o select */
+    .produto-select {
+        display: none !important;
+    }
+    .produto-nome {
+        display: inline-block !important;
+    }
+
+    /* Remove bordas de campos editáveis */
+    [contenteditable="true"] {
+        border: none;
+        background: transparent;
+        padding: 0;
+    }
+    
+    .invoice-items-table th, .invoice-items-table td {
+        border-width: 1px;
+    }
+}

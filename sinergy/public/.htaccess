@@ -1,0 +1,25 @@
+# .htaccess da pasta public/
+# Configurações para arquivos públicos
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Página inicial padrão
+DirectoryIndex index.html index.php
+
+# Habilitar RewriteEngine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Se o arquivo ou diretório existir, servir diretamente
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+</IfModule>
+
+# Proteção de arquivos
+<FilesMatch "\.(env|log|sql|bak)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>

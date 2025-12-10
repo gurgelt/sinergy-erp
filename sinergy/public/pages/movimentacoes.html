@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentações</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/movimentacoes.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css"> <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Tela de carregamento -->
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Cabecalho -->
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Top bar -->
+    <div class="top-bar">
+        <div class="section-title">Movimentações</div>
+        <div class="search-container">
+            <input type="text" id="search-movimentacao" placeholder="Buscar movimentação por NF, cliente, etc.">
+        </div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="#" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main class="conteudo-principal">
+        <section class="movimentacoes-section">
+            <h2>Histórico de Movimentações</h2>
+            <div class="filter-controls">
+                <input type="text" id="searchInput" placeholder="Buscar por lote, fornecedor, etc.">
+                <select id="typeFilter">
+                    <option value="">Todos os Tipos</option>
+                </select>
+                <input type="date" id="startDate">
+                <input type="date" id="endDate">
+                <button id="applyFilters">Aplicar Filtros</button>
+                <button id="clearFilters">Limpar Filtros</button>
+            </div>
+            <div class="table-container">
+                <table id="movimentacoesTable">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora da Mov.</th>
+                            <th>Tipo de Movimentação</th>
+                            <th>Natureza da Operação</th>
+                            <th>Item Movimentado</th>
+                            <th>Lote</th>
+                            <th>Peso (KG)</th>
+                            <th>Origem/Destino</th>
+                            <th>Observação</th>
+                            <!-- <th>Ações</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <div id="modal-confirma-exclusao" class="modal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle warning-icon"></i> Confirmar Exclusão</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body text-center">
+                <p id="mensagem-exclusao">Tem certeza que deseja excluir esta movimentação?</p>
+                <p><strong><span id="item-a-excluir"></span></strong></p>
+                <p class="warning-text">Esta ação não pode ser desfeita.</p>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary cancel-modal">Cancelar</button>
+                    <button type="button" id="btn-confirma-exclusao" class="btn btn-danger">Sim, Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="load-more-container">
+        <button id="btn-load-more" class="btn btn-primary" style="display: none;">
+            <i class="fas fa-plus"></i> Carregar Mais
+        </button>
+    </div>
+    </main>
+
+    <div id="notification-container"></div>
+
+    <!-- Chatbot -->
+    <script>
+      window.watsonAssistantChatOptions = {
+        integrationID: "50047cc6-c44e-48fb-b3a5-090b708c41dc",
+        region: "us-south",
+        serviceInstanceID: "b23df53b-540f-453d-a17d-70148571d28f",
+        onLoad: async (instance) => {
+          await instance.render();
+        },
+      };
+      setTimeout(function () {
+        const t = document.createElement("script");
+        t.src =
+          "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
+          (window.watsonAssistantChatOptions.clientVersion || "latest") +
+          "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });</script>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/movimentacoes.js" defer></script>
+</body>
+</html>

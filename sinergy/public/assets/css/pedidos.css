@@ -1,0 +1,453 @@
+/* pedidos.css - Estilos específicos para a página de PEDIDOS */
+
+/* Container principal */
+.conteudo-principal {
+    padding: 20px;
+    background-color: #f5f7fa; /* Você pode mudar essa cor de fundo se quiser diferenciar a tela de pedidos */
+    min-height: calc(100vh - 60px);
+}
+
+/* Header (Mantido classe .orcamentos-header para compatibilidade com HTML existente) */
+.orcamentos-header {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.orcamentos-header h2 { margin: 0; color: #2c3e50; }
+
+/* Filtros */
+.orcamentos-filters {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.filter-search {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+.filter-search i {
+    color: #7f8c8d;
+    padding: 10px 12px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
+}
+.filter-search input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    outline: none;
+}
+.filter-search:focus-within {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+.filter-select {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 200px;
+    font-size: 14px;
+    height: 40px; 
+}
+
+/* Estatísticas (KPIs) */
+.orcamentos-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.stat-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+}
+.stat-icon.bg-blue { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.stat-icon.bg-yellow { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.stat-icon.bg-green { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.stat-icon.bg-red { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); }
+.stat-info .stat-label { font-size: 13px; color: #7f8c8d; margin-bottom: 5px; }
+.stat-info .stat-value { font-size: 24px; font-weight: 600; color: #2c3e50; }
+
+/* Tabela */
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid #ecf0f1; }
+.data-table th { background-color: #f8f9fa; font-weight: 600; color: #2c3e50; font-size: 13px; text-transform: uppercase; }
+.data-table tbody tr:hover { background-color: #f5f7fa; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+
+/* Ações da Tabela */
+.table-actions { display: flex; justify-content: center; gap: 8px; }
+.action-button { background: none; border: none; cursor: pointer; padding: 8px; border-radius: 4px; transition: all 0.2s; font-size: 16px; }
+.action-button:hover { background-color: rgba(0, 0, 0, 0.05); }
+
+/* Cores dos botões de Pedidos */
+.action-button.view { color: #3498db; }
+.action-button.view-pdf { color: #3498db; }
+.action-button.download { color: #e74c3c; }
+.action-button.delete { color: #e74c3c; } /* Botão de cancelar pedido */
+
+/* === STATUS BADGES (Específico de Pedidos) === */
+.status-badge { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: capitalize; }
+
+.status-badge.aguardando-producao { 
+    background-color: #fff7ed; /* Laranja claro */
+    color: #c2410c; /* Laranja escuro */
+    border: 1px solid #ffedd5;
+}
+
+.status-badge.em-producao { 
+    background-color: #eff6ff; /* Azul claro */
+    color: #1d4ed8; /* Azul escuro */
+    border: 1px solid #dbeafe;
+}
+
+.status-badge.concluido { 
+    background-color: #f0fdf4; /* Verde claro */
+    color: #15803d; /* Verde escuro */
+    border: 1px solid #dcfce7;
+}
+
+.status-badge.cancelado { 
+    background-color: #fef2f2; /* Vermelho claro */
+    color: #b91c1c; /* Vermelho escuro */
+    border: 1px solid #fee2e2;
+}
+
+/* Modal Genérico */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; overflow-y: auto; padding: 20px; }
+.modal.active { display: flex; align-items: center; justify-content: center; }
+.modal-content { background-color: white; border-radius: 8px; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); animation: modalFadeIn 0.3s; }
+@keyframes modalFadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.modal-header { padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background-color: white; z-index: 10; }
+.modal-header h2 { margin: 0; font-size: 1.5rem; color: #2c3e50; }
+.close-modal { background: none; border: none; font-size: 28px; cursor: pointer; color: #95a5a6; }
+.modal-body { padding: 20px; }
+
+/* Visualização de Pedido */
+.view-section { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #ecf0f1; }
+.view-section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.view-section h3 { font-size: 16px; font-weight: 600; color: #2c3e50; margin-bottom: 15px; }
+.view-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px 20px; background-color: #f8f9fa; padding: 20px; border-radius: 8px; }
+.view-info-item { display: flex; flex-direction: column; gap: 5px; }
+.view-label { font-size: 13px; color: #7f8c8d; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.view-value { font-size: 15px; color: #2c3e50; font-weight: 600; word-break: break-word; }
+
+/* Botões Específicos de Pedidos (no modal) */
+#modal-visualizar-pedido .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ecf0f1; }
+#modal-visualizar-pedido .btn { padding: 10px 15px; border-radius: 4px; font-weight: 500; cursor: pointer; border: none; transition: all 0.3s; }
+
+#modal-visualizar-pedido .btn.btn-production { background-color: #f59e0b; color: white; } /* Amarelo */
+#modal-visualizar-pedido .btn.btn-production:hover { background-color: #d97706; }
+
+#modal-visualizar-pedido .btn.btn-success { background-color: #2ecc71; color: white; } /* Verde */
+#modal-visualizar-pedido .btn.btn-success:hover { background-color: #27ae60; }
+
+#modal-visualizar-pedido .btn.btn-danger { background-color: #ef4444; color: white; } /* Vermelho */
+#modal-visualizar-pedido .btn.btn-danger:hover { background-color: #dc2626; }
+
+#modal-visualizar-pedido .btn#btn-baixar-op { background-color: #e74c3c; color: white; }
+#modal-visualizar-pedido .btn#btn-baixar-op:hover { background-color: #c0392b; }
+
+#modal-visualizar-pedido .form-actions .btn#btn-visualizar-op { background-color: #3498db; color: white; margin-right: auto; }
+#modal-visualizar-pedido .form-actions .btn#btn-visualizar-op:hover { background-color: #2980b9; }
+
+#modal-visualizar-pedido .btn.btn-secondary { background-color: #ecf0f1; color: #2c3e50; }
+#modal-visualizar-pedido .btn.btn-secondary:hover { background-color: #bdc3c7; }
+
+/* Tabela de Itens do Modal */
+.itens-table-container { border: 1px solid #ecf0f1; border-radius: 6px; overflow-x: auto; margin-bottom: 15px; }
+.itens-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+.itens-table th, .itens-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ecf0f1; white-space: nowrap; }
+.itens-table th { background-color: #f8f9fa; font-size: 13px; }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .view-info-grid { grid-template-columns: 1fr; }
+    #modal-visualizar-pedido .form-actions { flex-direction: column; }
+    #modal-visualizar-pedido .form-actions .btn#btn-visualizar-op { margin-right: 0; margin-bottom: 10px; }
+}
+
+/* ========================================================================== */
+/* === CORREÇÃO DE ESTILO: MODAL DE EDIÇÃO DE PEDIDO === */
+/* ========================================================================== */
+
+/* 1. Container dos Totais (Alinhado à direita com visual de cartão) */
+#modal-editar-pedido .totais-container {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 350px; /* Limita a largura para não esticar */
+    margin-left: auto; /* Empurra o box para a direita */
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+/* 2. Linhas de Total (Flexbox para separar Rótulo e Valor) */
+#modal-editar-pedido .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #475569;
+    width: 100%;
+}
+
+/* 3. Estilização dos Inputs dentro dos Totais (Frete e Desconto) */
+#modal-editar-pedido .total-row input[type="number"] {
+    width: 100px;
+    text-align: right;
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #334155;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+#modal-editar-pedido .total-row input[type="number"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* 4. Linha do Checkbox de Frete */
+#modal-editar-pedido .frete-row {
+    min-height: 35px; /* Altura mínima para alinhar quando o input aparece/some */
+}
+
+#modal-editar-pedido .form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* 5. Destaque para o Total Final */
+#modal-editar-pedido .total-row.total-final {
+    border-top: 2px solid #cbd5e1;
+    padding-top: 15px;
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a; /* Cor escura para destaque */
+}
+
+#modal-editar-pedido .total-row.total-final span:last-child {
+    color: #2563eb; /* Azul para o valor */
+}
+
+/* 6. Campo de Observações */
+#modal-editar-pedido textarea#edit-observacoes {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+    margin-top: 5px;
+}
+
+#modal-editar-pedido .form-section label {
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* 7. Botões de Ação (Rodapé) */
+#modal-editar-pedido .form-actions {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end; /* Alinha à direita */
+    gap: 12px; /* Espaço entre os botões */
+    background-color: #fff; /* Garante fundo branco */
+}
+
+#modal-editar-pedido .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+#modal-editar-pedido .btn-secondary {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+#modal-editar-pedido .btn-secondary:hover {
+    background-color: #e2e8f0;
+}
+
+#modal-editar-pedido .btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+#modal-editar-pedido .btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* ========================================================================== */
+/* === NOVOS BOTÕES DE AÇÃO (PEDIDOS) === */
+/* ========================================================================== */
+
+/* Botão Iniciar Produção (Laranja/Amarelo - Ação de início) */
+.action-button.start-prod {
+    color: #d97706; /* Âmbar escuro */
+}
+.action-button.start-prod:hover {
+    background-color: #fffbeb;
+    color: #b45309;
+}
+
+/* Botão Concluir Produção (Verde - Sucesso) */
+.action-button.finish-prod {
+    color: #16a34a; /* Verde */
+}
+.action-button.finish-prod:hover {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+/* Botão Editar (SOLICITADO: Mudar para Azul) */
+.action-button.edit {
+    color: #2563eb !important; /* Azul Royal */
+}
+.action-button.edit:hover {
+    background-color: #eff6ff;
+    color: #1d4ed8 !important;
+}
+
+/* Botão Cancelar (Vermelho) */
+.action-button.delete {
+    color: #dc2626;
+}
+.action-button.delete:hover {
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+/* Ajuste de espaçamento para caber mais botões */
+.table-actions {
+    display: flex;
+    justify-content: center;
+    gap: 4px; /* Reduzi levemente o gap para caber tudo */
+}
+
+.action-button {
+    padding: 6px; /* Reduzi levemente o padding */
+    font-size: 15px;
+}
+
+/* ========================================================================== */
+/* === ESTILOS DAS ABAS E RELATÓRIOS === */
+/* ========================================================================== */
+
+/* Container das Abas */
+.tabs-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1px;
+}
+
+/* Botões das Abas */
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    color: #3498db;
+    background-color: #f8fafc;
+}
+
+.tab-btn.active {
+    color: #3498db;
+    border-bottom-color: #3498db;
+    font-weight: 600;
+}
+
+/* Conteúdo das Abas */
+.tab-content {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Botão Excel Específico */
+#btn-exportar-excel-vendas {
+    background-color: #217346; /* Cor Excel */
+    color: white;
+}
+#btn-exportar-excel-vendas:hover {
+    background-color: #1e6b41;
+}
+
+/* Ajuste para tabela pequena no relatório */
+.data-table.small th, .data-table.small td {
+    padding: 10px;
+    font-size: 13px;
+}

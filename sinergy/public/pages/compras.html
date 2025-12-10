@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Compras</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/compras.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    <li class="items-nav" data-module="diretoria"><a href="diretoria.html"><span>Diretoria</span></a></li>
+                    <li class="items-nav has-submenu active"><a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu" style="display:block;"><li><a href="suprimentos.html">Gestão de Compras</a></li><li><a href="compras.html" class="active">Solicitações de Compra</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="estoque"><a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="estoque.html">Estoque</a></li><li><a href="saldo.html">Saldo do Estoque</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="comercial"><a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="orcamentos.html">Orçamentos</a></li><li><a href="pedidos.html">Pedidos</a></li><li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="financeiro"><a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="financeiro.html">Geral</a></li><li><a href="contasapagar.html">Contas a pagar</a></li><li><a href="contasareceber.html">Contas a receber</a></li><li><a href="tesouraria.html">Tesouraria</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="comex"><a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="informacoes.html">Informações</a></li><li><a href="documentos.html">Documentos</a></li><li><a href="rastreio.html">Rastreio</a></li></ul></li>
+                    <li class="items-nav has-submenu" data-module="rh"><a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a><ul class="submenu"><li><a href="funcionarios.html">Funcionários</a></li></ul></li>
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Central de Compras</div>
+        <div class="search-container"><input type="text" id="search-input" placeholder="Buscar solicitação..."></div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">Notificações <span id="notification-count">(0)</span></div>
+                <div id="notification-dropdown-list"><div class="notification-empty-state">Nenhuma notificação.</div></div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar"><img src="https://i.pravatar.cc/100" alt="Avatar" id="user-avatar"></div>
+            <div class="user-info"><div class="user-name" id="user-name">...</div><div class="user-email" id="user-email">...</div></div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item"><i class="fas fa-user-circle"></i><span>Meus Dados</span></a>
+                <a href="#" id="logout-btn" class="dropdown-item"><i class="fas fa-sign-out-alt"></i><span>Sair</span></a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="page-header-compras">
+            <div>
+                <h2>Solicitações de Compra</h2>
+                <p style="color: #64748b; font-size: 14px;">Acompanhe, cote e aprove as necessidades da empresa.</p>
+            </div>
+            <button id="btn-nova-solicitacao" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nova Solicitação</button>
+        </div>
+
+        <div class="filters-bar">
+            <button class="filter-chip active" data-filter="todos">Todos</button>
+            <button class="filter-chip" data-filter="Pendente">Pendentes</button>
+            <button class="filter-chip" data-filter="Em Cotação">Em Cotação</button>
+            <button class="filter-chip" data-filter="Aprovado">Aprovados</button>
+            
+            <div style="margin-left: auto;">
+                <select id="filter-setor" class="form-control small">
+                    <option value="">Todos os Setores</option>
+                    <option value="Produção">Produção</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="TI">TI</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="requests-container" class="requests-grid"></div>
+    </main>
+
+    <div id="modal-solicitacao" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header"><h2>Nova Solicitação</h2><button class="close-modal">&times;</button></div>
+            <div class="modal-body">
+                <form id="form-solicitacao">
+                    <div class="form-row">
+                        <div class="form-group flex-2"><label>Material *</label><input type="text" id="input-material" class="form-control" required></div>
+                        <div class="form-group"><label>Qtd *</label><div style="display:flex;gap:5px;"><input type="number" id="input-qtd" class="form-control" required step="0.01"><select id="input-unidade" class="form-control" style="width:80px;"><option value="un">un</option><option value="kg">kg</option><option value="cx">cx</option><option value="m">m</option></select></div></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Setor *</label><select id="input-setor" class="form-control" required><option value="Produção">Produção</option><option value="Administrativo">Administrativo</option><option value="Comercial">Comercial</option><option value="TI">TI</option></select></div>
+                        <div class="form-group"><label>Prioridade *</label><select id="input-prioridade" class="form-control" required><option value="Normal">Normal</option><option value="Urgente">Urgente</option><option value="Crítica">Crítica</option></select></div>
+                    </div>
+                    <div class="form-group"><label>Descrição</label><textarea id="input-descricao" class="form-control" rows="3"></textarea></div>
+                    <div class="form-actions"><button type="button" class="btn btn-secondary cancel-modal">Cancelar</button><button type="submit" class="btn btn-primary">Enviar</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-cotacao" class="modal">
+        <div class="modal-content" style="max-width: 1100px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-search-dollar"></i> Mapa de Cotação</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cotacao-header-info" style="margin-bottom: 15px; padding: 10px; background: #f1f5f9; border-radius: 6px; color: #334155;"></div>
+
+                <form id="form-cotacao">
+                    <input type="hidden" id="cotacao-id">
+                    <div class="cotacao-grid">
+                        <div class="cotacao-coluna">
+                            <div class="coluna-header">Fornecedor 1</div>
+                            <div class="form-group input-group-search">
+                                <label>Empresa</label>
+                                <input type="text" id="f1-nome" class="form-control" placeholder="Nome" autocomplete="off" oninput="showSupplierSuggestions(this, 1)">
+                                <div id="sugestoes-f1" class="autocomplete-suggestions"></div>
+                            </div>
+                            <div class="form-group"><label>Preço</label><input type="number" id="f1-preco" class="form-control" step="0.01"></div>
+                            <div class="form-group"><label>Pgto</label><input type="text" id="f1-pgto" class="form-control"></div>
+                            <div class="form-group"><label>Obs</label><textarea id="f1-obs" class="form-control" rows="1"></textarea></div>
+                            <div class="radio-choice"><input type="radio" name="fornecedor_escolhido" value="1" id="r1"><label for="r1">Escolher</label></div>
+                        </div>
+                        <div class="cotacao-coluna">
+                            <div class="coluna-header">Fornecedor 2</div>
+                            <div class="form-group input-group-search">
+                                <label>Empresa</label>
+                                <input type="text" id="f2-nome" class="form-control" placeholder="Nome" autocomplete="off" oninput="showSupplierSuggestions(this, 1)">
+                                <div id="sugestoes-f2" class="autocomplete-suggestions"></div>
+                            </div>
+                            <div class="form-group"><label>Preço</label><input type="number" id="f2-preco" class="form-control" step="0.01"></div>
+                            <div class="form-group"><label>Pgto</label><input type="text" id="f2-pgto" class="form-control"></div>
+                            <div class="form-group"><label>Obs</label><textarea id="f2-obs" class="form-control" rows="1"></textarea></div>
+                            <div class="radio-choice"><input type="radio" name="fornecedor_escolhido" value="2" id="r2"><label for="r2">Escolher</label></div>
+                        </div>
+                        <div class="cotacao-coluna">
+                            <div class="coluna-header">Fornecedor 3</div>
+                            <div class="form-group input-group-search">
+                                <label>Empresa</label>
+                                <input type="text" id="f3-nome" class="form-control" placeholder="Nome" autocomplete="off" oninput="showSupplierSuggestions(this, 1)">
+                                <div id="sugestoes-f3" class="autocomplete-suggestions"></div>
+                            </div>
+                            <div class="form-group"><label>Preço</label><input type="number" id="f3-preco" class="form-control" step="0.01"></div>
+                            <div class="form-group"><label>Pgto</label><input type="text" id="f3-pgto" class="form-control"></div>
+                            <div class="form-group"><label>Obs</label><textarea id="f3-obs" class="form-control" rows="1"></textarea></div>
+                            <div class="radio-choice"><input type="radio" name="fornecedor_escolhido" value="3" id="r3"><label for="r3">Escolher</label></div>
+                        </div>
+                    </div>
+
+                    <div class="cotacao-footer-action">
+                        <div class="obs-geral"><label>Obs Diretoria:</label><input type="text" id="cotacao-obs-geral" class="form-control"></div>
+                        <div class="buttons-area">
+                            <button type="button" class="btn btn-secondary" id="btn-salvar-apenas">
+                                <i class="fas fa-save"></i> Salvar
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Enviar p/ Diretoria
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-aprovacao-final" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 style="color: #27ae60">Aprovar Compra</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Confirme os dados para gerar o <strong>Pedido de Compra</strong>.</p>
+                <form id="form-aprovacao-final">
+                    <input type="hidden" id="aprov-id">
+                    <div class="form-group"><label>Fornecedor Final</label><input type="text" id="aprov-fornecedor" class="form-control" required></div>
+                    <div class="form-group"><label>Valor Final (R$)</label><input type="number" id="aprov-valor" class="form-control" step="0.01" required></div>
+                    <div class="form-group"><label>Pagamento</label><input type="text" id="aprov-pgto" class="form-control" required></div>
+                    <div class="form-group">
+                        <label class="checkbox-container"><input type="checkbox" id="aprov-gerar-fin" checked><span class="checkmark"></span> Gerar Contas a Pagar</label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary cancel-modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Confirmar & Gerar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/compras.js"></script>
+</body>
+</html>

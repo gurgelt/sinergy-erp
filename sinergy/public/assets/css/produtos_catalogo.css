@@ -1,0 +1,65 @@
+/* styles/produtos_catalogo.css - Estilos do Catálogo de Produtos */
+
+/* Container da Tabela */
+.table-container {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Botões de Ação na Tabela (Editar / Excluir) */
+.table-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-size: 16px;
+}
+
+.action-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(1.1);
+}
+
+.action-button.edit {
+    color: #3498db; /* Azul Sinergy */
+}
+
+.action-button.delete {
+    color: #e74c3c; /* Vermelho */
+}
+
+/* Container de Paginação */
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Estilo do Header da Página (onde fica o título e o botão Novo) */
+.page-header-catalog {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.page-header-catalog h2 {
+    margin: 0;
+    color: #2c3e50;
+}

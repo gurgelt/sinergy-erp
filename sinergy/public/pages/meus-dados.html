@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meus Dados</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/notifications.css" />
+    <link rel="stylesheet" href="../assets/css/meus-dados.css" />
+    <link rel="stylesheet" href="../assets/css/nav.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.ico"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  </head>
+  <body>
+    <!-- Tela de carregamento -->
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+        <!-- Cabecalho -->
+        <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+      
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Conteúdo Principal -->
+    <main class="conteudo-principal">
+      <div class="profile-container">
+        <div class="profile-header">
+          <h2>Meus Dados</h2>
+          <p>Gerencie suas informações pessoais e de segurança.</p>
+        </div>
+
+        <form id="profile-form" novalidate>
+          <div class="profile-card">
+            <h3>Informações Pessoais</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="profile-fullname">Nome Completo</label>
+                <input type="text" id="profile-fullname" required />
+              </div>
+              <div class="form-group">
+                <label for="profile-username"
+                  >Nome de Usuário (não pode ser alterado)</label
+                >
+                <input type="text" id="profile-username" disabled />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="profile-email">E-mail</label>
+              <input type="email" id="profile-email" required />
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <h3>Foto de Perfil</h3>
+            <div class="form-group">
+              <label>Pré-visualização da Foto</label>
+              <div class="profile-picture-preview" id="profile-picture-preview">
+                <img id="profile-avatar-preview" src="https://i.pravatar.cc/100" alt="Pré-visualização do Avatar" />
+                <span class="placeholder-text" style="display: none;">Nenhuma foto selecionada</span>
+              </div>
+              <input type="file" id="profile-picture-upload" accept="image/jpeg, image/png" />
+              <small class="form-help">Selecione uma imagem JPG ou PNG (máx. 500KB).</small>
+            </div>
+          </div>
+          <div class="profile-card">
+            <h3>Alterar Senha</h3>
+            <p class="form-help">Deixe em branco para não alterar a senha.</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="profile-new-password">Nova Senha</label>
+                <input
+                  type="password"
+                  id="profile-new-password"
+                  minlength="6"
+                />
+              </div>
+              <div class="form-group">
+                <label for="profile-confirm-password"
+                  >Confirmar Nova Senha</label
+                >
+                <input type="password" id="profile-confirm-password" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="btn-voltar" class="btn btn-secondary">
+              Voltar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Salvar Alterações
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div id="notification-container"></div>
+
+    <!-- Chatbot -->
+    <script>
+      window.watsonAssistantChatOptions = {
+        integrationID: "50047cc6-c44e-48fb-b3a5-090b708c41dc", // The ID of this integration.
+        region: "us-south", // The region your integration is hosted in.
+        serviceInstanceID: "b23df53b-540f-453d-a17d-70148571d28f", // The ID of your service instance.
+        onLoad: async (instance) => {
+          await instance.render();
+        },
+      };
+      setTimeout(function () {
+        const t = document.createElement("script");
+        t.src =
+          "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
+          (window.watsonAssistantChatOptions.clientVersion || "latest") +
+          "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });
+    </script>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/meus-dados.js" defer></script>
+  </body>
+</html>

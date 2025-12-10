@@ -1,0 +1,30 @@
+# API .htaccess
+# Controle de acesso e configurações
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Habilitar RewriteEngine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /sinergy/api/
+
+    # Redirecionar todas as requisições para index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Proteção de arquivos sensíveis
+<FilesMatch "\.(env|log|sql|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Configurações de PHP
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>

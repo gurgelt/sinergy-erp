@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manutenções - Sinergy</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css"> 
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/orcamentos.css"> 
+    
+    <link rel="stylesheet" href="../assets/css/manutencoes.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav active" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                          
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Manutenções</div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar por Cliente ou Código...">
+        </div>
+        
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="orcamentos-header">
+            <div class="header-left">
+                <h2>Gerenciar Solicitações</h2>
+            </div>
+            <div class="header-actions">
+                <button id="btn-nova-solicitacao" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Nova Solicitação
+                </button>
+            </div>
+        </div>
+
+        <div class="orcamentos-stats">
+            <div class="stat-card">
+                <div class="stat-icon bg-blue">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">Total</div>
+                    <div class="stat-value" id="stat-total">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-yellow">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">Pendentes</div>
+                    <div class="stat-value" id="stat-pendentes">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); color: white;">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">Aguard. Aprov.</div>
+                    <div class="stat-value" id="stat-aprovacao">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white;">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">Em Manutenção</div>
+                    <div class="stat-value" id="stat-em-manutencao">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-green">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">Concluídas</div>
+                    <div class="stat-value" id="stat-concluidas">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="orcamentos-filters">
+            <div class="filter-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input-main" placeholder="Buscar por cliente, código ou responsável...">
+            </div>
+            <select id="filter-status" class="filter-select">
+                <option value="todos">Todos os Status</option>
+                <option value="Pendente">Pendente</option>
+                <option value="Em Análise">Em Análise</option>
+                <option value="Aguardando Aprovação">Aguardando Aprovação</option>
+                <option value="Em Manutenção">Em Manutenção</option>
+                <option value="Concluído">Concluído</option>
+                <option value="Cancelado">Cancelado</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table class="data-table" id="tabela-manutencoes">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Cliente</th>
+                        <th>Problema</th>
+                        <th>Data Solicitação</th>
+                        <th>Responsável</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="manutencoes-tbody">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="modal-manutencao" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 id="modal-title">Nova Solicitação de Manutenção</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-manutencao">
+                    <input type="hidden" id="manutencao-id">
+                    
+                    <div class="form-section">
+                        <h3>Solicitação do Cliente</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Código</label>
+                                <input type="text" id="input-codigo" class="form-control" placeholder="(Automático)" readonly>
+                            </div>
+                            <div class="form-group flex-2">
+                                <label>Cliente *</label>
+                                <select id="select-cliente" class="form-control" required>
+                                    <option value="">Selecione um cliente...</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Problema/Defeito Relatado *</label>
+                            <textarea id="input-problema" class="form-control" rows="3" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Informações de Garantia</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Data da Compra</label>
+                                <input type="date" id="input-data-compra" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Prazo de Garantia</label>
+                                <input type="date" id="input-data-garantia" class="form-control">
+                            </div>
+                        </div>
+                        <div id="garantia-status-aviso" class="aviso-garantia" style="display: none;"></div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Serviço (Uso Interno)</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Responsável (Técnico)</label>
+                                <select id="select-responsavel" class="form-control">
+                                    <option value="">Selecione um funcionário...</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status da Solicitação *</label>
+                                <select id="select-status" class="form-control" required>
+                                    <option value="Pendente">Pendente</option>
+                                    <option value="Em Análise">Em Análise</option>
+                                    <option value="Aguardando Aprovação">Aguardando Aprovação</option>
+                                    <option value="Em Manutenção">Em Manutenção</option>
+                                    <option value="Concluído">Concluído</option>
+                                    <option value="Cancelado">Cancelado</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Data da Manutenção</label>
+                                <input type="date" id="input-data-manutencao" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-valor">Valor da Manutenção (R$)</label>
+                            <input type="number" id="input-valor" class="form-control" step="0.01" min="0" placeholder="0,00">
+                        </div>
+                        <div class="form-group">
+                            <label>Serviço Realizado</label>
+                            <textarea id="input-servico-realizado" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Observações</label>
+                            <textarea id="input-observacoes" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-salvar">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-confirmar-exclusao" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 id="exclusao-modal-title">Confirmar Exclusão</h2>
+                <button class="close-modal" id="close-exclusao-modal">&times;</button>
+            </div>
+            <div class="modal-body modal-body-alerta">
+                <div class="alerta-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="alerta-content">
+                    <p id="exclusao-mensagem">Tem certeza que deseja excluir esta solicitação?</p>
+                    <p class="alerta-destaque" id="exclusao-orcamento-numero"></p>
+                    <p class="alerta-aviso">Esta ação não pode ser desfeita.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btn-cancelar-exclusao">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btn-confirmar-exclusao">Sim, Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/manutencoes.js" defer></script>
+</body>
+</html>

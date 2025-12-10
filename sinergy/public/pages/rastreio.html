@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreio de Containers - Sinergy</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css?v=2024.12">
+    <link rel="stylesheet" href="../assets/css/notifications.css?v=2024.12">
+    <link rel="stylesheet" href="../assets/css/nav.css?v=2024.12">
+    <link rel="stylesheet" href="../assets/css/rastreio.css?v=2024.12.03c">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            <button id="sidebar-toggle" class="btn-toggle-menu"><i class="fas fa-bars"></i></button>
+        </div>
+        
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav active" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                          
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Comércio Exterior</div>
+        <div class="search-container"><input type="text" id="search-input" placeholder="Buscar container..."></div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="page-header-rastreio">
+            <h2><i class="fas fa-ship"></i> Rastreio de Importação</h2>
+            <button class="btn btn-primary" onclick="window.abrirModalRastreio()">
+                <i class="fas fa-plus"></i> Novo Rastreio
+            </button>
+        </div>
+
+        <div id="lista-containers" class="container-list">
+            <p style="text-align:center; color:#999; margin-top:50px;">Carregando dados...</p>
+        </div>
+    </main>
+
+    <div id="modal-rastreio" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Dados do Container</h2>
+                <button class="close-modal" onclick="window.fecharModalRastreio()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-rastreio">
+                    <input type="hidden" id="rastreio-id">
+                    <div class="form-row">
+                        <div class="form-group flex-2">
+                            <label>Nº Container *</label>
+                            <input type="text" id="input-container" class="form-control" required placeholder="ABCD1234567">
+                        </div>
+                        <div class="form-group flex-2">
+                            <label>Armador</label>
+                            <input type="text" id="input-armador" class="form-control" placeholder="Maersk / MSC">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mercadoria</label>
+                        <input type="text" id="input-mercadoria" class="form-control" placeholder="Descrição da carga">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Previsão Chegada (ETA) *</label>
+                            <input type="date" id="input-eta" class="form-control" required>
+                        </div>
+                        <div class="form-group flex-2">
+                            <label>Etapa Atual</label>
+                            <select id="input-step" class="form-control">
+                                <option value="1">1. Documentação</option>
+                                <option value="2">2. Booking</option>
+                                <option value="3">3. Em Trânsito (Mar)</option>
+                                <option value="4">4. Atracação</option>
+                                <option value="5">5. Desembaraço</option>
+                                <option value="6">6. Carregamento</option>
+                                <option value="7">7. Transporte Rod.</option>
+                                <option value="8">8. Entregue</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea id="input-obs" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="window.fecharModalRastreio()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js?v=2024.12"></script>
+    <script src="../assets/js/notifications.js?v=2024.12"></script>
+    <script src="../assets/js/sidebar.js?v=2024.12"></script>
+    <script src="../assets/js/rastreio.js?v=2024.12.03b"></script>
+</body>
+</html>

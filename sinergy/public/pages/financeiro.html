@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Financeiro</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/orcamentos.css">
+    <link rel="stylesheet" href="../assets/css/relatorios.css">
+    <link rel="stylesheet" href="../assets/css/financeiro.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Dashboard Financeiro</div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar...">
+        </div>
+        
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="orcamentos-header">
+            <div class="header-left">
+                <h2>Visão Geral Financeira</h2>
+            </div>
+            <div class="header-actions" style="gap: 10px;">
+                <a href="contasapagar.html" class="btn btn-danger" style="text-decoration: none;">
+                    <!--<i class="fas fa-minus-circle"></i>-->
+                    Lançar Despesa
+                </a>
+                <a href="contasareceber.html" class="btn btn-success" style="text-decoration: none;">
+                    <!--<i class="fas fa-plus-circle"></i>-->
+                    Ver Recebimentos
+                </a>
+            </div>
+        </div>
+
+        <div class="orcamentos-stats kpi-financeiro">
+            <div class="stat-card kpi-a-receber">
+                <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Total a Receber</div>
+                    <div class="stat-value" id="kpi-a-receber">R$ 0,00</div>
+                </div>
+            </div>
+            <div class="stat-card kpi-a-pagar">
+                <div class="stat-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Total a Pagar</div>
+                    <div class="stat-value" id="kpi-a-pagar">R$ 0,00</div>
+                </div>
+            </div>
+            <div class="stat-card kpi-saldo">
+                <div class="stat-icon"><i class="fas fa-balance-scale"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Saldo Previsto</div>
+                    <div class="stat-value" id="kpi-saldo-previsto">R$ 0,00</div>
+                </div>
+            </div>
+            <div class="stat-card kpi-recebido">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Recebido (Últimos 30d)</div>
+                    <div class="stat-value" id="kpi-recebido-30d">R$ 0,00</div>
+                </div>
+            </div>
+             <div class="stat-card kpi-pago">
+                <div class="stat-icon"><i class="fas fa-receipt"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Pago (Últimos 30d)</div>
+                    <div class="stat-value" id="kpi-pago-30d">R$ 0,00</div>
+                </div>
+            </div>
+            <div class="stat-card kpi-vencido">
+                <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Vencido (A Receber)</div>
+                    <div class="stat-value" id="kpi-vencido-receber">R$ 0,00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="graficos-container">
+            <div class="grafico-row">
+                <div class="grafico-card" style="flex: 2;">
+                    <div class="grafico-header">
+                        <h3>Fluxo de Caixa (Últimos 30 dias)</h3>
+                    </div>
+                    <div class="grafico-content" style="height: 350px;">
+                        <canvas id="fluxo-caixa-chart"></canvas>
+                    </div>
+                </div>
+                <div class="grafico-card" style="flex: 1;">
+                    <div class="grafico-header">
+                        <h3>Despesas por Categoria (Últimos 30 dias)</h3>
+                    </div>
+                    <div class="grafico-content" style="height: 350px;">
+                        <canvas id="despesas-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-lists-container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Próximos Pagamentos</h2>
+                </div>
+                <div class="card-body">
+                    <table class="data-table" id="tabela-prox-pagamentos">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Vencimento</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prox-pagamentos-tbody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Próximos Recebimentos</h2>
+                </div>
+                <div class="card-body">
+                    <table class="data-table" id="tabela-prox-recebimentos">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Vencimento</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prox-recebimentos-tbody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/financeiro.js" defer></script>
+</body>
+</html>

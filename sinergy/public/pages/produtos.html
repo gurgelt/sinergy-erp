@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Produção - Sinergy</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css?=v.60">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/compras.css">
+    <link rel="stylesheet" href="../assets/css/chat-widget.css?v=2.0">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <style>
+        /* Estilos de Abas */
+        .tabs-container { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .tab-btn { background: none; border: none; padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: 600; color: #7f8c8d; border-radius: 5px; transition: all 0.2s; }
+        .tab-btn:hover { background-color: #f1f2f6; }
+        .tab-btn.active { background-color: #3498db; color: white; }
+
+        /* Estilos da Lista de Produção */
+        .prod-item-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; margin-bottom: 10px; border-radius: 8px; background: white; transition: all 0.2s; }
+        .prod-item-row.disabled { background-color: #f8f9fa; opacity: 0.7; border-left: 4px solid #bdc3c7; }
+        .prod-item-row.pending { border-left: 4px solid #f39c12; }
+        .prod-item-row.done { border-left: 4px solid #27ae60; background-color: #f0fff4; }
+        
+        /* Detalhes do Histórico */
+        .history-detail-card { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
+        .history-bobina-badge { display: inline-block; background: #e1f5fe; color: #0277bd; padding: 4px 8px; border-radius: 4px; font-size: 12px; margin-top: 5px; border: 1px solid #b3e5fc; }
+        
+        .btn-view-details {
+            background: none;
+            border: 1px solid #dcdcdc;
+            color: #555;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+        }
+        .btn-view-details:hover {
+            background-color: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            <button id="sidebar-toggle" class="btn-toggle-menu"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    <li class="items-nav" data-module="diretoria"><a href="diretoria.html"><span>Diretoria</span></a></li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    
+                    <li class="items-nav active"><a href="produtos.html" class="active"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    <li class="items-nav"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Fábrica / Produção</div>
+        
+        <div class="search-container">
+            <input type="text" id="search-prod" placeholder="Buscar pedido ou cliente...">
+        </div>
+        
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="page-header-compras" style="display:block;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h2>Controle de Produção</h2>
+                <button class="btn btn-secondary" onclick="window.initProducao(true)"><i class="fas fa-sync-alt"></i> Atualizar</button>
+            </div>
+            
+            <div class="tabs-container">
+                <button class="tab-btn active" onclick="window.switchTab('fila')" id="tab-fila">
+                    <i class="fas fa-stream"></i> Fila de Produção
+                </button>
+                <button class="tab-btn" onclick="window.switchTab('historico')" id="tab-historico">
+                    <i class="fas fa-history"></i> Histórico Concluído
+                </button>
+            </div>
+        </div>
+
+        <div id="view-fila" class="view-section">
+            <div id="production-grid" class="requests-grid">
+                <p style="padding:20px;">Carregando fila...</p>
+            </div>
+        </div>
+
+        <div id="view-historico" class="view-section" style="display:none;">
+            <div id="history-grid" class="requests-grid">
+                <p style="padding:20px;">Carregando histórico...</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-producao" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 id="modal-ped-title">Pedido #000</h2>
+                <button class="close-modal" onclick="window.fecharModalProducao()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e9ecef;">
+                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Responsável pela Produção *</label>
+                    <div style="display: flex; gap: 10px;">
+                        <select id="select-responsavel-geral" class="form-control">
+                            <option value="">Selecione o funcionário...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="lista-itens-producao"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-baixa-item" class="modal" style="z-index: 2100;">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Consumir Material</h3>
+                <button class="close-modal" onclick="window.fecharModalBaixa()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="item-desc-baixa" style="font-weight:bold; margin-bottom:15px; color:#2c3e50;">...</p>
+                
+                <div style="background:#e3f2fd; padding:10px; border-radius:6px; margin-bottom:15px; font-size:14px; color:#0d47a1;">
+                    <strong>Meta Calculada:</strong> <span id="meta-peso">0.00</span> kg 
+                    <span style="margin:0 10px;">|</span> 
+                    <strong>Selecionado:</strong> <span id="total-selecionado" style="font-weight:bold; color:#c62828;">0.00</span> kg
+                </div>
+
+                <form id="form-baixa-producao">
+                    <input type="hidden" id="baixa-item-id">
+                    
+                    <div id="container-linhas-bobinas" style="max-height: 300px; overflow-y: auto; margin-bottom: 10px;">
+                        </div>
+
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="window.adicionarLinhaBobina()" style="width:100%; border:1px dashed #ccc; margin-bottom:15px;">
+                        <i class="fas fa-plus"></i> Adicionar outra bobina
+                    </button>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="window.fecharModalBaixa()">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Confirmar Baixa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-detalhes-historico" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2>Detalhes da Produção</h2>
+                <button class="close-modal" onclick="document.getElementById('modal-detalhes-historico').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="conteudo-historico"></div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="document.getElementById('modal-detalhes-historico').classList.remove('active')">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-detalhes-item" class="modal" style="z-index: 2500;">
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3>Detalhes do Item</h3>
+                <button class="close-modal" onclick="document.getElementById('modal-detalhes-item').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4 id="detalhe-nome" style="color:#2c3e50; margin-bottom:5px; border-bottom:1px solid #eee; padding-bottom:10px;">Nome do Item</h4>
+                
+                <div style="background:#f8f9fa; padding:15px; border-radius:8px; margin-top:15px;">
+                    <div class="form-row">
+                        <div class="form-group" style="flex:1; text-align:center;">
+                            <label style="font-size:11px; color:#7f8c8d;">Quantidade</label>
+                            <div id="detalhe-qtd" style="font-size:18px; font-weight:bold; color:#2c3e50;">0</div>
+                        </div>
+                        <div class="form-group" style="flex:1; text-align:center;">
+                            <label style="font-size:11px; color:#7f8c8d;">Unidade</label>
+                            <div id="detalhe-un" style="font-size:18px; font-weight:bold; color:#2980b9;">-</div>
+                        </div>
+                    </div>
+
+                    <hr style="border:0; border-top:1px dashed #ddd; margin:10px 0;">
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; text-align:center;">
+                        <div>
+                            <label style="font-size:11px; color:#7f8c8d;">Comprimento (m)</label>
+                            <div id="detalhe-comp" style="font-weight:600; font-size:16px;">-</div>
+                        </div>
+                        <div>
+                            <label style="font-size:11px; color:#7f8c8d;">Altura (m)</label>
+                            <div id="detalhe-alt" style="font-weight:600; font-size:16px;">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:20px; text-align:right;">
+                    <button class="btn btn-secondary" onclick="document.getElementById('modal-detalhes-item').classList.remove('active')">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js?v=9.0"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/produtos.js?v=22.24"></script>
+    <script src="../assets/js/chat-widget.js?v=2.0"></script>
+</body>
+</html>

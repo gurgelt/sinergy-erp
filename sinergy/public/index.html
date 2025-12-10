@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinergy - Home</title>
+    <link rel="stylesheet" href="./assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/dashboard.css">
+    <link rel="stylesheet" href="./assets/css/notifications.css">
+    <link rel="stylesheet" href="./assets/css/nav.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16"  href="./assets/images/favicon-16x16.ico">
+    <link rel="stylesheet" href="../assets/css/chat-widget.css?v=2.0">
+</head>
+    <body>
+        <div id="loader-overlay">
+            <div class="loader-spinner"></div>
+        </div>
+        
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="index.html" id="logo-link" class="logo-link">
+                <img src="./assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="pages/diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu" data-module="suprimentos">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="pages/suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="pages/compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="pages/estoque.html">Estoque</a></li>
+                            <li><a href="pages/saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="pages/orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pages/pedidos.html">Pedidos</a></li>
+                            <li><a href="pages/produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link" data-module="financeiro"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="pages/financeiro.html">Financeiro</a></li>
+                            <li><a href="pages/contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="pages/contasareceber.html">Contas a receber</a></li>
+                            <li><a href="pages/tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link" data-module="comex"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="pages/informacoes.html">Informações</a></li>
+                            <li><a href="pages/documentos.html">Documentos</a></li>
+                            <li><a href="pages/rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+ 
+                    <li class="items-nav has-submenu data-module="rh"">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="pages/funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav" data-module="manutencoes"><a href="pages/manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="produtos"><a href="pages/produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="pages/expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="pages/movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="pages/consulta.html"><span>Consulta</span></a></li>                         
+                    <li class="items-nav" data-module="relatorios"><a href="pages/relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="pages/suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+        <div class="top-bar">
+            <div class="section-title">Home</div>
+            <div class="search-container">
+                <input type="text" placeholder="Buscar no sistema">
+            </div>
+            <div id="notification-bell-icon" class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <div id="notification-dropdown" class="notification-dropdown">
+                    <div class="notification-dropdown-header">
+                        Notificações <span id="notification-count">(0)</span>
+                    </div>
+                    <div id="notification-dropdown-list">
+                        <div class="notification-empty-state">
+                            Nenhuma notificação no momento.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-profile" id="user-profile-container"> 
+                <div class="avatar">
+                    <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="user-name">Carregando...</div>
+                    <div class="user-email" id="user-email">Carregando...</div>
+                </div>
+                <i class="fas fa-chevron-down dropdown-arrow"></i>
+                <div class="dropdown-menu" id="user-dropdown-menu">
+                    <a href="pages/meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Meus Dados</span>
+                    </a>
+                    <a href="#" id="logout-btn" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <main class="conteudo-principal">
+            <div class="page-header">
+                <h1>Bem-vindo!</h1>
+                <div class="date-info">
+                    <i class="far fa-calendar-alt"></i> <span id="current-date">Carregando data...</span>
+                </div>
+            </div>
+
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h2>Olá, <span id="welcome-name">Usuário</span>!</h2>
+                    <p>Aqui está o resumo das operações da Atron hoje.</p>
+                </div>
+                <div class="welcome-actions">
+                    <a href="pages/pedidos.html" class="btn-white"><i class="fas fa-plus"></i> Novo Pedido</a>
+                    <a href="pages/produtos.html" class="btn-white-outline"><i class="fas fa-industry"></i> Nova Produção</a>
+                </div>
+            </div>
+
+            <div class="dashboard-kpis">
+                <div class="kpi-card stock">
+                    <div class="kpi-icon"><i class="fas fa-warehouse"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">Estoque Total (Bobinas)</span>
+                        <h3 id="kpi-stock-weight">0 kg</h3>
+                        <span class="kpi-sub" id="kpi-stock-count">0 bobinas</span>
+                    </div>
+                </div>
+                <div class="kpi-card production">
+                    <div class="kpi-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">Produção (Mês Atual)</span>
+                        <h3 id="kpi-production-weight">0 kg</h3>
+                        <span class="kpi-sub" id="kpi-production-count">0 ordens</span>
+                    </div>
+                </div>
+                <div class="kpi-card sales">
+                    <div class="kpi-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">Pedidos em Aberto</span>
+                        <h3 id="kpi-orders-open">0</h3>
+                        <span class="kpi-sub" id="kpi-orders-value">R$ 0,00</span>
+                    </div>
+                </div>
+                <div class="kpi-card finance">
+                    <div class="kpi-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">A Receber (Pendente)</span>
+                        <h3 id="kpi-finance-pending">R$ 0,00</h3>
+                        <span class="kpi-sub">Fluxo Financeiro</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-charts">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Distribuição de Estoque</h3>
+                        </div>
+                        <div class="card-body chart-container">
+                            <canvas id="stockChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Produção vs. Metas (Últimos 6 meses)</h3>
+                        </div>
+                        <div class="card-body chart-container">
+                            <canvas id="productionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-sidebar">
+                    <div class="activity-card">
+                        <div class="card-header">
+                            <h3>Últimas Movimentações</h3>
+                            <a href="pages/movimentacoes.html" class="see-more">Ver tudo</a>
+                        </div>
+                        <div class="card-body">
+                            <ul class="activity-list" id="recent-activities-list">
+                                <li class="loading-text">Carregando atividades...</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="quick-access-card">
+                        <div class="card-header">
+                            <h3>Acesso Rápido</h3>
+                        </div>
+                        <div class="quick-links-grid">
+                            <a href="pages/estoque.html" class="quick-link">
+                                <i class="fas fa-boxes"></i> <span>Estoque</span>
+                            </a>
+                            <a href="pages/orcamentos.html" class="quick-link">
+                                <i class="fas fa-file-invoice"></i> <span>Orçamentos</span>
+                            </a>
+                            <a href="pages/funcionarios.html" class="quick-link">
+                                <i class="fas fa-users"></i> <span>RH</span>
+                            </a>
+                            <a href="pages/suporte.html" class="quick-link">
+                                <i class="fas fa-headset"></i> <span>Suporte</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="factors-card compact">
+                        <div class="card-header">
+                            <h3>Fatores de Cálculo</h3>
+                        </div>
+                        <ul class="specs-list factors-list" id="fatores-bobinas-list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="notification-container"></div>
+
+        // <script>
+        // window.watsonAssistantChatOptions = {
+        //     integrationID: "50047cc6-c44e-48fb-b3a5-090b708c41dc",
+        //     region: "us-south",
+        //     serviceInstanceID: "b23df53b-540f-453d-a17d-70148571d28f",
+        //     onLoad: async (instance) => { await instance.render(); }
+        // };
+        // setTimeout(function(){
+        //     const t=document.createElement('script');
+        //     t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+        //     document.head.appendChild(t);
+        // });
+        // </script>
+
+        <script src="./assets/js/app.js"></script>
+        <script src="../assets/js/chat-widget.js?v=2.0"></script>
+        <script src="./assets/js/notifications.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/home.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,285 @@
+/* diretoria.css - Visão Estratégica Global */
+
+/* === ESTRUTURA PRINCIPAL === */
+.conteudo-principal {
+    padding: 20px 30px;
+    background-color: #f4f6f9;
+    min-height: calc(100vh - 70px);
+}
+
+.diretoria-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    margin-bottom: 25px;
+    border-left: 5px solid #2c3e50;
+}
+
+.diretoria-header h2 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.data-hoje {
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+/* === KPI CARDS (TOPO) === */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.kpi-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+}
+
+.kpi-card .icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+/* Cores dos Ícones */
+.kpi-card.financeiro .icon { background: #eff6ff; color: #3498db; }
+.kpi-card.comercial .icon { background: #ecfdf5; color: #27ae60; }
+.kpi-card.rh .icon { background: #fef2f2; color: #e74c3c; }
+
+.kpi-info h3 {
+    margin: 0;
+    font-size: 12px;
+    color: #95a5a6;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.kpi-info p {
+    margin: 5px 0 0 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.kpi-info small {
+    font-size: 11px;
+    color: #bdc3c7;
+}
+
+.mini-stats {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.text-danger { color: #e74c3c; }
+.text-success { color: #27ae60; }
+
+/* === LAYOUT DASHBOARD (3 COLUNAS) === */
+.dashboard-grid-layout {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.dashboard-column {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* CARDS DE GRÁFICOS E LISTAS */
+.chart-card, .info-list-card, .approval-center {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-card h3, .info-list-card h3, .approval-center h3 {
+    margin: 0 0 15px 0;
+    font-size: 15px;
+    color: #34495e;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Área do Gráfico (Canvas Wrapper) */
+/* Isso é essencial para o Chart.js não ficar gigante ou sumir */
+.chart-wrapper {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.chart-wrapper-small {
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
+
+/* LISTAS SIMPLES (Produção/Comex) */
+.simple-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.simple-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f8f9fa;
+    font-size: 13px;
+    color: #2c3e50;
+}
+
+.simple-list li:last-child { border-bottom: none; }
+
+/* === CENTRAL DE APROVAÇÃO (Pendências) === */
+.card-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+.card-header-custom h3 { margin: 0; border: none; padding: 0; }
+
+.badge-count {
+    background: #e74c3c;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.approval-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.approval-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.2s;
+}
+
+.approval-item:hover { background-color: #fcfcfc; }
+
+/* Borda colorida por tipo */
+.approval-item.type-Compra { border-left: 3px solid #3498db; padding-left: 10px; }
+.approval-item.type-Orcamento { border-left: 3px solid #f1c40f; padding-left: 10px; }
+
+.app-info strong {
+    display: block;
+    font-size: 13px;
+    color: #2c3e50;
+    margin-bottom: 3px;
+}
+
+.app-info div {
+    font-size: 11px;
+    color: #95a5a6;
+}
+
+.btn-icon {
+    border: 1px solid #dfe6e9;
+    background: transparent;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7f8c8d;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-icon:hover {
+    background: #ecf0f1;
+    color: #2980b9;
+    border-color: #bdc3c7;
+}
+
+/* === TABELA DE COTAÇÃO (Dentro do Modal) === */
+.table-cotacao {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.table-cotacao th, .table-cotacao td {
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.table-cotacao th {
+    background-color: #f8f9fa;
+    color: #34495e;
+    font-weight: 600;
+}
+
+/* Botão de Escolha */
+.btn-mini-select {
+    padding: 4px 10px;
+    font-size: 11px;
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-mini-select:hover {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .dashboard-grid-layout {
+        flex-direction: column;
+    }
+}

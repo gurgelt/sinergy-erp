@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatórios</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/relatorios.css" />
+    <link rel="stylesheet" href="../assets/css/notifications.css" />
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.ico"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  </head>
+  <body>
+    
+    <div id="loader-overlay">
+      <div class="loader-spinner"></div>
+    </div>
+
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+      <div class="section-title">Relatórios</div>
+      <div class="search-container">
+        <input type="text" placeholder="Buscar relatório" />
+      </div>
+      <div id="notification-bell-icon" class="notification-icon">
+          <i class="fas fa-bell"></i>
+          <div id="notification-dropdown" class="notification-dropdown">
+              <div class="notification-dropdown-header">
+                  Notificações <span id="notification-count">(0)</span>
+              </div>
+              <div id="notification-dropdown-list">
+                  <div class="notification-empty-state">
+                      Nenhuma notificação no momento.
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="user-profile" id="user-profile-container">
+          <div class="avatar">
+              <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+          </div>
+          <div class="user-info">
+              <div class="user-name" id="user-name">Carregando...</div>
+              <div class="user-email" id="user-email">Carregando...</div>
+          </div>
+          <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+          <div class="dropdown-menu" id="user-dropdown-menu">
+              <a href="#" id="meus-dados-btn" class="dropdown-item">
+                  <i class="fas fa-user-circle"></i>
+                  <span>Meus Dados</span>
+              </a>
+              <a href="#" id="logout-btn" class="dropdown-item">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>Sair</span>
+              </a>
+          </div>
+      </div>
+    </div>
+
+    <main class="conteudo-principal">
+      <div class="relatorios-header">
+        <h2>Relatórios Gerenciais</h2>
+        <div class="header-actions">
+            <div class="filter-group">
+                <label for="filtro-periodo">Período de Análise</label>
+                <select id="filtro-periodo" class="filter-select">
+                    <option value="7">Últimos 7 dias</option>
+                    <option value="30" selected>Últimos 30 dias</option>
+                    <option value="90">Últimos 90 dias</option>
+                    <option value="180">Últimos 6 meses</option>
+                    <option value="365">Último ano</option>
+                    <option value="custom">Personalizado</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filtro-mes">Filtrar por Mês</label>
+                <select id="filtro-mes" class="filter-select">
+                    <option value="">Todos os Meses</option>
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filtro-ano">Filtrar por Ano</label>
+                <select id="filtro-ano" class="filter-select">
+                    <option value="">Todos os Anos</option>
+                    </select>
+            </div>
+            <button id="btn-aplicar-filtros" class="btn btn-primary">
+                <i class="fas fa-filter"></i> Aplicar Filtros
+            </button>
+        </div>
+      </div>
+
+      <div id="periodo-custom" class="periodo-custom">
+        <div class="data-container">
+          <label for="data-inicio">De:</label>
+          <input type="date" id="data-inicio" class="data-input" />
+        </div>
+        <div class="data-container">
+          <label for="data-fim">Até:</label>
+          <input type="date" id="data-fim" class="data-input" />
+        </div>
+        <button id="btn-aplicar-periodo" class="btn btn-primary btn-sm">
+          Aplicar
+        </button>
+      </div>
+
+      <div class="indicadores-container">
+        <div class="indicadores-header">
+          <h2>Indicadores-Chave de Desempenho (KPIs)</h2>
+        </div>
+        <div class="indicadores-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon">
+              <i class="fas fa-weight-hanging"></i>
+            </div>
+            <div class="kpi-info">
+              <h3>Peso Total em Estoque</h3>
+              <p id="peso-estoque">0 kg</p>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">
+              <i class="fas fa-industry"></i>
+            </div>
+            <div class="kpi-info">
+              <h3>Peso Total Produzido</h3>
+              <p id="peso-producao">0 kg</p>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">
+              <i class="fas fa-trash-alt"></i>
+            </div>
+            <div class="kpi-info">
+              <h3>Total de Sucata Gerada</h3>
+              <p id="peso-sucata">0 kg</p>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">
+              <i class="fas fa-percentage"></i>
+            </div>
+            <div class="kpi-info">
+              <h3>Taxa de Aproveitamento</h3>
+              <p id="taxa-aproveitamento">0%</p>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">
+              <i class="fas fa-boxes"></i>
+            </div>
+            <div class="kpi-info">
+              <h3>Total de Bobinas</h3>
+              <p id="total-bobinas">0</p>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="kpi-info">
+              <h3>Total de Produções</h3>
+              <p id="total-produtos">0</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="graficos-container">
+        <div class="grafico-row">
+          <div class="grafico-card">
+            <div class="grafico-header">
+              <h3>Produção vs. Estoque (kg)</h3>
+            </div>
+            <div class="grafico-content">
+              <canvas id="grafico-producao-estoque"></canvas>
+            </div>
+          </div>
+          <div class="grafico-card">
+            <div class="grafico-header">
+              <h3>Aproveitamento de Material (%)</h3>
+            </div>
+            <div class="grafico-content">
+              <canvas id="grafico-aproveitamento"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="grafico-row">
+          <div class="grafico-card">
+            <div class="grafico-header">
+              <h3>Produção por Tipo de Material</h3>
+            </div>
+            <div class="grafico-content">
+              <canvas id="grafico-tipo-material"></canvas>
+            </div>
+          </div>
+          <div class="grafico-card">
+            <div class="grafico-header">
+              <h3>Tendência de Produção Mensal</h3>
+            </div>
+            <div class="grafico-content">
+              <canvas id="grafico-tendencia"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detalhes-container">
+        <div class="detalhes-header">
+          <h2>Detalhamento por Tipo de Material</h2>
+          <button id="btn-exportar" class="btn btn-primary">
+            <i class="fas fa-file-export"></i> Exportar para Excel
+          </button>
+        </div>
+        <div class="table-container">
+          <table id="tabela-detalhes" class="data-table">
+            <thead>
+              <tr>
+                <th>Tipo de Material</th>
+                <th>Estoque (kg)</th>
+                <th>Produção (kg)</th>
+                <th>Sucata (kg)</th>
+                <th>Aproveitamento (%)</th>
+                <th>Qtd. Bobinas</th>
+                <th>Qtd. Produtos</th>
+              </tr>
+            </thead>
+            <tbody>
+              </tbody>
+            <tfoot>
+              <tr>
+                <th>Total</th>
+                <th id="total-estoque">0 kg</th>
+                <th id="total-producao">0 kg</th>
+                <th id="total-sucata">0 kg</th>
+                <th id="media-aproveitamento">0%</th>
+                <th id="soma-bobinas">0</th>
+                <th id="soma-produtos">0</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div id="modal-exportacao" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Exportar Relatório</h2>
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="formato-exportacao">Formato de Exportação</label>
+              <select id="formato-exportacao" class="select-full">
+                <option value="csv">CSV</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Conteúdo a Exportar</label>
+              <div class="checkbox-group">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="export-kpi" checked />
+                  <span class="checkmark"></span>
+                  Indicadores-Chave
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="export-graficos" checked />
+                  <span class="checkmark"></span>
+                  Gráficos
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="export-tabela" checked />
+                  <span class="checkmark"></span>
+                  Tabela de Detalhamento
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="nome-arquivo">Nome do Arquivo</label>
+              <input
+                type="text"
+                id="nome-arquivo"
+                value="Relatório Sinergy"
+                class="input-full"
+              />
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary cancel-modal">
+                Cancelar
+              </button>
+              <button
+                type="button"
+                id="btn-confirma-exportacao"
+                class="btn btn-primary"
+              >
+                <i class="fas fa-download"></i> Baixar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="notification-container"></div>
+
+    <script>
+      window.watsonAssistantChatOptions = {
+        integrationID: "50047cc6-c44e-48fb-b3a5-090b708c41dc", // The ID of this integration.
+        region: "us-south", // The region your integration is hosted in.
+        serviceInstanceID: "b23df53b-540f-453d-a17d-70148571d28f", // The ID of your service instance.
+        onLoad: async (instance) => {
+          await instance.render();
+        },
+      };
+      setTimeout(function () {
+        const t = document.createElement("script");
+        t.src =
+          "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
+          (window.watsonAssistantChatOptions.clientVersion || "latest") +
+          "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });
+    </script>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/relatorios.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contas a Pagar</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/orcamentos.css">
+    <link rel="stylesheet" href="../assets/css/contasapagar.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    <li class="items-nav" data-module="diretoria"><a href="diretoria.html"><span>Diretoria</span></a></li>
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu active" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu" style="display: block;">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html" class="active">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Contas a Pagar</div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar por descrição ou fornecedor...">
+        </div>
+        
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">Notificações <span id="notification-count">(0)</span></div>
+                <div id="notification-dropdown-list"><div class="notification-empty-state">Nenhuma notificação no momento.</div></div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar"><img src="https://i.pravatar.cc/100" alt="Avatar" id="user-avatar"></div>
+            <div class="user-info"><div class="user-name" id="user-name">...</div><div class="user-email" id="user-email">...</div></div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" class="dropdown-item"><i class="fas fa-user-circle"></i> <span>Meus Dados</span></a>
+                <a href="#" id="logout-btn" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> <span>Sair</span></a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="orcamentos-header">
+            <div class="header-left">
+                <h2>Gerenciar Despesas</h2>
+            </div>
+            <div class="header-actions">
+                <button id="btn-novo-lancamento" class="btn btn-primary"><i class="fas fa-plus"></i> Lançar Despesa</button>
+            </div>
+        </div>
+
+        <div class="orcamentos-filters">
+            <select id="filter-status" class="filter-select">
+                <option value="todos">Todos os Status</option>
+                <option value="Pendente">Pendente</option>
+                <option value="Vencido">Vencido</option>
+                <option value="Pago">Pago</option>
+            </select>
+            <select id="filter-categoria" class="filter-select">
+                <option value="todas">Todas as Categorias</option>
+                <option value="Matéria-Prima">Matéria-Prima</option>
+                <option value="Impostos">Impostos</option>
+                <option value="Salários">Salários</option>
+                <option value="Infraestrutura">Infraestrutura</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table class="data-table" id="tabela-contas-pagar">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Fornecedor</th>
+                        <th>Categoria</th>
+                        <th>Vencimento</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="contasapagar-tbody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="modal-conta" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2 id="modal-title">Lançar Despesa</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-conta">
+                    <input type="hidden" id="conta-id">
+                    <div class="form-section">
+                        <div class="form-row">
+                            <div class="form-group flex-2"><label>Descrição *</label><input type="text" id="input-descricao" class="form-control" required></div>
+                            <div class="form-group"><label>Fornecedor</label><input type="text" id="input-fornecedor" class="form-control"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Categoria *</label><select id="input-categoria" class="form-control" required><option value="">Selecione...</option><option value="Matéria-Prima">Matéria-Prima</option><option value="Impostos">Impostos</option><option value="Salários">Salários</option><option value="Infraestrutura">Infraestrutura</option><option value="Marketing">Marketing</option><option value="Outros">Outros</option></select></div>
+                            <div class="form-group"><label>Valor (R$) *</label><input type="number" id="input-valor" class="form-control" step="0.01" min="0" required></div>
+                            <div class="form-group"><label>Tipo de Pagamento</label><select id="input-tipo-pgto" class="form-control"><option value="À Vista">À Vista</option><option value="Parcelado">Parcelado</option><option value="Recorrente">Recorrente</option></select></div>
+                            <div class="form-group"><label>Forma de Pagamento</label><select id="input-forma-pgto" class="form-control"><option value="Pix">Pix</option><option value="Boleto">Boleto</option><option value="Dinheiro">Dinheiro</option><option value="Cartão de Crédito">Cartão de Crédito</option><option value="Transferência">Transferência</option></select></div>
+                            <div class="form-group"><label>Data de Vencimento *</label><input type="date" id="input-vencimento" class="form-control" required></div>
+                        </div>
+                        <div class="form-group"><label>Observações</label><textarea id="input-observacoes" class="form-control" rows="3"></textarea></div>
+                    </div>
+                    <div class="form-actions"><button type="button" class="btn btn-secondary" id="btn-cancelar">Cancelar</button><button type="submit" class="btn btn-primary" id="btn-salvar">Salvar Despesa</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-confirmar-exclusao" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header"><h2 id="exclusao-modal-title">Confirmar Exclusão</h2><button class="close-modal" id="close-exclusao-modal">&times;</button></div>
+            <div class="modal-body modal-body-alerta">
+                <div class="alerta-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="alerta-content"><p>Tem certeza que deseja excluir?</p><p class="alerta-destaque" id="exclusao-orcamento-numero"></p><p class="alerta-aviso">Ação irreversível.</p></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" id="btn-cancelar-exclusao">Cancelar</button><button type="button" class="btn btn-danger" id="btn-confirmar-exclusao">Sim, Excluir</button></div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/contasapagar.js?v=1.15"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saldo de Estoque</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/saldo.css" />
+    <link rel="stylesheet" href="../assets/css/notifications.css" />
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.ico"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  </head>
+  <body>
+    <!-- Tela de carregamento -->
+    <div id="loader-overlay">
+      <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Cabecalho -->
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="section-title">Saldo de Estoque</div>
+      <div class="search-container">
+        <input type="text" id="search-saldo" placeholder="Buscar material" />
+      </div>
+      <div id="notification-bell-icon" class="notification-icon">
+          <i class="fas fa-bell"></i>
+          <div id="notification-dropdown" class="notification-dropdown">
+              <div class="notification-dropdown-header">
+                  Notificações <span id="notification-count">(0)</span>
+              </div>
+              <div id="notification-dropdown-list">
+                  <div class="notification-empty-state">
+                      Nenhuma notificação no momento.
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="user-profile" id="user-profile-container">
+          <div class="avatar">
+              <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+          </div>
+          <div class="user-info">
+              <div class="user-name" id="user-name">Carregando...</div>
+              <div class="user-email" id="user-email">Carregando...</div>
+          </div>
+          <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+          <div class="dropdown-menu" id="user-dropdown-menu">
+              <a href="#" id="meus-dados-btn" class="dropdown-item">
+                  <i class="fas fa-user-circle"></i>
+                  <span>Meus Dados</span>
+              </a>
+              <a href="#" id="logout-btn" class="dropdown-item">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>Sair</span>
+              </a>
+          </div>
+      </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main class="conteudo-principal">
+      <div class="saldo-container">
+        <div class="saldo-header">
+          <h2>Resumo de Estoque por Material</h2>
+          <div class="header-actions">
+            <select id="filter-saldo-tipo" class="filter-select">
+              <option value="">Todos os Tipos</option>
+              <option value="Super-Cana">Super-Cana</option>
+              <option value="Meia-Cana">Meia-Cana</option>
+              <option value="Meia-Cana Transvision">Meia-Cana Transvision</option>
+              <option value="Guia 50">Guia 50</option>
+              <option value="Guia 60">Guia 60</option>
+              <option value="Guia 70">Guia 70</option>
+              <option value="Guia 100">Guia 100</option>  
+              <option value="Soleira">Soleira</option>
+              <option value="Eixo">Eixo</option>
+            </select>
+            <select id="filter-saldo-status" class="filter-select">
+              <option value="">Todos os Status</option>
+              <option value="Disponível">Disponível</option>
+              <option value="Indisponível">Indisponível</option>
+            </select>
+            <button id="export-excel-btn" class="export-button">
+                <i class="fas fa-file-excel"></i> Exportar para Excel
+            </button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="tabela-saldo" class="data-table">
+            <thead>
+              <tr>
+                <th>MATERIAL</th>
+                <th>Estoque Atual</th>
+                <th>Estoque Mínimo</th>
+                <th>Estoque Regular</th>
+                <th>Nível de Estoque</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              </tbody>
+          </table>
+        </div>
+
+        <div class="saldo-summary">
+          <div class="summary-card">
+            <div class="summary-icon">
+              <i class="fas fa-weight-hanging"></i>
+            </div>
+            <div class="summary-info">
+              <h3>Peso Total de Estoque</h3>
+              <p id="total-saldo-peso">0 kg</p>
+            </div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon">
+              <i class="fas fa-boxes"></i>
+            </div>
+            <div class="summary-info">
+              <h3>Tipos de Material em Estoque</h3>
+              <p id="total-saldo-tipos">0</p>
+            </div>
+          </div>
+          <!-- <div class="summary-card">
+            <div class="summary-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="summary-info">
+              <h3>Itens Disponíveis</h3>
+              <p id="total-saldo-disponiveis">0</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </main>
+
+    <div id="notification-container"></div>
+
+    <!-- Chatbot -->
+    <script>
+      window.watsonAssistantChatOptions = {
+        integrationID: "50047cc6-c44e-48fb-b3a5-090b708c41dc", // The ID of this integration.
+        region: "us-south", // The region your integration is hosted in.
+        serviceInstanceID: "b23df53b-540f-453d-a17d-70148571d28f", // The ID of your service instance.
+        onLoad: async (instance) => {
+          await instance.render();
+        },
+      };
+      setTimeout(function () {
+        const t = document.createElement("script");
+        t.src =
+          "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
+          (window.watsonAssistantChatOptions.clientVersion || "latest") +
+          "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });
+    </script>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/saldo.js" defer></script>
+  </body>
+</html>

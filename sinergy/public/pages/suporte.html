@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/suporte.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Tela de carregamento -->
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+        <!-- Sidebar esquerda -->
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>    
+
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="section-title">Suporte</div>
+        <div class="search-container">
+            <input type="text" placeholder="Buscar informação">
+        </div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="user-profile" id="user-profile-container">
+        <div class="avatar">
+            <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+        </div>
+        <div class="user-info">
+            <div class="user-name" id="user-name">Carregando...</div>
+            <div class="user-email" id="user-email">Carregando...</div>
+        </div>
+        <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+        <div class="dropdown-menu" id="user-dropdown-menu">
+            <a href="#" id="meus-dados-btn" class="dropdown-item">
+                <i class="fas fa-user-circle"></i>
+                <span>Meus Dados</span>
+            </a>
+            <a href="#" id="logout-btn" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo-principal">
+        <div class="support-container">
+            <div class="support-categories">
+                <div class="support-category active" data-target="technical">
+                    <i class="fas fa-desktop"></i>
+                    <span>Suporte Técnico</span>
+                </div>
+                <div class="support-category" data-target="system">
+                    <i class="fas fa-cogs"></i>
+                    <span>Sistema ERP</span>
+                </div>
+                <div class="support-category" data-target="manuals">
+                    <i class="fas fa-book"></i>
+                    <span>Manuais</span>
+                </div>
+                <div class="support-category" data-target="faq">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Perguntas Frequentes</span>
+                </div>
+            </div>
+            
+            <div class="support-content">
+                <div class="support-panel active" id="technical">
+                    <h2>Suporte Técnico</h2>
+                    <div class="support-info">
+                        <div class="info-card">
+                            <h3>Horário de Atendimento</h3>
+                            <p>Segunda a sexta, das 8h às 16h</p>
+                            <p>Sábado, das 8h às 12h (somente emergências)</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Contato</h3>
+                            <p><i class="fas fa-phone"></i>(11) 98801-4644</p>
+                            <p><i class="fas fa-envelope"></i>sac@atron.com.br</p>
+                            <p><i class="fas fa-comment"></i>Chat interno no sistema</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Suporte Emergencial</h3>
+                            <p><i class="fas fa-phone"></i> (11) 98801-4644</p>
+                            <p>Disponível 24h para problemas críticos</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="support-panel" id="system">
+                    <h2>Sistema ERP</h2>
+                    <div class="system-modules">
+                        <div class="module-card">
+                            <h3>Controle de Estoque</h3>
+                            <p>Gerenciamento de bobinas de aço</p>
+                            <ul class="module-features">
+                                <li>Cadastro e controle de bobinas</li>
+                                <li>Rastreamento de lotes</li>
+                                <li>Movimentação de estoque</li>
+                                <li>Inventário físico</li>
+                            </ul>
+                            <a href="estoque.html" class="module-link">Acessar módulo</a>
+                        </div>
+                        <div class="module-card">
+                            <h3>Produtos Acabados</h3>
+                            <p>Lâminas, tubos e outros produtos processados</p>
+                            <ul class="module-features">
+                                <li>Lâminas meia-cana e super-cana</li>
+                                <li>Tubos octagonais</li>
+                                <li>Guias de 50, 60 e 70</li>
+                                <li>Controle de produção</li>
+                            </ul>
+                            <a href="produtos.html" class="module-link">Acessar módulo</a>
+                        </div>
+                        <div class="module-card">
+                            <h3>Relatórios</h3>
+                            <p>Geração de relatórios personalizados</p>
+                            <ul class="module-features">
+                                <li>Relatórios de estoque</li>
+                                <li>Análise de produção</li>
+                                <li>Consumo de materiais</li>
+                                <li>Exportação em PDF/Excel</li>
+                            </ul>
+                            <a href="relatorios.html" class="module-link">Acessar módulo</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="support-panel" id="manuals">
+                    <h2>Manuais</h2>
+                    <div class="manuals-list">
+                        <div class="manual-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="manual-info">
+                                <h3>Manual do Usuário</h3>
+                                <p>Guia completo para utilização do sistema</p>
+                            </div>
+                            <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="manual-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="manual-info">
+                                <h3>Controle de Estoque</h3>
+                                <p>Instruções para gestão de bobinas de aço</p>
+                            </div>
+                            <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="manual-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="manual-info">
+                                <h3>Produtos Acabados</h3>
+                                <p>Guia para cadastro e controle de produtos processados</p>
+                            </div>
+                            <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="manual-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="manual-info">
+                                <h3>Relatórios</h3>
+                                <p>Como gerar e interpretar relatórios</p>
+                            </div>
+                            <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="manual-item">
+                            <i class="fas fa-file-video"></i>
+                            <div class="manual-info">
+                                <h3>Vídeos Tutoriais</h3>
+                                <p>Treinamentos em vídeo para todas as funções</p>
+                            </div>
+                            <a href="#" class="download-btn">Acessar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="support-panel" id="faq">
+                    <h2>Perguntas Frequentes</h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Como cadastrar uma nova bobina de aço?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Para cadastrar uma nova bobina, acesse o menu "Estoque" e clique em "Nova Bobina". Preencha todos os campos obrigatórios como fornecedor, tipo de material, espessura, largura, peso e lote. Certifique-se de informar corretamente as especificações do material para garantir o cálculo preciso do rendimento de produção.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Como registrar a produção de lâminas a partir de uma bobina?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Acesse o menu "Produtos" e clique em "Nova Produção". Selecione a bobina de origem, o tipo de produto (ex: lâmina meia-cana) e informe a quantidade produzida. O sistema calculará automaticamente o consumo de material e atualizará o estoque da bobina. Lembre-se que os dados de rendimento serão baseados nas especificações cadastradas da bobina e do tipo de produto.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>O que fazer quando ocorre divergência no estoque de bobinas?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Em caso de divergência, realize um inventário físico e compare com os dados do sistema. Para ajustar, acesse "Estoque", selecione a bobina e informe o peso correto. É necessário justificar o ajuste para fins de auditoria. O sistema manterá um histórico de todos os ajustes realizados para controle posterior.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Como gerar relatório de produtividade por tipo de produto?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Acesse o menu "Relatórios", selecione o período desejado e o tipo de produto (lâminas meia-cana, super-cana, tubos octagonais, etc). O sistema gerará um relatório detalhado com gráficos comparativos e indicadores de eficiência produtiva, incluindo taxa de aproveitamento das bobinas e tempo médio de produção.</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="notification-container"></div>
+
+    <!-- Chatbot -->
+    <script>
+        window.watsonAssistantChatOptions = {
+            integrationID: "50047cc6-c44e-48fb-b3a5-090b708c41dc",
+            region: "us-south",
+            serviceInstanceID: "b23df53b-540f-453d-a17d-70148571d28f",
+            onLoad: async (instance) => { await instance.render(); }
+        };
+        setTimeout(function(){
+            const t=document.createElement('script');
+            t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
+    </script>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/suporte.js" defer></script>
+</body>
+</html>

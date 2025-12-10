@@ -1,0 +1,174 @@
+/* styles/tesouraria.css - Estilos específicos da Tesouraria */
+
+/* Header */
+.tesouraria-header {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tesouraria-header h2 { margin: 0; color: #2c3e50; }
+
+/* Filtros */
+.filters-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    align-items: flex-end;
+}
+.filter-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 180px;
+}
+
+/* KPIs / Stats */
+.tesouraria-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.stat-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-left: 4px solid transparent;
+}
+
+/* Cores dos KPIs */
+.stat-card.entrada { border-color: #2ecc71; }
+.stat-card.entrada .stat-icon { background-color: #e8f8f0; color: #2ecc71; }
+
+.stat-card.saida { border-color: #e74c3c; }
+.stat-card.saida .stat-icon { background-color: #fdeded; color: #e74c3c; }
+
+.stat-card.saldo { border-color: #3498db; }
+.stat-card.saldo .stat-icon { background-color: #eaf4fc; color: #3498db; }
+
+.stat-icon {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+}
+.stat-value { font-size: 24px; font-weight: 700; }
+
+/* Cores de Texto */
+.text-success { color: #27ae60 !important; }
+.text-danger { color: #c0392b !important; }
+.text-blue { color: #2980b9 !important; }
+
+/* Tabela de Extrato */
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 20px;
+}
+
+/* Badges de Tipo */
+.badge-tipo {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.badge-tipo.entrada { background-color: #dcfce7; color: #166534; }
+.badge-tipo.saida { background-color: #fee2e2; color: #991b1b; }
+
+/* Botão de Estorno */
+.action-button.revert {
+    color: #f39c12;
+}
+.action-button.revert:hover {
+    background-color: #fff8e1;
+    transform: scale(1.1);
+}
+
+/* Modal Warning Button */
+.btn-warning {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+}
+.btn-warning:hover {
+    background-color: #e67e22;
+}
+
+@media (max-width: 768px) {
+    .filters-container { flex-direction: column; align-items: stretch; }
+    .tesouraria-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .header-actions { width: 100%; }
+    #btn-exportar-extrato { width: 100%; }
+}
+
+/* ========================================================================== */
+/* === BOTÕES DE AÇÃO PADRONIZADOS (Tesouraria) === */
+/* ========================================================================== */
+
+/* Container dos botões na célula */
+.table-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Espaçamento entre ícones */
+}
+
+/* Estilo Base do Botão (Reset) */
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 15px; /* Tamanho do ícone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Botão Editar (Azul) */
+.action-button.edit {
+    color: #3498db;
+}
+.action-button.edit:hover {
+    background-color: #ebf8ff;
+    color: #2980b9;
+}
+
+/* Botão Estornar/Reverter (Laranja/Amarelo) */
+.action-button.revert {
+    color: #f39c12;
+}
+.action-button.revert:hover {
+    background-color: #fef9e7;
+    color: #d35400;
+}
+
+/* Ajuste na largura da coluna de ações */
+#tabela-tesouraria th:last-child,
+#tabela-tesouraria td:last-child {
+    width: 100px;
+    text-align: center;
+}

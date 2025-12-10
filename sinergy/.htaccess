@@ -1,0 +1,89 @@
+# .htaccess Principal - Sistema Sinergy
+# Configurações para o Apache
+
+# Habilitar RewriteEngine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /sinergy/
+
+    # Redirecionar /api/* para /api/index.php
+    RewriteCond %{REQUEST_URI} ^/sinergy/api/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/(.*)$ api/index.php [QSA,L]
+
+    # Redirecionar tudo mais para /public/ (se não for arquivo/diretório existente)
+    RewriteCond %{REQUEST_URI} !^/sinergy/public/
+    RewriteCond %{REQUEST_URI} !^/sinergy/api/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Proteção de arquivos sensíveis
+<FilesMatch "^(\\.env|\\.gitignore|\\.htaccess|composer\\.(json|lock)|README\\.md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Proteção das pastas config, src, logs, backups
+RedirectMatch 403 ^/(config|src|logs|backups)/
+
+# Configurações de segurança
+<IfModule mod_headers.c>
+    # Proteção XSS
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Prevenir MIME sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Proteção contra clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Content Security Policy (ajuste conforme necessário)
+    # Header set Content-Security-Policy "default-src 'self'"
+</IfModule>
+
+# Configurações PHP
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+    php_value memory_limit 256M
+</IfModule>
+
+# Cache de arquivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Imagens
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/ico "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # CSS e JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+
+    # Fontes
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+</IfModule>
+
+# Compressão GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+</IfModule>

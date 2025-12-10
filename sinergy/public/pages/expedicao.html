@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Expedição - Sinergy</title>
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/compras.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/chat-widget.css?v=2.0">
+    <link rel="icon" type="image/png" sizes="16x16"  href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        .exp-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; margin-bottom: 10px; border-radius: 8px; background: white; }
+        
+        /* Item Bloqueado (Produção ainda não acabou) */
+        .exp-item.locked { background: #fdf2f2; border-left: 4px solid #e74c3c; opacity: 0.8; }
+        
+        /* Item Pronto para Separar */
+        .exp-item.ready { background: #fff; border-left: 4px solid #3498db; }
+        
+        /* Item Já Separado */
+        .exp-item.done { background: #f0fff4; border-left: 4px solid #27ae60; opacity: 0.6; pointer-events: none; }
+
+        .badge-prod { font-size: 11px; padding: 2px 6px; border-radius: 4px; background: #eee; color: #555; }
+        .badge-prod.ok { background: #d4edda; color: #155724; }
+        .badge-prod.wait { background: #fff3cd; color: #856404; }
+        
+        .tab-btn.active { border-bottom: 2px solid #3498db !important; color: #3498db !important; }
+        
+        .btn-view-details {
+            background: none;
+            border: 1px solid #dcdcdc;
+            color: #555;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+        }
+        .btn-view-details:hover {
+            background-color: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link"><img src="../assets/images/sinergy_logo.png" class="sidebar-logo"></a>
+            <button id="sidebar-toggle" class="btn-toggle-menu"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav class="style-nav">
+            <div class="div-nav">
+                                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Expedição / Separação</div>
+        <div class="search-container"><input type="text" id="search-exp" placeholder="Buscar pedido..."></div>
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-profile" id="user-profile-container"> 
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="pages/meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="page-header-compras" style="display:block;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h2>Controle de Expedição</h2>
+                <button class="btn btn-secondary" onclick="window.initExpedicao(true)"><i class="fas fa-sync-alt"></i> Atualizar</button>
+            </div>
+            
+            <div class="tabs-container" style="display: flex; gap: 10px; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 20px;">
+                <button class="tab-btn active" onclick="window.switchTab('fila')" id="tab-fila" style="padding: 10px 20px; border:none; background:none; cursor:pointer; font-weight:600; color:#7f8c8d;">
+                    <i class="fas fa-dolly"></i> Separação Pendente
+                </button>
+                <button class="tab-btn" onclick="window.switchTab('historico')" id="tab-historico" style="padding: 10px 20px; border:none; background:none; cursor:pointer; font-weight:600; color:#7f8c8d;">
+                    <i class="fas fa-history"></i> Histórico Concluído
+                </button>
+            </div>
+        </div>
+
+        <div id="view-fila" class="view-section">
+            <div id="expedition-grid" class="requests-grid">
+                <p style="padding:20px;">Carregando fila...</p>
+            </div>
+        </div>
+
+        <div id="view-historico" class="view-section" style="display:none;">
+            <div id="history-grid" class="requests-grid">
+                <p style="padding:20px;">Carregando histórico...</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-detalhes-historico" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2>Detalhes da Expedição</h2>
+                <button class="close-modal" onclick="document.getElementById('modal-detalhes-historico').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="conteudo-historico"></div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="document.getElementById('modal-detalhes-historico').classList.remove('active')">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-expedicao" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 id="modal-ped-title">Conferência - Pedido #000</h2>
+                <button class="close-modal" onclick="document.getElementById('modal-expedicao').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="lista-itens-expedicao"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-selecionar-local" class="modal" style="z-index: 2300;">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Selecionar Local</h3>
+                <button class="close-modal" onclick="window.fecharModalLocal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="desc-item-picking" style="font-weight:bold; margin-bottom:15px; color:#2c3e50;">...</p>
+                
+                <form id="form-picking">
+                    <input type="hidden" id="picking-item-id"> <div class="form-group">
+                        <label>De onde você retirou o produto? *</label>
+                        <select id="select-local-estoque" class="form-control" required>
+                            <option value="">Carregando locais...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="window.fecharModalLocal()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar Baixa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-detalhes-item" class="modal" style="z-index: 2500;">
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3>Detalhes do Item</h3>
+                <button class="close-modal" onclick="document.getElementById('modal-detalhes-item').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4 id="detalhe-nome" style="color:#2c3e50; margin-bottom:5px; border-bottom:1px solid #eee; padding-bottom:10px;">Nome do Item</h4>
+                
+                <div style="background:#f8f9fa; padding:15px; border-radius:8px; margin-top:15px;">
+                    <div class="form-row">
+                        <div class="form-group" style="flex:1; text-align:center;">
+                            <label style="font-size:11px; color:#7f8c8d;">Quantidade</label>
+                            <div id="detalhe-qtd" style="font-size:18px; font-weight:bold; color:#2c3e50;">0</div>
+                        </div>
+                        <div class="form-group" style="flex:1; text-align:center;">
+                            <label style="font-size:11px; color:#7f8c8d;">Unidade</label>
+                            <div id="detalhe-un" style="font-size:18px; font-weight:bold; color:#2980b9;">-</div>
+                        </div>
+                    </div>
+
+                    <hr style="border:0; border-top:1px dashed #ddd; margin:10px 0;">
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; text-align:center;">
+                        <div>
+                            <label style="font-size:11px; color:#7f8c8d;">Comprimento (m)</label>
+                            <div id="detalhe-comp" style="font-weight:600; font-size:16px;">-</div>
+                        </div>
+                        <div>
+                            <label style="font-size:11px; color:#7f8c8d;">Altura (m)</label>
+                            <div id="detalhe-alt" style="font-weight:600; font-size:16px;">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:20px; text-align:right;">
+                    <button class="btn btn-secondary" onclick="document.getElementById('modal-detalhes-item').classList.remove('active')">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    
+    <div id="modal-conclusao-pedido" class="modal" style="z-index: 2200;">
+        <div class="modal-content" style="max-width: 400px; text-align: center; padding: 40px 30px;">
+            
+            <div style="font-size: 60px; color: #27ae60; margin-bottom: 20px;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h2 style="color: #2c3e50; margin-bottom: 10px;">Sucesso!</h2>
+            
+            <p style="color: #7f8c8d; font-size: 16px; margin-bottom: 30px; line-height: 1.5;">
+                🎉 Pedido 100% Conferido!<br>
+                <strong>Pronto para entrega/coleta.</strong>
+            </p>
+            
+            <button class="btn btn-success" style="width: 100%; padding: 12px;" onclick="document.getElementById('modal-conclusao-pedido').classList.remove('active')">
+                Fechar
+            </button>
+        </div>
+    </div>
+    
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js?v=1.3"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/expedicao.js?v=2.23"></script> 
+    <script src="../assets/js/chat-widget.js?v=2.0"></script>
+</body>
+</html>

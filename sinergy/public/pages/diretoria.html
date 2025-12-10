@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diretoria - Visão Estratégica</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/diretoria.css">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="loader-overlay"><div class="loader-spinner"></div></div>
+
+    <header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="items-nav"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    <li class="items-nav"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Painel da Diretoria</div>
+        
+        <div class="search-container">
+            </div>
+        
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="diretoria-header">
+            <h2>Visão Estratégica Global</h2>
+            <span class="data-hoje" id="data-hoje">...</span>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card dark financeiro">
+                <div class="icon"><i class="fas fa-wallet"></i></div>
+                <div class="info">
+                    <h3>Saldo Atual</h3>
+                    <p id="kpi-saldo">R$ 0,00</p>
+                    <small>Caixa Real</small>
+                </div>
+            </div>
+            <div class="kpi-card dark financeiro">
+                <div class="icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                <div class="info">
+                    <h3>A Pagar / A Receber</h3>
+                    <div class="mini-stats">
+                        <span class="text-danger">P: <span id="kpi-a-pagar">0</span></span>
+                        <span class="text-success">R: <span id="kpi-a-receber">0</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="kpi-card dark comercial">
+                <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+                <div class="info">
+                    <h3>Pedidos Abertos</h3>
+                    <p id="kpi-pedidos-abertos">0</p>
+                    <small>Faturamento: <span id="kpi-faturamento">R$ 0</span></small>
+                </div>
+            </div>
+            <div class="kpi-card dark rh">
+                <div class="icon"><i class="fas fa-users"></i></div>
+                <div class="info">
+                    <h3>Funcionários</h3>
+                    <p id="kpi-funcionarios">0</p>
+                    <small>Custo Médio: <span id="kpi-custo-func">R$ 0</span></small>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid-layout">
+            
+            <div class="dashboard-column">
+                <div class="chart-card">
+                    <h3>Faturamento por Vendedor</h3>
+                    <div class="chart-wrapper"><canvas id="chartVendedores"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Faturamento por Cliente (Top 5)</h3>
+                    <div class="chart-wrapper"><canvas id="chartClientes"></canvas></div>
+                </div>
+            </div>
+
+            <div class="dashboard-column">
+                <div class="info-list-card">
+                    <h3><i class="fas fa-cubes"></i> Posição de Estoque</h3>
+                    <div class="chart-wrapper-small"><canvas id="chartEstoque"></canvas></div>
+                </div>
+                
+                <div class="info-list-card">
+                    <h3><i class="fas fa-industry"></i> Produção em Andamento</h3>
+                    <ul id="list-producao" class="simple-list">
+                        <li>Carregando...</li>
+                    </ul>
+                </div>
+
+                <div class="info-list-card">
+                    <h3><i class="fas fa-tools"></i> Manutenções Ativas: <span id="kpi-manutencao-ativa">0</span></h3>
+                    <div class="chart-wrapper-small"><canvas id="chartManutencao"></canvas></div>
+                </div>
+            </div>
+
+            <div class="dashboard-column">
+                <div class="approval-center">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-gavel"></i> Aprovações Pendentes</h3>
+                        <span class="badge-count" id="count-pendencias">0</span>
+                    </div>
+                    <div class="approval-list" id="approval-list"></div>
+                </div>
+
+                <div class="info-list-card comex">
+                    <h3><i class="fas fa-ship"></i> Próximos Containers (Comex)</h3>
+                    <ul id="list-comex" class="simple-list comex-list">
+                        <li>Buscando dados...</li>
+                    </ul>
+                </div>
+
+                <div class="info-list-card">
+                    <h3><i class="fas fa-shopping-bag"></i> Solicitações de Compra</h3>
+                    <div class="mini-kpi-row">
+                        <span>Aguardando: <strong id="kpi-compras-aguardando">0</strong></span>
+                    </div>
+                    <div class="chart-wrapper-small"><canvas id="chartComprasSetor"></canvas></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="modal-detalhes-solicitacao" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Detalhes</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-detalhes-content"></div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="document.getElementById('modal-detalhes-solicitacao').classList.remove('active')">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/diretoria.js?v=2024.12.03d"></script>
+</body>
+</html>

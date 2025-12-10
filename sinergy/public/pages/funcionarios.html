@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH - Funcionários</title>
+    
+    <link rel="stylesheet" href="../assets/css/base.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/notifications.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/orcamentos.css"> <link rel="stylesheet" href="../assets/css/rh.css"> 
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+<header class="cabecalho">
+        <div class="logo-container">
+            <a href="../index.html" id="logo-link" class="logo-link"> 
+                <img src="../assets/images/sinergy_logo.png" alt="Sinergy Logo" class="sidebar-logo">
+            </a>
+            
+            <button id="sidebar-toggle" class="btn-toggle-menu" title="Recolher/Expandir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="style-nav">
+            <div class="div-nav">
+                <ul class="ul-nav">
+                    <li class="items-nav"><a href="../index.html"><span>Home</span></a></li>
+                    
+                    <li class="items-nav" data-module="diretoria"> 
+                        <a href="diretoria.html"> <span>Diretoria</span>
+                        </a> 
+                    </li>
+                    
+                    <li class="items-nav has-submenu">
+                        <a href="#" class="production-link"><span>Suprimentos<i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="suprimentos.html">Gestão de Compras</a></li>
+                            <li><a href="compras.html">Solicitações de Compra</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="estoque">
+                        <a href="#" class="production-link"><span>Estoque <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="estoque.html">Estoque</a></li>
+                            <li><a href="saldo.html">Saldo do Estoque</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comercial">
+                        <a href="#" class="production-link"><span>Comercial <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="orcamentos.html">Orçamentos</a></li>
+                            <li><a href="pedidos.html">Pedidos</a></li>
+                            <li><a href="produtos_catalogo.html">Catálogo de Produtos</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="financeiro">
+                        <a href="#" class="production-link"><span>Financeiro <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="financeiro.html">Geral</a></li>
+                            <li><a href="contasapagar.html">Contas a pagar</a></li>
+                            <li><a href="contasareceber.html">Contas a receber</a></li>
+                            <li><a href="tesouraria.html">Tesouraria</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="comex">
+                        <a href="#" class="production-link"><span>Comex <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="informacoes.html">Informações</a></li>
+                            <li><a href="documentos.html">Documentos</a></li>
+                            <li><a href="rastreio.html">Rastreio</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav has-submenu" data-module="rh">
+                        <a href="#" class="production-link"><span>RH <i class="fas fa-chevron-down submenu-arrow"></i></span></a>
+                        <ul class="submenu">
+                            <li><a href="funcionarios.html">Funcionários</a></li>
+                        </ul>
+                    </li>
+                
+                    <li class="items-nav" data-module="manutencao"><a href="manutencoes.html"><span>Manutenções</span></a></li>
+                    <li class="items-nav" data-module="producao"><a href="produtos.html"><span>Produções</span></a></li>
+                    <li class="items-nav" data-module="expedicao"><a href="expedicao.html"><span>Expedição</span></a></li>
+                    <li class="items-nav" data-module="movimentacoes"><a href="movimentacoes.html"><span>Movimentações</span></a></li>
+                    
+                    <li class="items-nav"><a href="consulta.html"><span>Consulta</span></a></li>                         
+                    
+                    <li class="items-nav" data-module="relatorios"><a href="relatorios.html"><span>Relatórios</span></a></li>
+                    
+                    <li class="items-nav"><a href="suporte.html"><span>Suporte</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="top-bar">
+        <div class="section-title">Funcionários</div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar por nome ou CPF...">
+        </div>
+        
+        <div id="notification-bell-icon" class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">
+                    Notificações <span id="notification-count">(0)</span>
+                </div>
+                <div id="notification-dropdown-list">
+                    <div class="notification-empty-state">
+                        Nenhuma notificação no momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="user-profile" id="user-profile-container">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/100" alt="Avatar do usuário" id="user-avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+            </div>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+            <div class="dropdown-menu" id="user-dropdown-menu">
+                <a href="meus-dados.html" id="meus-dados-btn" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meus Dados</span>
+                </a>
+                <a href="#" id="logout-btn" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="conteudo-principal">
+        <div class="orcamentos-header">
+            <div class="header-left">
+                <h2>Gerenciar Funcionários</h2>
+            </div>
+            <div class="header-actions">
+                <button id="btn-novo-funcionario" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Novo Funcionário
+                </button>
+            </div>
+        </div>
+
+        <div class="orcamentos-filters">
+            <div class="filter-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input-main" placeholder="Buscar por nome, CPF ou cargo...">
+            </div>
+            <select id="filter-status" class="filter-select">
+                <option value="todos">Todos os Status</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Afastado">Afastado</option>
+                <option value="Inativo">Inativo (Demitido)</option>
+            </select>
+             <select id="filter-departamento" class="filter-select">
+                <option value="todos">Todos os Setores</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Produção">Produção</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Administrativo">Administrativo</option>
+                <option value="Recursos Humanos">Recursos Humanos</option>
+                <option value="Estatística">Estatística</option>
+                <option value="Suprimentos">Suprimentos</option>
+                <option value="Compras">Compras</option>
+                <option value="Logística">Logística</option>
+                <option value="Manutenção">Manutenção</option>
+                <option value="Comex">Comex</option>
+                <option value="TI">TI</option>
+            </select>
+        </div>
+
+        <div id="employee-grid" class="employee-grid">
+            </div>
+    </main>
+
+    <div id="modal-funcionario" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2 id="modal-title">Novo Funcionário</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-funcionario">
+                    <input type="hidden" id="funcionario-id">
+                    
+            <div class="form-section">
+                        <h3>Dados Pessoais</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Foto de Perfil</label>
+                                <div class="profile-picture-preview" id="funcionario-picture-preview">
+                                    <img id="funcionario-avatar-preview" src="" alt="Pré-visualização" style="display: none;">
+                                    <span class="placeholder-text" id="funcionario-placeholder">Sem foto</span>
+                                </div>
+                                <input type="file" id="input-foto" class="form-control" accept="image/jpeg, image/png">
+                                <input type="hidden" id="input-foto-base64">
+                                <small class="form-help">Selecione uma imagem JPG ou PNG (máx. 1MB).</small>
+                            </div>
+                            <div class="form-group flex-2">
+                                <label>Nome Completo *</label>
+                                <input type="text" id="input-nome" class="form-control" required>
+                            </div>
+                             <div class="form-group">
+                                <label>Data de Nascimento</label>
+                                <input type="date" id="input-nascimento" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                             <div class="form-group">
+                                <label>CPF *</label>
+                                <input type="text" id="input-cpf" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>RG</label>
+                                <input type="text" id="input-rg" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                             <div class="form-group">
+                                <label>Nome da Mãe</label>
+                                <input type="text" id="input-mae" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Nome do Pai</label>
+                                <input type="text" id="input-pai" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Contato e Endereço</h3>
+                         <div class="form-row">
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <input type="tel" id="input-telefone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>E-mail</label>
+                                <input type="email" id="input-email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-2">
+                                <label>Endereço (Rua, N°, Bairro)</label>
+                                <input type="text" id="input-endereco" class="form-control">
+                            </div>
+                             <div class="form-group">
+                                <label>CEP</label>
+                                <input type="text" id="input-cep" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Cidade / UF</label>
+                            <input type="text" id="input-cidadeuf" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Documentação</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>PIS/PASEP</label>
+                                <input type="text" id="input-pis" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Título de Eleitor</label>
+                                <input type="text" id="input-titulo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Dados Contratuais</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Data de Admissão *</label>
+                                <input type="date" id="input-admissao" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Cargo *</label>
+                                <input type="text" id="input-cargo" class="form-control" required placeholder="Ex: Vendedor, Serralheiro">
+                            </div>
+                            <div class="form-group">
+                                <label>Departamento *</label>
+                                <select id="input-departamento" class="form-control" required>
+                                    <option value="todos">Todos os Setores</option>
+                                    <option value="Comercial">Comercial</option>
+                                    <option value="Produção">Produção</option>
+                                    <option value="Financeiro">Financeiro</option>
+                                    <option value="Administrativo">Administrativo</option>
+                                    <option value="Recursos Humanos">Recursos Humanos</option>
+                                    <option value="Estatística">Estatística</option>
+                                    <option value="Suprimentos">Suprimentos</option>
+                                    <option value="Compras">Compras</option>
+                                    <option value="Logística">Logística</option>
+                                    <option value="Manutenção">Manutenção</option>
+                                    <option value="Comex">Comex</option>
+                                    <option value="TI">TI</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Salário (R$)</label>
+                                <input type="number" id="input-salario" class="form-control" step="0.01" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo de Contrato</label>
+                                <select id="input-contrato" class="form-control">
+                                    <option value="CLT">CLT</option>
+                                    <option value="PJ">PJ</option>
+                                    <option value="Estágio">Estágio</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status *</label>
+                                <select id="input-status" class="form-control" required>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Afastado">Afastado</option>
+                                    <option value="Inativo">Inativo (Demitido)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Dados Bancários (Para Pagamento)</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Banco</label>
+                                <input type="text" id="input-banco" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Agência</label>
+                                <input type="text" id="input-agencia" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Conta Corrente</label>
+                                <input type="text" id="input-conta" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Acesso ao Sistema</h3>
+                        <div class="form-group">
+                            <label>Vincular Login do Sinergy</label>
+                            <select id="select-usuario-login" class="form-control">
+                                <option value="">Nenhum (Não usa o sistema)</option>
+                                </select>
+                            <small>Selecione o login de usuário (da tela de 'Login') para este funcionário.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-salvar">Salvar Funcionário</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-permissoes" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <div>
+                    <h2 id="permissoes-titulo">Gerenciar Acessos</h2>
+                    <p style="margin: 5px 0 0 0; color: #64748b; font-size: 14px;">
+                        Módulos ativos: <span id="contador-permissoes" style="font-weight: 600; color: #3498db;">0</span> de <span id="total-permissoes">11</span>
+                    </p>
+                </div>
+                <button class="close-modal" id="close-permissoes-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="busca-modulos" placeholder="🔍 Buscar módulo..."
+                           style="width: 100%; padding: 10px 15px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                </div>
+
+                <form id="form-permissoes">
+                    <input type="hidden" id="permissoes-usuario-id">
+
+                    <div class="permissions-grid">
+                        <label class="permission-card" data-modulo="diretoria">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-chart-pie"></i></div>
+                                <span class="perm-label">Diretoria</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="diretoria">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="comercial">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-shopping-cart"></i></div>
+                                <span class="perm-label">Comercial</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="comercial">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="suprimentos">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-truck-loading"></i></div>
+                                <span class="perm-label">Suprimentos</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="suprimentos">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="estoque">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-warehouse"></i></div>
+                                <span class="perm-label">Estoque</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="estoque">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="producao">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-industry"></i></div>
+                                <span class="perm-label">Produção</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="producao">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="financeiro">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-dollar-sign"></i></div>
+                                <span class="perm-label">Financeiro</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="financeiro">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="comex">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-globe-americas"></i></div>
+                                <span class="perm-label">Comex</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="comex">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="rh">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-users"></i></div>
+                                <span class="perm-label">RH</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="rh">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="manutencao">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-tools"></i></div>
+                                <span class="perm-label">Manutenção</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="manutencao">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="movimentacoes">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <span class="perm-label">Movimentações</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="movimentacoes">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+
+                        <label class="permission-card" data-modulo="relatorios">
+                            <div class="perm-content">
+                                <div class="perm-icon"><i class="fas fa-chart-line"></i></div>
+                                <span class="perm-label">Relatórios</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" name="modulo" value="relatorios">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-actions" style="border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 10px;">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar-permissoes">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" style="min-width: 150px;">
+                            <i class="fas fa-save"></i> Salvar Acessos
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/notifications.js" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script src="../assets/js/funcionarios.js?v=2024.12.04k" defer></script>
+</body>
+</html>
